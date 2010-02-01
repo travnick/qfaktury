@@ -505,7 +505,7 @@ void Ustawienia::saveSettings() {
 	sett().setValue("edit", cbEdit->isChecked());
 	sett().setValue("editSymbol", cbSmbEdit->isChecked());
 	sett().setValue("editName", cbSmbEdit_2->isChecked());
-	sett().setValue("shortYear", shortYear->isChecked());
+	sett().setValue("shortYear", !shortYear->isChecked());
 	sett().setValue("chars_in_symbol", spbNumb->value());
 	sett().setValue("ticMask", nipMaskEdit->text());
 	sett().setValue("accountMask", accountMaskEdit->text());
@@ -595,7 +595,7 @@ void Ustawienia::readSettings() {
 	cbDay->setChecked(sett().value("day").toBool());
 	cbMonth->setChecked(sett().value("month").toBool());
 	cbYear->setChecked(sett().value("year").toBool());
-	shortYear->setChecked(sett().value("shortYear").toBool());
+	shortYear->setChecked(!sett().value("shortYear").toBool());
 	cbEdit->setChecked(sett().value("edit").toBool());
 
 	cbSmbEdit->setChecked(sett().value("editSymbol").toBool());
@@ -625,7 +625,7 @@ void Ustawienia::readSettings() {
 	cbDay->setChecked(sett().value("day") .toBool());
 	cbMonth->setChecked(sett().value("month") .toBool());
 	cbYear->setChecked(sett().value("year") .toBool());
-	shortYear->setChecked(sett().value("shortYear") .toBool());
+	shortYear->setChecked(!sett().value("shortYear") .toBool());
 	cbEdit->setChecked(sett().value("edit") .toBool());
 	cbSmbEdit->setChecked(sett().value("editSymbol") .toBool());
 	spbNumb->setValue(sett().value("chars_in_symbol").toInt());

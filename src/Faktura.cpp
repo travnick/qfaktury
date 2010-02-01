@@ -322,7 +322,7 @@ void Faktura::backBtnClick() {
 		lastInvoice += "/" + QDate::currentDate().toString("MM");
 
 	if (sett().value("year") .toBool()) {
-		if (!sett().value("shortYear") .toBool())
+		if (sett().value("shortYear") .toBool())
 			lastInvoice += "/" + QDate::currentDate().toString("yy");
 		else
 			lastInvoice += "/" + QDate::currentDate().toString("yyyy");
