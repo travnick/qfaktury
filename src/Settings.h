@@ -352,7 +352,7 @@ public:
 		setValue("numberOfCopies", 1);
 		setValue("nipMask", "999-99-999-99; ");
 		setValue("accountMask", "99-9999-9999-9999-9999-9999-9999; ");
-	//      setValue ("filtrEnd", QDate::currentDate ().toString (Qt::ISODate));
+		setValue ("filtrEnd", QDate::currentDate ().toString(getDateFormat()));
 		setValue("filtrStart", QDate::currentDate().toString(getDateFormat()));
 		setValue("firstrun", false);
 		setValue("jednostki", tr("szt.|kg.|g.|m.|km.|godz."));
