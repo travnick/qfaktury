@@ -59,6 +59,7 @@ void MainWindow::init() {
 		tableT->setColumnWidth(9, 55); // netto4
 		tableT->setColumnWidth(10, 55);
 		saveAllSettAsDefault();
+		setupDir();
 
 		if (QMessageBox::warning(this, "QFaktury", trUtf8("Pierwsze uruchomienie programu. Czy chcesz skonfigurować firmę?"), trUtf8("Tak"), trUtf8("Nie"), 0, 0,
 				1) == 0) {
