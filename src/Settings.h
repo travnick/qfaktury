@@ -10,6 +10,7 @@
 #include <QTextCodec>
 #include <QTranslator>
 #include <QMessageBox>
+#include <QDesktopServices>
 #include "config.h"
 
 
@@ -497,7 +498,11 @@ public:
 
 	// returns working directory
 	QString getWorkingDir() {
-		return value("working_dir", QDir::homePath()).toString() + "/elinux";
+		//return value("working_dir", QDir::homePath()).toString() + "/elinux";
+      QString dataDir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+      if (dataDir == "")
+         dataDir = QDir::homePath() + value("working_dir", "/elinux").toString();
+      return dataDir;
 	}
 
 	// returns templates directory

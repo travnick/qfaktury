@@ -13,6 +13,8 @@
 
 int main(int argc, char **argv) {
 	QApplication a(argc, argv);
+   a.setApplicationName("QFaktury");
+	a.setOrganizationName("www.e-linux.pl");
 
 
 	// multilangage
@@ -53,8 +55,6 @@ int main(int argc, char **argv) {
 	QIcon icon;
 	icon.addPixmap(QPixmap(":/res/icons/qfaktury_48.png"), QIcon::Normal, QIcon::Off);
 	a.setWindowIcon(icon);
-	a.setApplicationName("QFaktury");
-	a.setOrganizationName("www.e-linux.pl");
 	return a.exec();
 }
 
