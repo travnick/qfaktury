@@ -559,7 +559,7 @@ void Ustawienia::readSettings() {
 	curr = getTemplates().indexOf(sett().value("css").toString());
 	cssList->setCurrentIndex(curr);
 
-	nipMaskEdit->setText(sett().value("ticMask", "999-99-999-99; ").toString());
+	nipMaskEdit->setText(sett().value("ticMask", "999-999-99-99; ").toString());
 	accountMaskEdit->setText(sett().value("accountMask", "99-9999-9999-9999-9999-9999-9999; ").toString());
 
 

@@ -595,7 +595,7 @@
     </message>
     <message>
         <location filename="ui/Kontrahenci.ui" line="109"/>
-        <source>999-99-999-99; </source>
+        <source>999-999-99-99; </source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -18,7 +18,7 @@ Kontrahenci::Kontrahenci(QWidget *parent, int mode, IDataLayer *dl) :
 void Kontrahenci::init() {
 	allNames = dataLayer->kontrahenciGetFirmList();
 
-	nipEdit->setInputMask(sett().value("ticMask", "999-99-999-99; ").toString());
+	nipEdit->setInputMask(sett().value("ticMask", "999-999-99-99; ").toString());
 	accountEdit->setInputMask(sett().value("accountMask", "99-9999-9999-9999-9999-9999-9999; ").toString());
 
 	// connects
