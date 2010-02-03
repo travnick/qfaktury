@@ -366,14 +366,8 @@ void MainWindow::readTw() {
 void MainWindow::setupDir() {
 	workingDir = sett().getWorkingDir();
 	QDir dir(workingDir);
-	if (!dir.exists()) {
-		dir.mkdir(workingDir);
-		dir.mkdir(workingDir + sett().getDataDir());
-	}
-
-	if (!dir.exists(workingDir + sett().getDataDir())) {
-		dir.mkdir(workingDir + sett().getDataDir());
-	}
+	if (!dir.exists(sett().getDataDir()))
+		dir.mkpath(workingDir + sett().getDataDir());
 }
 
 
