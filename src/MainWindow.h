@@ -21,6 +21,7 @@ public slots:
 	void tableClear(QTableWidget * tab);
 	void tabChanged(QWidget * aaa);
 	void rereadHist();
+	void resetFilter();
 	void aboutQt();
 	void oProg();
 	void editFHist();

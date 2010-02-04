@@ -116,6 +116,7 @@ void MainWindow::init() {
 	// connect slots
 	connect(actionBug, SIGNAL (activated ()), this, SLOT(reportBug()));
 	connect(applyFiltrBtn, SIGNAL (clicked()), this, SLOT(rereadHist()));
+	connect(resetFiltrBtn, SIGNAL(clicked()), this, SLOT(resetFilter()));
 	connect(plikDane_firmyAction, SIGNAL(activated()), this, SLOT(daneFirmyClick()));
 	connect(plikKoniecAction, SIGNAL(activated()), this, SLOT(close()));
 	connect(kontrahenciDodajAction, SIGNAL(activated()), this, SLOT(kontrClick()));
@@ -1100,6 +1101,13 @@ void MainWindow::pomoc() {
  */
 void MainWindow::reportBug() {
 	QDesktopServices::openUrl(QUrl("https://sourceforge.net/tracker2/?func=add&group_id=154610&atid=792471"));
+}
+
+// slot for resetting the filters
+void MainWindow::resetFilter() {
+	filtrStart->setDate(sett().getFirstDayOfYear());
+	filtrEnd->setDate(sett().getLastDayOfYear());
+	rereadHist();
 }
 
 // ----------------------------------------  SLOTS ---------------------------------//
