@@ -48,16 +48,6 @@ void MainWindow::init() {
 	// first run
 	if (firstRun()) {
 		// towary/uslugi - wymiary
-		tableT->setColumnWidth(0, 50);
-		tableT->setColumnWidth(1, 140);
-		tableT->setColumnWidth(3, 40);
-		tableT->setColumnWidth(4, 60);
-		tableT->setColumnWidth(5, 50);
-		tableT->setColumnWidth(6, 55); // netto1
-		tableT->setColumnWidth(7, 55); // netto2
-		tableT->setColumnWidth(8, 55); // netto3
-		tableT->setColumnWidth(9, 55); // netto4
-		tableT->setColumnWidth(10, 55);
 		saveAllSettAsDefault();
 		setupDir();
 
@@ -302,6 +292,7 @@ void MainWindow::readHist() {
 		tableH->item(tableH->rowCount() - 1, 5)->setText(text);
 	}
 	tableH->setSortingEnabled(true);
+	tableH->resizeColumnsToContents();
 }
 
 /** Reads customers from the XML
@@ -324,6 +315,7 @@ void MainWindow::readKontr() {
 		tableK->item(tableK->rowCount() - 1, 4)->setText(text);
 	}
 	tableK->setSortingEnabled(true);
+	tableK->resizeColumnsToContents();
 }
 
 /** Reads goods from the XML
@@ -360,6 +352,7 @@ void MainWindow::readTw() {
 	}
 
 	tableT->setSortingEnabled(true);
+	tableT->resizeColumnsToContents();
 }
 
 /** Creates directories if required
