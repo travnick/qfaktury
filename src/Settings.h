@@ -639,30 +639,30 @@ public:
 	}
 
 	QString getDecimalPointStr() {
-		QChar decimalPoint = locale->decimalPoint ();
+		QChar decimalPoint = locale.decimalPoint ();
 		return QString(decimalPoint);
 	}
 
 	QString getTPointStr() {
-		QChar tPoint = locale->groupSeparator();
+		QChar tPoint = locale.groupSeparator();
 		return QString(tPoint);
 	}
 
 	QString numberToString(double i, char f = 'f', int prec = 2) {
-			return locale->toString(i, f, prec);
+			return locale.toString(i, f, prec);
 		}
 
 	QString numberToString(int i) {
-			return locale->toString(i);
+			return locale.toString(i);
 		}
 
 	double stringToDouble(QString s) {
-			return locale->toDouble(s);
+			return locale.toDouble(s);
 		}
 private:
 	QString dateFormat;
 	QString fileNameDateFormat;
-	QLocale *locale;
+	QLocale locale;
     QTranslator* translator;
 
 	// constr
@@ -675,9 +675,6 @@ private:
 		QTextCodec::setCodecForCStrings (QTextCodec::codecForName (getCodecName()));
 		QTextCodec::setCodecForLocale (QTextCodec::codecForName (getCodecName()));
 		QTextCodec::setCodecForTr (QTextCodec::codecForName (getCodecName()));
-
-		locale = new QLocale();
-
 	}
 
 	Settings(const Settings&):QSettings() {}
