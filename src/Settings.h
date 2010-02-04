@@ -52,6 +52,18 @@ public:
 		return translator;
 	}
 
+	// returns the first day of the current year
+	QDate getFirstDayOfYear() {
+		int currentYear = QDate::currentDate().year();
+		return QDate(currentYear, 1, 1);
+	}
+
+	// returns the last day of the current year
+	QDate getLastDayOfYear() {
+		int currentYear = QDate::currentDate().year();
+		return QDate(currentYear, 12, 31);
+	}
+
 	/**
 	 * validate the settings and set them to default values if required.
 	 */
@@ -85,9 +97,9 @@ public:
 			setValue("editSymbol", "false");
 		if (value("filtrEnd").toString().compare("") == 0)
 			setValue("filtrEnd",
-					QDate::currentDate().toString(Qt::ISODate));
+					getLastDayOfYear().toString(Qt::ISODate));
 		if (value("filtrStart").toString().compare("") == 0)
-			setValue("filtrStart", QDate::currentDate().toString(
+			setValue("filtrStart", getFirstDayOfYear().toString(
 					Qt::ISODate));
 		if (value("firstrun").toString().compare("") == 0)
 			setValue("firstrun", false);
@@ -353,8 +365,8 @@ public:
 		setValue("numberOfCopies", 1);
 		setValue("nipMask", "999-999-99-99; ");
 		setValue("accountMask", "99-9999-9999-9999-9999-9999-9999; ");
-		setValue ("filtrEnd", QDate::currentDate ().toString(getDateFormat()));
-		setValue("filtrStart", QDate::currentDate().toString(getDateFormat()));
+		setValue ("filtrEnd", getLastDayOfYear().toString(getDateFormat()));
+		setValue("filtrStart", getFirstDayOfYear().toString(getDateFormat()));
 		setValue("firstrun", false);
 		setValue("jednostki", tr("szt.|kg.|g.|m.|km.|godz."));
 		setValue("korNr", "1");

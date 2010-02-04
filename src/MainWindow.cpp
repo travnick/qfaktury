@@ -199,8 +199,8 @@ bool MainWindow::firstRun() {
 	if (ok) {
 		sett().checkSettings();
 		// set dates for filter
-		filtrStart->setDate(QDate::currentDate());
-		filtrEnd->setDate(QDate::currentDate());
+		filtrStart->setDate(sett().getFirstDayOfYear());
+		filtrEnd->setDate(sett().getLastDayOfYear());
 		return ok;
 	} else {
 		sett().checkSettings();
