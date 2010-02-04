@@ -158,17 +158,14 @@ QString Faktura::getInvoiceTypeAndSaveNr() {
 // ---- SLOTS START  --//////////////////////////////////////////////////////////////////////////////////
 
 void Faktura::kontrClick() {
-	Kontrahenci *kontrWindow;
-	kontrWindow = new Kontrahenci(this, 0, dataLayer);
+	Kontrahenci kontrWindow(this, 0, dataLayer);
 	//qDebug ("%s %s:%d", __FUNCTION__, __FILE__, __LINE__);
-	if (kontrWindow->exec() == QDialog::Accepted) {
+	if (kontrWindow.exec() == QDialog::Accepted) {
 		kAdded = true;
-		QStringList row = kontrWindow->ret.split("|");
+		QStringList row = kontrWindow.ret.split("|");
 		kontrName->setText (row[0] + "," + row[3] + "," + row[6] + " " + row[2] + "," +  s_TIC + row[5]);
 		kontrName->setCursorPosition(0);
 	}
-	delete kontrWindow;
-	kontrWindow = NULL;
 }
 
 void Faktura::keyPressEvent(QKeyEvent * event) {
@@ -184,16 +181,14 @@ void Faktura::keyPressEvent(QKeyEvent * event) {
  *  Opens window with the list of the customers
  */
 void Faktura::getCustomer () {
-  KontrahenciLista *klWindow = new KontrahenciLista(this);
-  if (klWindow->exec () == QDialog::Accepted)
+  KontrahenciLista klWindow(this);
+  if (klWindow.exec () == QDialog::Accepted)
     {
-      kontrName->setText (klWindow->ret);
+      kontrName->setText (klWindow.ret);
       kontrName->setCursorPosition (1);
       saveBtn->setEnabled(true);
       canClose = false;
     }
-  delete klWindow;
-  klWindow = NULL;
 }
 
 /** Slot
@@ -226,11 +221,11 @@ void Faktura::discountChange() {
  *  Shows window with a list of products
  */
 void Faktura::addTow() {
-	TowaryLista *twWindow = new TowaryLista(this);
-	if (twWindow->exec() == QDialog::Accepted) {
+	TowaryLista twWindow(this);
+	if (twWindow.exec() == QDialog::Accepted) {
 		MainWindow::insertRow(tableTow, tableTow->rowCount());
-		// qDebug() << twWindow->ret;
-		QStringList row = twWindow->ret.split("|");
+		// qDebug() << twWindow.ret;
+		QStringList row = twWindow.ret.split("|");
 		int rowNum = tableTow->rowCount() - 1;
 		tableTow->item(rowNum, 0)->setText(sett().numberToString(
 				tableTow->rowCount())); // id
@@ -250,8 +245,6 @@ void Faktura::addTow() {
 			calculateDiscount();
 		calculateSum();
 	}
-	delete twWindow;
-	twWindow = NULL;
 }
 
 /** Slot delTowar
@@ -273,23 +266,21 @@ void Faktura::delTowar() {
 void Faktura::editTowar() {
 	// qDebug() << __FUNCTION__ << ": ENTER";
 	// we can only modify quantity
-	ZmienIlosc *changeQuant = new ZmienIlosc(this);
-	changeQuant->nameTow->setText(
+	ZmienIlosc *changeQuant(this);
+	changeQuant.nameTow->setText(
 			tableTow-> item(tableTow->currentRow(), 1)->text());
-	changeQuant->codeTow->setText(
+	changeQuant.codeTow->setText(
 			tableTow-> item(tableTow->currentRow(), 2)->text());
-	changeQuant->spinAmount->setValue(tableTow-> item(tableTow->currentRow(),
+	changeQuant.spinAmount->setValue(tableTow-> item(tableTow->currentRow(),
 			4)->text().toInt());
-	if (changeQuant->exec() == QDialog::Accepted) {
+	if (changeQuant.exec() == QDialog::Accepted) {
 		int currentRow = tableTow->currentRow();
-		tableTow->item(currentRow, 4)->setText(changeQuant->spinAmount->cleanText());
+		tableTow->item(currentRow, 4)->setText(changeQuant.spinAmount->cleanText());
 		saveBtn->setEnabled(true);
 		canClose = false;
 		calculateOneDiscount(currentRow);
 		calculateSum();
 	}
-	delete changeQuant;
-	changeQuant = NULL;
 	// qDebug() << __FUNCTION__ << ": EXIT";
 }
 
@@ -939,10 +930,9 @@ void Faktura::makeInvoiceSummAll() {
 		fraStrList += "<td width=\"48%\"><span style=\"toPay\">";
 		fraStrList += trUtf8("Do zapłaty: ") + sum3->text() + " "
 					+ currCombo->currentText() + "</span><br>";
-		ConvertAmount* conv = new ConvertAmount();
+		ConvertAmount conv;
 		fraStrList += trUtf8("słownie:")
-				+ conv->convertPL(sum3->text(), currCombo->currentText()) + "<br>";
-		delete conv;
+				+ conv.convertPL(sum3->text(), currCombo->currentText()) + "<br>";
 		QString paym1 = sett().value("paym1").toString();
 		if (platCombo->currentIndex() == 0) {
 			fraStrList += trUtf8("forma płatności: ") + platCombo->currentText() + "<br><b>";

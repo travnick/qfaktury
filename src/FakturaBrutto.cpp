@@ -64,11 +64,11 @@ void FakturaBrutto::calculateOneDiscount(int i) {
  *  Add new towar
  */
 void FakturaBrutto::addTow() {
-	TowaryBruttoLista *twWindow = new TowaryBruttoLista(this);
-	if (twWindow->exec() == QDialog::Accepted) {
+	TowaryBruttoLista twWindow(this);
+	if (twWindow.exec() == QDialog::Accepted) {
 		MainWindow::insertRow(tableTow, tableTow->rowCount());
 		// qDebug() << twWindow->ret;
-		QStringList row = twWindow->ret.split("|");
+		QStringList row = twWindow.ret.split("|");
 		int rowNum = tableTow->rowCount() - 1;
 		tableTow->item(rowNum, 0)->setText(sett().numberToString(
 				tableTow->rowCount())); // id
@@ -88,6 +88,4 @@ void FakturaBrutto::addTow() {
 			calculateDiscount();
 		calculateSum();
 	}
-	delete twWindow;
-	twWindow = NULL;
 }

@@ -744,13 +744,12 @@ void MainWindow::settClick() {
 /** Slot used to add new customer
  */
 void MainWindow::kontrClick() {
-	Kontrahenci *kontrWindow;
-	kontrWindow = new Kontrahenci(this, 0, dl);
+	Kontrahenci kontrWindow(this, 0, dl);
 	//qDebug ("%s %s:%d", __FUNCTION__, __FILE__, __LINE__);
-	if (kontrWindow->exec() == QDialog::Accepted) {
+	if (kontrWindow.exec() == QDialog::Accepted) {
 		tableK->setSortingEnabled(false);
 		insertRow(tableK, tableK->rowCount());
-		QStringList row = kontrWindow->ret.split("|");
+		QStringList row = kontrWindow.ret.split("|");
 		tableK->item(tableK->rowCount() - 1, 0)->setText(row[0]); // name
 		tableK->item(tableK->rowCount() - 1, 1)->setText(row[1]); // type
 		tableK->item(tableK->rowCount() - 1, 2)->setText(row[2]); // place
@@ -758,8 +757,6 @@ void MainWindow::kontrClick() {
 		tableK->item(tableK->rowCount() - 1, 4)->setText(row[4]); // telefon
 		tableK->setSortingEnabled(true);
 	}
-	delete kontrWindow;
-	kontrWindow = NULL;
 }
 
 /** Slot used to delete current customer

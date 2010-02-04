@@ -800,11 +800,10 @@ void Korekta::makeInvoiceSummAll(){
 			fraStrList += trUtf8("Do zwrotu: ");
 			fraStrList += sum3->text() + " " + currCombo->currentText()+ "<br>";
 		}
-		ConvertAmount* conv = new ConvertAmount();
+		ConvertAmount conv;
 		fraStrList += trUtf8("słownie:")
-				+ conv->convertPL(sum3->text(), currCombo->currentText())
+				+ conv.convertPL(sum3->text(), currCombo->currentText())
 				+ "<br>";
-		delete conv;
 
 		QString paym1 = sett().value("paym1").toString();
 		if (platCombo->currentIndex() == 0) {
