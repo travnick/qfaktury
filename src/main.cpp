@@ -40,14 +40,8 @@ int main(int argc, char **argv) {
 
 		a.processEvents();
 
-		QTimer *showSplash = new QTimer();
-		a.connect(showSplash, SIGNAL(timeout()), &w, SLOT(show()));
-
-		QTimer *closeSplash = new QTimer();
-		a.connect(closeSplash, SIGNAL(timeout()), &splash, SLOT(close()));
-
-		showSplash->start(5000);
-		closeSplash->start(4960);
+		QTimer::singleShot(5000, &w, SLOT(show()));
+		QTimer::singleShot(4960, &splash, SLOT(close()));
 	}
 
 	a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
