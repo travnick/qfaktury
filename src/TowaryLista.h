@@ -23,7 +23,7 @@ public slots:
 protected:
 	void init();
 
-	typedef QMap<QString, ProductData *> ProductDataList;
+	typedef QMap<QString, ProductData> ProductDataList;
 	ProductDataList listaTowary2;
 	ProductDataList listaUslugi2;
 	QMap<QString, QString> nettos;

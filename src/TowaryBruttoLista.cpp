@@ -39,10 +39,10 @@ void TowaryBruttoLista::doAccept() {
 
 	if (selectedItem != "") {
 		if (comboBox1->currentIndex() == 0) {
-			ret = selectedItem + "|" + listaTowary2[id]->getCode() + "|"
-					+ listaTowary2[id]->getPkwiu() + "|"
+			ret = selectedItem + "|" + listaTowary2[id].getCode() + "|"
+					+ listaTowary2[id].getPkwiu() + "|"
 					+ trimZeros(countSpinBox->cleanText()) + "|"
-					+ listaTowary2[id]->getQuantityType() + "|"
+					+ listaTowary2[id].getQuantityType() + "|"
 					+ rabatSpin->cleanText() + "|"
 					+ getPriceOfCurrent() + "|"
 					+ nettoLabel->text() + "|" + sett().numberToString(vats[selectedItem]) + "|"
@@ -50,10 +50,10 @@ void TowaryBruttoLista::doAccept() {
 
 		}
 		if (comboBox1->currentIndex() == 1) {
-			ret = selectedItem + "|" + listaUslugi2[id]->getCode() + "|"
-					+ listaUslugi2[id]->getPkwiu() + "|"
+			ret = selectedItem + "|" + listaUslugi2[id].getCode() + "|"
+					+ listaUslugi2[id].getPkwiu() + "|"
 					+ trimZeros(countSpinBox->cleanText()) + "|"
-					+ listaUslugi2[id]->getQuantityType() + "|"
+					+ listaUslugi2[id].getQuantityType() + "|"
 					+ rabatSpin->cleanText() + "|"
 					+ getPriceOfCurrent() + "|"
 					+ nettoLabel->text() + "|" + sett().numberToString(vats[selectedItem]) + "|"

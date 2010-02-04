@@ -76,24 +76,24 @@ void TowaryLista::doAccept() {
 
 	if (selectedItem != "") {
 		if (comboBox1->currentIndex() == 0) {
-			ret = selectedItem + "|" + listaTowary2[id]->getCode() + "|"
-					+ listaTowary2[id]->getPkwiu() + "|"
+			ret = selectedItem + "|" + listaTowary2[id].getCode() + "|"
+					+ listaTowary2[id].getPkwiu() + "|"
 					+ trimZeros(countSpinBox->cleanText()) + "|"
-					+ listaTowary2[id]->getQuantityType() + "|"
+					+ listaTowary2[id].getQuantityType() + "|"
 					+ rabatSpin->cleanText() + "|"
 					+ sett().numberToString(priceBoxEdit->value()) + "|"
-					+ nettoLabel->text() + "|" + sett().numberToString(listaTowary2[id]->getVat()) + "|"
+					+ nettoLabel->text() + "|" + sett().numberToString(listaTowary2[id].getVat()) + "|"
 					+ bruttoLabel->text();
 
 		}
 		if (comboBox1->currentIndex() == 1) {
-			ret = selectedItem + "|" + listaUslugi2[id]->getCode() + "|"
-					+ listaUslugi2[id]->getPkwiu() + "|"
+			ret = selectedItem + "|" + listaUslugi2[id].getCode() + "|"
+					+ listaUslugi2[id].getPkwiu() + "|"
 					+ trimZeros(countSpinBox->cleanText()) + "|"
-					+ listaUslugi2[id]->getQuantityType() + "|"
+					+ listaUslugi2[id].getQuantityType() + "|"
 					+ rabatSpin->cleanText() + "|"
 					+ sett().numberToString(priceBoxEdit->value()) + "|"
-					+ nettoLabel->text() + "|" + sett().numberToString(listaUslugi2[id]->getVat()) + "|"
+					+ nettoLabel->text() + "|" + sett().numberToString(listaUslugi2[id].getVat()) + "|"
 					+ bruttoLabel->text();
 
 		}
@@ -176,13 +176,13 @@ void TowaryLista::readTow() {
 
 		for (QDomNode n = towar.firstChild(); !n.isNull(); n = n.nextSibling()) {
 			text = n.toElement().attribute("name");
-			ProductData *product = new ProductData();
-			product->setId(n.toElement().attribute("idx"));
-			product->setName(text);
-			product->setCode(n.toElement().attribute("code"));
-			product->setVat(n.toElement().attribute("vat"));
-						product->setQuanType(n.toElement().attribute("quanType"));
-			product->setPkwiu(n.toElement().attribute("pkwiu"));
+			ProductData product;
+			product.setId(n.toElement().attribute("idx"));
+			product.setName(text);
+			product.setCode(n.toElement().attribute("code"));
+			product.setVat(n.toElement().attribute("vat"));
+						product.setQuanType(n.toElement().attribute("quanType"));
+			product.setPkwiu(n.toElement().attribute("pkwiu"));
 			vats[text] = n.toElement ().attribute ("vat").toInt();
 			nettos[text] = n.toElement ().attribute ("netto1") + "|" +
 						n.toElement ().attribute ("netto2") + "|" +
@@ -194,13 +194,13 @@ void TowaryLista::readTow() {
 
 		for (QDomNode n = usluga.firstChild(); !n.isNull(); n = n.nextSibling()) {
 			text = n.toElement().attribute("name");
-			ProductData *product = new ProductData();
-			product->setId(n.toElement().attribute("idx"));
-			product->setName(text);
-			product->setVat(n.toElement().attribute("vat"));
-			product->setCode(n.toElement().attribute("code"));
-			product->setQuanType(n.toElement().attribute("quanType"));
-			product->setPkwiu(n.toElement().attribute("pkwiu"));
+			ProductData product;
+			product.setId(n.toElement().attribute("idx"));
+			product.setName(text);
+			product.setVat(n.toElement().attribute("vat"));
+			product.setCode(n.toElement().attribute("code"));
+			product.setQuanType(n.toElement().attribute("quanType"));
+			product.setPkwiu(n.toElement().attribute("pkwiu"));
 			vats[text] = n.toElement ().attribute ("vat").toInt();
 			nettos[text] = n.toElement ().attribute ("netto1") + "|" +
 						n.toElement ().attribute ("netto2") + "|" +
@@ -218,14 +218,14 @@ void TowaryLista::displayData(int x) {
 
 	switch (x) {
 	case 0:
-		for (QMap<QString, ProductData *>::iterator iter = listaTowary2.begin();
+		for (QMap<QString, ProductData>::iterator iter = listaTowary2.begin();
 				iter != listaTowary2.end();
 				++iter) {
 			listWidget->addItem(iter.key());
 		}
 		break;
 	case 1:
-		for (QMap<QString, ProductData *>::iterator iter = listaUslugi2.begin();
+		for (QMap<QString, ProductData>::iterator iter = listaUslugi2.begin();
 						iter != listaUslugi2.end();
 						++iter) {
 			listWidget->addItem(iter.key());
