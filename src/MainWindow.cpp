@@ -252,8 +252,8 @@ void MainWindow::saveAllSettAsDefault() {
  */
 void MainWindow::saveAllSett() {
 	// save filtr
-	sett().setValue("filtrStart", filtrStart->text());
-	sett().setValue("filtrEnd", filtrEnd->text());
+	sett().setValue("filtrStart", filtrStart->date());
+	sett().setValue("filtrEnd", filtrEnd->date());
 
 	saveColumnWidth();
 

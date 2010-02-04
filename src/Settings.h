@@ -25,9 +25,7 @@ public:
 
 	// get date from settings as QDate
 	QDate getValueAsDate(QString val) {
-		QString date = value(val).toString();
-		QLocale locale;
-		return locale.toDate( date, getDateFormat());
+		return value(val).toDate();
 	}
 
 	// returns date format used for all dates
@@ -97,10 +95,9 @@ public:
 			setValue("editSymbol", "false");
 		if (value("filtrEnd").toString().compare("") == 0)
 			setValue("filtrEnd",
-					getLastDayOfYear().toString(Qt::ISODate));
+					getLastDayOfYear());
 		if (value("filtrStart").toString().compare("") == 0)
-			setValue("filtrStart", getFirstDayOfYear().toString(
-					Qt::ISODate));
+			setValue("filtrStart", getFirstDayOfYear());
 		if (value("firstrun").toString().compare("") == 0)
 			setValue("firstrun", false);
 		if (value("jednostki").toString().compare("") == 0)
@@ -365,8 +362,8 @@ public:
 		setValue("numberOfCopies", 1);
 		setValue("nipMask", "999-999-99-99; ");
 		setValue("accountMask", "99-9999-9999-9999-9999-9999-9999; ");
-		setValue ("filtrEnd", getLastDayOfYear().toString(getDateFormat()));
-		setValue("filtrStart", getFirstDayOfYear().toString(getDateFormat()));
+		setValue ("filtrEnd", getLastDayOfYear());
+		setValue("filtrStart", getFirstDayOfYear());
 		setValue("firstrun", false);
 		setValue("jednostki", tr("szt.|kg.|g.|m.|km.|godz."));
 		setValue("korNr", "1");
