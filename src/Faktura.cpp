@@ -51,18 +51,17 @@ void Faktura::init() {
 
 	// set width of the columns on the products list
 	sett().beginGroup("fakturaForm");
-	tableTow->setColumnWidth(0, sett().value("towCol0", QVariant(0)).toInt()); //index
-	tableTow->setColumnWidth(1, sett().value("towCol1", QVariant(90)).toInt()); // nazwa
-	tableTow->setColumnWidth(2, sett().value("towCol2", QVariant(35)).toInt()); // kod
-	tableTow->setColumnWidth(3, sett().value("towCol3", QVariant(35)).toInt()); // kod
-	tableTow->setColumnWidth(4, sett().value("towCol4", QVariant(40)).toInt()); // ilosc
-	tableTow->setColumnWidth(5, sett().value("towCol5", QVariant(30)).toInt()); // jm
-	tableTow->setColumnWidth(6, sett().value("towCol6", QVariant(30)).toInt()); // rabat
-	tableTow->setColumnWidth(7, sett().value("towCol7", QVariant(60)).toInt()); // cena jedn.
-	tableTow->setColumnWidth(8, sett().value("towCol8", QVariant(60)).toInt()); // netto
-	tableTow->setColumnWidth(9, sett().value("towCol9", QVariant(30)).toInt()); // vat
-	tableTow->setColumnWidth(10,
-			sett().value("towCol10", QVariant(50)).toInt()); // netto *  (wzor vat)
+	for (unsigned int i = 0; i <= 10; i++)
+	{
+		QString colName = QString("towCol%1").arg(i);
+		int colWidth = sett().value(colName).toInt();
+
+		if (colWidth)
+			tableTow->setColumnWidth(i, colWidth);
+		else
+			tableTow->resizeColumnToContents(i);
+	}
+
 	sett().endGroup();
 
 	// set all the dates to todays date -> could be logical date :)
@@ -244,6 +243,7 @@ void Faktura::addTow() {
 		if (constRab->isChecked())
 			calculateDiscount();
 		calculateSum();
+		tableTow->resizeColumnsToContents();
 	}
 }
 
@@ -258,6 +258,7 @@ void Faktura::delTowar() {
 	calculateSum();
 	saveBtn->setEnabled(true);
 	canClose = false;
+	tableTow->resizeColumnsToContents();
 }
 
 /** Slot editTowar
@@ -280,6 +281,7 @@ void Faktura::editTowar() {
 		canClose = false;
 		calculateOneDiscount(currentRow);
 		calculateSum();
+		tableTow->resizeColumnsToContents();
 	}
 	// qDebug() << __FUNCTION__ << ": EXIT";
 }
@@ -1086,6 +1088,7 @@ void Faktura::readData(QString fraFile, int co) {
 	// if (constRab->isChecked())
 	calculateDiscount();
 	calculateSum();
+	tableTow->resizeColumnsToContents();
 }
 
 /** Sets the editability
