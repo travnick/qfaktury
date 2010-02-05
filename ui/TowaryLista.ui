@@ -171,7 +171,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="rabatSpin" />
+            <widget class="QSpinBox" name="rabatSpin" >
+             <property name="alignment" >
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
