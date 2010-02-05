@@ -160,7 +160,7 @@
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
              <property name="buttonSymbols" >
-              <enum>QAbstractSpinBox::NoButtons</enum>
+              <enum>QAbstractSpinBox::UpDownArrows</enum>
              </property>
              <property name="decimals" >
               <number>3</number>
