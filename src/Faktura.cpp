@@ -376,16 +376,14 @@ void Faktura::payTextChanged(QString text) {
 			platCombo->setCurrentIndex(0);
 			return;
 		}
-		CustomPayment *cp = new CustomPayment(this);
-		cp->setInvoiceAmount(sett().stringToDouble(sum3->text()));
-		if (cp->exec() ==  QDialog::Accepted) {
-			custPaymData = cp->custPaymData;
+		CustomPayment cp(this);
+		cp.setInvoiceAmount(sett().stringToDouble(sum3->text()));
+		if (cp.exec() ==  QDialog::Accepted) {
+			custPaymData = cp.custPaymData;
 			liabDate->setEnabled(false);
 		} else {
 			platCombo->setCurrentIndex(0);
 		}
-		delete cp;
-		cp = NULL;
 	}
 
 	textChanged(text);
