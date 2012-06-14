@@ -267,7 +267,7 @@ void Faktura::delTowar() {
 void Faktura::editTowar() {
 	// qDebug() << __FUNCTION__ << ": ENTER";
 	// we can only modify quantity
-	ZmienIlosc *changeQuant(this);
+    ZmienIlosc changeQuant(this);
 	changeQuant.nameTow->setText(
 			tableTow-> item(tableTow->currentRow(), 1)->text());
 	changeQuant.codeTow->setText(

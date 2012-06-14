@@ -432,7 +432,7 @@ void MainWindow::pluginSlot() {
 
 	QStringList args;
 	args += customActions[scriptId];
-	args += QString("%1").arg(winId(), 0, 10);
+    args += QString("%1").arg((size_t)winId(), 0, 10);
 
 	qDebug() << find(winId())->windowTitle();
 
