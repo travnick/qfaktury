@@ -1,1 +1,5 @@
 *.user
+.project
+.cproject
+.settings
+*.autosave
