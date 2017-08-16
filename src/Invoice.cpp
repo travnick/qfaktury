@@ -2352,7 +2352,7 @@ void Invoice::makeInvoiceProductsHeadar()
 	invStrList +=
 		"<tr align=\"center\" valign=\"middle\" class=\"productsHeader\" width=\"100%\" >"; // TUTAJ
 
-	int currentPercent;
+	int currentPercent = 0;
 	int &sumPercents = currentPercent;
 
 	sett().beginGroup("invoices_positions");
