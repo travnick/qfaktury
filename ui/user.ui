@@ -9,14 +9,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>584</width>
-    <height>650</height>
+    <width>660</width>
+    <height>809</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dane firmy</string>
   </property>
   <layout class="QGridLayout">
+   <property name="leftMargin">
+    <number>2</number>
+   </property>
+   <property name="topMargin">
+    <number>2</number>
+   </property>
+   <property name="rightMargin">
+    <number>2</number>
+   </property>
+   <property name="bottomMargin">
+    <number>2</number>
+   </property>
+   <property name="spacing">
+    <number>1</number>
+   </property>
    <item row="1" column="0">
     <layout class="QHBoxLayout">
      <item>
@@ -92,9 +107,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-313</y>
-            <width>528</width>
-            <height>859</height>
+            <y>0</y>
+            <width>632</width>
+            <height>728</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -857,7 +872,6 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <resources/>
  <connections>
   <connection>

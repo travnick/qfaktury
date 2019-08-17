@@ -50,7 +50,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="TabPage1">
       <attribute name="title">
@@ -903,8 +903,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>271</width>
-            <height>291</height>
+            <width>265</width>
+            <height>296</height>
            </rect>
           </property>
           <attribute name="label">
@@ -1083,8 +1083,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>288</width>
-            <height>188</height>
+            <width>280</width>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -1239,8 +1239,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>301</width>
-            <height>153</height>
+            <width>295</width>
+            <height>144</height>
            </rect>
           </property>
           <attribute name="label">
@@ -1367,8 +1367,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>273</width>
-            <height>153</height>
+            <width>267</width>
+            <height>144</height>
            </rect>
           </property>
           <attribute name="label">
@@ -1503,8 +1503,8 @@ korekt:</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>485</width>
-            <height>353</height>
+            <width>477</width>
+            <height>360</height>
            </rect>
           </property>
           <attribute name="label">
@@ -2918,7 +2918,6 @@ korekt:</string>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <tabstops>
   <tabstop>closeButton</tabstop>
   <tabstop>saveButton</tabstop>

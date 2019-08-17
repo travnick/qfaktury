@@ -476,7 +476,6 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <tabstops>
   <tabstop>listBox1</tabstop>
   <tabstop>okBtn</tabstop>
