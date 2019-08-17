@@ -7,6 +7,8 @@ endif()
 
 set(QT_MIN_VERSION "5.10.0")
 
+set(QT_QMAKE_EXECUTABLE "~/Qt/5.12.4")
+
 # Set project version
 set (QFAKTURY_VERSION_MAJOR "0")
 set (QFAKTURY_VERSION_MINOR "7")
