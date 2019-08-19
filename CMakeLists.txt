@@ -7,7 +7,7 @@ endif()
 
 set(QT_MIN_VERSION "5.10.0")
 
-set(QT_QMAKE_EXECUTABLE "~/Qt/5.12.4")
+set(QT_QMAKE_EXECUTABLE "~/Qt/5.12.4/gcc_64/bin")
 
 # Set project version
 set (QFAKTURY_VERSION_MAJOR "0")
@@ -26,8 +26,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines
 find_package( Qt5 REQUIRED COMPONENTS Gui Core Widgets PrintSupport Xml XmlPatterns Network )
 
 
-option(FEDORA "Check if this Fedora" OFF)
-option(QUAZIP_FOUND "Check if QuaZipn is installed and accessible" OFF)
+option(FEDORA "Check if this Fedora" ON)
+option(QUAZIP_FOUND "Check if QuaZipn is installed and accessible" ON)
 
 
 find_package(Fedora)
