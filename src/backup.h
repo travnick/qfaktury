@@ -20,9 +20,9 @@ public:
     Backup(bool withGui, QWidget* parent = 0); // false -> without Gui
     ~Backup();
 
-    const QString getBackupPath();
-    const QString getDirectoryPath();
-    const QString getFilename();
+    const QString getBackupPath() const;
+    const QString getDirectoryPath() const;
+    const QString getFilename() const;
 
 protected:
     void whenAutoBackup();

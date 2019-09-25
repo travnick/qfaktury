@@ -17,6 +17,8 @@
 #include <QPushButton>
 #include <QComboBox>
 
+#include "debug_message.h"
+
 short invType;
 Invoice *Invoice::m_instance = nullptr;
 
@@ -27,7 +29,7 @@ Invoice::Invoice(QWidget *parent, IDataLayer *dl, QString Inv)
     : QDialog(parent), inv_form(Inv) {
   setupUi(this);
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   m_instance = this;
   dataLayer = dl;
@@ -53,7 +55,7 @@ Invoice::Invoice(QWidget *parent, IDataLayer *dl, QString Inv)
                              "się różni wybór waluty z listy obok."));
 
   init();
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -92,7 +94,7 @@ Invoice::~Invoice() {
     sendKindInfo = 0;
   delete sendKindInfo;
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -115,7 +117,7 @@ bool Invoice::getKAdded() const { return kAdded; }
 
 void Invoice::init() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   reply = 0;
   manager = 0;
@@ -265,7 +267,7 @@ void Invoice::init() {
 
   canClose = true;
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -282,7 +284,7 @@ void Invoice::whatTypeFromTitle(QString title, bool ifForm, bool kadded,
     type = numbType;
   }
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -324,7 +326,7 @@ QString Invoice::getInvoiceTypeAndSaveNr() {
 
 void Invoice::connectedWebsite(const QUrl &webExchRate) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   manager = new QNetworkAccessManager(this);
 
@@ -367,7 +369,7 @@ void Invoice::connectedWebsite(const QUrl &webExchRate) {
 
 void Invoice::httpReadyRead() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (file.exists()) {
     file.write(reply->readAll());
@@ -376,7 +378,7 @@ void Invoice::httpReadyRead() {
 
 void Invoice::tellFinished() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (file.open(QIODevice::ReadOnly)) {
 
@@ -437,7 +439,7 @@ void Invoice::tellFinished() {
 
 QMap<QString, double> Invoice::getActualCurList() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QMap<QString, double> currencies;
 
@@ -496,7 +498,7 @@ is first argument, that is the our main language
 void Invoice::algorithmCurrencies(QString mainEl, QStringList list,
                                   QMap<QString, double> &mappedList) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QStringList::const_iterator constIterator;
   QStringList::const_iterator constIteratorDepth;
@@ -544,7 +546,7 @@ void Invoice::algorithmCurrencies(QString mainEl, QStringList list,
 
 QMap<QString, double> Invoice::tableOfValues() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QMap<QString, double> currencies;
 
@@ -578,7 +580,7 @@ QMap<QString, double> Invoice::tableOfValues() {
 
 bool Invoice::ifUpdated() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (!file.open(QIODevice::ReadOnly)) {
 
@@ -649,13 +651,13 @@ bool Invoice::ifUpdated() {
 }
 
 QString Invoice::checkInvCurr() {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
   return currCombo->currentText().trimmed();
 }
 
 bool Invoice::convWarn() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   bool whatToDo = false;
 
@@ -688,7 +690,7 @@ bool Invoice::convWarn() {
 
 void Invoice::convertCurrShort(QString btnText) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (!convWarn()) {
 
@@ -784,14 +786,14 @@ void Invoice::compareCurrToConv(bool ifCanConv) {
 
 const QString Invoice::pressedTxt() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   return pressedText;
 }
 
 void Invoice::calcAll(const double &currVal) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   double res1 = 0;
   double res2 = 0;
@@ -871,13 +873,13 @@ void Invoice::calcAll(const double &currVal) {
   }
 
   goodsEdited = true;
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
 void Invoice::buyerClick() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   Buyers *buyersWindow;
   buyersWindow = new Buyers(this, 0, dataLayer);
@@ -898,7 +900,7 @@ void Invoice::buyerClick() {
 
 void Invoice::keyPressEvent(QKeyEvent *event) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (event->key() == Qt::Key_Escape) {
     canQuit();
@@ -911,7 +913,7 @@ void Invoice::keyPressEvent(QKeyEvent *event) {
 
 void Invoice::getCustomer() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   BuyersList *buylistWindow = new BuyersList(this);
 
@@ -932,7 +934,7 @@ void Invoice::getCustomer() {
 
 void Invoice::discountConstChange() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (constRab->isChecked()) {
 
@@ -954,7 +956,7 @@ void Invoice::discountConstChange() {
 
 void Invoice::discountChange() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   calculateDiscount();
 
@@ -977,7 +979,7 @@ void Invoice::discountChange() {
 
 void Invoice::addGoods() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   GoodsList *goodslistWindow = new GoodsList(this);
 
@@ -1025,7 +1027,7 @@ void Invoice::addGoods() {
 
 void Invoice::delGoods() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   tableGoods->removeRow(tableGoods->currentRow());
 
@@ -1048,7 +1050,7 @@ void Invoice::delGoods() {
 
 void Invoice::editGoods() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
   // we can only modify quantity
 
   goodsEdited = true;
@@ -1138,7 +1140,7 @@ void Invoice::editGoods() {
  */
 void Invoice::backBtnClick() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QString prefix, suffix;
   prefix = sett().value("prefix").toString();
@@ -1173,7 +1175,7 @@ void Invoice::backBtnClick() {
 
 void Invoice::canQuit() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << ": canClose " << canClose;
 
   if (canClose) {
@@ -1210,7 +1212,7 @@ void Invoice::canQuit() {
 
 void Invoice::tableActivated(QTableWidgetItem *item) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (item != NULL || !item->text().isEmpty()) {
     rmGoodsBtn->setEnabled(true);
@@ -1227,7 +1229,7 @@ void Invoice::tableActivated(QTableWidgetItem *item) {
 
 void Invoice::payTextChanged(QString text) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
   qDebug() << __FUNCTION__ << paysCombo->currentIndex();
 
   if (text != trUtf8("zaliczka")) {
@@ -1344,7 +1346,7 @@ void Invoice::payTextChanged(QString text) {
   }
 
   textChanged(text);
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -1354,11 +1356,11 @@ void Invoice::payTextChanged(QString text) {
 
 void Invoice::textChanged(QString) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
   saveBtn->setEnabled(true);
   canClose = false;
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -1368,7 +1370,7 @@ void Invoice::textChanged(QString) {
 
 void Invoice::dateChanged(QDate) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (productDate->date() < sellingDate->date()) {
 
@@ -1384,12 +1386,12 @@ void Invoice::dateChanged(QDate) {
     canClose = false;
   }
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
 void Invoice::rateDateChanged(QString date) {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (!rComboWasChanged) {
 
@@ -1496,7 +1498,7 @@ void Invoice::rateDateChanged(QString date) {
     }
   }
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -1505,7 +1507,7 @@ void Invoice::rateDateChanged(QString date) {
 
 void Invoice::setData(InvoiceData &invData) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   invData.id = fName;
   invData.customer = buyerName->text();
@@ -1578,7 +1580,7 @@ void Invoice::setData(InvoiceData &invData) {
   invData.liabDate = liabDate->date();
   invData.currencyType = currCombo->currentText();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -1587,7 +1589,7 @@ void Invoice::setData(InvoiceData &invData) {
 
 void Invoice::getData(InvoiceData invData) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   buyerName->setText(invData.customer);
   invNr->setText(invData.invNr);
@@ -1677,7 +1679,7 @@ void Invoice::getData(InvoiceData invData) {
             SLOT(rateDateChanged(QString)));
   }
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -1726,7 +1728,7 @@ bool Invoice::saveInvoice() {
 
 void Invoice::makeInvoice(bool to_print) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (buyerName->text() == "") {
 
@@ -1779,7 +1781,7 @@ void Invoice::makeInvoice(bool to_print) {
 
 void Invoice::printSlot(QPrinter *printer) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QTextDocument doc(invoiceType);
   QString s = QString();
@@ -1846,7 +1848,7 @@ void Invoice::printSlot(QPrinter *printer) {
 
 void Invoice::print() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QPrinter printer(QPrinter::HighResolution);
   if (!MainWindow::instance()->shouldHidden) {
@@ -1882,7 +1884,7 @@ void Invoice::print() {
 
 bool Invoice::validateForm() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (buyerName->text() == "") {
 
@@ -1947,7 +1949,7 @@ bool Invoice::validateForm() {
 
 void Invoice::makeInvoiceHeadarHTML() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   invStrList += "<!DOCTYPE html><head>";
   invStrList += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
@@ -2010,7 +2012,7 @@ void Invoice::makeInvoiceHeadarHTML() {
 
 void Invoice::makeInvoiceHeadar(bool sellDate, bool breakPage, bool original) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QString breakPageStr = "class=\"page_break\"";
   if (breakPage == false)
@@ -2115,7 +2117,7 @@ void Invoice::makeInvoiceHeadar(bool sellDate, bool breakPage, bool original) {
 
 void Invoice::makeInvoiceBody() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   invStrList += "<tr width=\"100%\"><td width=\"100%\">";
   invStrList += "<table width=\"100%\" border=\"0\">";
@@ -2253,7 +2255,7 @@ void Invoice::makeInvoiceBody() {
 
 void Invoice::makeInvoiceProductsHeadar() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   invStrList += "<tr align=\"center\" valign=\"middle\" "
                 "class=\"productsHeader\" width=\"100%\" >";
@@ -2403,7 +2405,7 @@ void Invoice::makeInvoiceProductsHeadar() {
 
 void Invoice::makeInvoiceProducts() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   invStrList += "<tr width=\"100%\"><td width=\"100%\">";
 
@@ -2499,7 +2501,7 @@ void Invoice::makeInvoiceProducts() {
 
 void Invoice::makeInvoiceSumm() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   double vatPrice =
       (sett().stringToDouble(sum3->text())) - (sett().stringToDouble(sum1->text()));
@@ -2534,7 +2536,7 @@ void Invoice::makeInvoiceSumm() {
 
 void Invoice::makeInvoiceSummAll() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   invStrList += "</td></tr>"; // closing products row
   invStrList += "<table width=\"100%\" border=\"0\">";
@@ -2644,7 +2646,7 @@ void Invoice::makeInvoiceSummAll() {
 
 void Invoice::makeInvoiceFooter() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   invStrList += "<tr>";
   invStrList += "<br/><br/><br/><br/>";
@@ -2706,7 +2708,7 @@ void Invoice::makeInvoiceFooter() {
 
 void Invoice::makeInvoiceFooterHtml() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   invStrList += "</body>";
   invStrList += "</html>";
@@ -2718,7 +2720,7 @@ void Invoice::makeInvoiceFooterHtml() {
 
 QString Invoice::getGroupedSums() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QStringList out;
   QStringList rates = sett().value("rates").toString().split("|");
@@ -2770,7 +2772,7 @@ QString Invoice::getGroupedSums() {
 
 void Invoice::readData(QString fraFile) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   prepayFile = fraFile;
   qDebug() << "prepayFile w readData: " << prepayFile;
@@ -2786,7 +2788,7 @@ void Invoice::readData(QString fraFile) {
   // calculateDiscount();
   calculateSum();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -2794,7 +2796,7 @@ void Invoice::readData(QString fraFile) {
  */
 void Invoice::setIsEditAllowed(bool isAllowed) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (!sett().value("editSymbol").toBool())
     invNr->setEnabled(isAllowed);
@@ -2839,7 +2841,7 @@ void Invoice::setIsEditAllowed(bool isAllowed) {
   konvGBP->setEnabled(isAllowed);
   konvRUB->setEnabled(isAllowed);
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -2848,13 +2850,13 @@ void Invoice::setIsEditAllowed(bool isAllowed) {
 
 void Invoice::calculateDiscount() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   for (int i = 0; i < tableGoods->rowCount(); ++i) {
     calculateOneDiscount(i);
   }
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -2910,7 +2912,7 @@ void Invoice::calculateOneDiscount(int i) {
   tableGoods->item(i, 10)->setText(sett().numberToString(gross)); // gross
   qDebug() << "gross in table: " << tableGoods->item(i, 10)->text();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -2919,7 +2921,7 @@ void Invoice::calculateOneDiscount(int i) {
 
 void Invoice::calculateSum() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   double net = 0;
   double discountValue = 0;
@@ -2947,7 +2949,7 @@ void Invoice::calculateSum() {
   sum2->setText(sett().numberToString(discountTotal, 'f', 2));
   sum3->setText(sett().numberToString(grossTotal, 'f', 2));
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }
 
@@ -2957,7 +2959,7 @@ void Invoice::calculateSum() {
 
 QString Invoice::numbersCount(int in, int x) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
   qDebug() << "nr: " << in;
   qDebug() << "sett().value(\"chars_in_symbol\")" << x;
 
@@ -2968,7 +2970,7 @@ QString Invoice::numbersCount(int in, int x) {
   for (int i = 0; i < incr; ++i)
     tmp2 += "0";
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 
   return tmp2 + tmp;
@@ -2979,7 +2981,7 @@ QString Invoice::numbersCount(int in, int x) {
 
 void Invoice::saveColumnsWidth() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   sett().beginGroup("fakturaForm");
 
@@ -2989,6 +2991,6 @@ void Invoice::saveColumnsWidth() {
 
   sett().endGroup();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
+  StrDebug
            << "EXIT";
 }

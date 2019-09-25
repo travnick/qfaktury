@@ -11,21 +11,23 @@
 
 #include <QDirIterator>
 
+#include "debug_message.h"
+
 XmlDataLayer::XmlDataLayer() : IDataLayer() {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 }
 
 XmlDataLayer::~XmlDataLayer() {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 }
 
 QString const XmlDataLayer::getRet() const {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
   return ret;
 }
 
 QString XmlDataLayer::getRetWarehouse() const {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
   return retWarehouse;
 }
 
@@ -34,7 +36,7 @@ QString XmlDataLayer::getRetWarehouse() const {
 void XmlDataLayer::buyersElemToData(BuyerData &o_buyerData,
                                     QDomElement i_element) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   o_buyerData.name = i_element.attribute("name");
   o_buyerData.place = i_element.attribute("place");
@@ -55,7 +57,7 @@ void XmlDataLayer::buyersElemToData(BuyerData &o_buyerData,
 void XmlDataLayer::buyersDataToElem(BuyerData &i_buyerData,
                                     QDomElement &o_element) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   o_element.setAttribute("name", i_buyerData.name);
   o_element.setAttribute("place", i_buyerData.place);
@@ -74,7 +76,7 @@ void XmlDataLayer::buyersDataToElem(BuyerData &i_buyerData,
 
 bool XmlDataLayer::ifPersonNodeExists(QDomElement root) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (root.childNodes().at(2).toElement().tagName() == "person") {
 
@@ -92,7 +94,7 @@ bool XmlDataLayer::ifPersonNodeExists(QDomElement root) {
 
 void XmlDataLayer::addSectionPerson(bool checkedRoot) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QDomDocument doc(sett().getCustomersDocName());
   if (!checkedRoot) {
@@ -124,7 +126,7 @@ void XmlDataLayer::addSectionPerson(bool checkedRoot) {
 
 QVector<BuyerData> XmlDataLayer::buyersSelectAllData() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QVector<BuyerData> buyerVec;
 
@@ -228,7 +230,7 @@ QVector<BuyerData> XmlDataLayer::buyersSelectAllData() {
 
 BuyerData XmlDataLayer::buyersSelectData(QString name, int type) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   BuyerData o_buyerData;
 
@@ -333,7 +335,7 @@ BuyerData XmlDataLayer::buyersSelectData(QString name, int type) {
 
 bool XmlDataLayer::buyersInsertData(BuyerData &buyerData, int type) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QDomDocument doc(sett().getCustomersDocName());
   QDomElement root;
@@ -441,7 +443,7 @@ bool XmlDataLayer::buyersInsertData(BuyerData &buyerData, int type) {
 
 QStringList XmlDataLayer::buyersGetFirmList() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QStringList allNames;
 
@@ -540,7 +542,7 @@ QStringList XmlDataLayer::buyersGetFirmList() {
 bool XmlDataLayer::buyersUpdateData(BuyerData &buyerData, int type,
                                     QString name) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QDomDocument doc(sett().getCustomersDocName());
   QDomElement root;
@@ -667,7 +669,7 @@ bool XmlDataLayer::buyersUpdateData(BuyerData &buyerData, int type,
 
 bool XmlDataLayer::buyersDeleteData(QString name) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QDomDocument doc(sett().getCustomersDocName());
   QDomElement root;
@@ -772,7 +774,7 @@ bool XmlDataLayer::buyersDeleteData(QString name) {
 void XmlDataLayer::productsElemToData(ProductData &o_prodData,
                                       QDomElement i_element) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   o_prodData.id = i_element.attribute("idx").toInt();
   o_prodData.name = i_element.attribute("name");
@@ -792,7 +794,7 @@ void XmlDataLayer::productsElemToData(ProductData &o_prodData,
 void XmlDataLayer::productsDataToElem(ProductData &i_prodData,
                                       QDomElement &o_element) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   o_element.setAttribute("idx", i_prodData.id);
   o_element.setAttribute("name", i_prodData.name);
@@ -809,7 +811,7 @@ void XmlDataLayer::productsDataToElem(ProductData &i_prodData,
 
 QVector<ProductData> XmlDataLayer::productsSelectAllData() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QVector<ProductData> prodVec;
 
@@ -894,7 +896,7 @@ QVector<ProductData> XmlDataLayer::productsSelectAllData() {
 
 ProductData XmlDataLayer::productsSelectData(QString name, int type) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   ProductData o_prodData;
 
@@ -984,7 +986,7 @@ ProductData XmlDataLayer::productsSelectData(QString name, int type) {
 
 bool XmlDataLayer::productsInsertData(ProductData &prodData, int type) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QDomDocument doc(sett().getProdutcsDocName());
   QDomElement root;
@@ -1057,7 +1059,7 @@ bool XmlDataLayer::productsInsertData(ProductData &prodData, int type) {
 bool XmlDataLayer::productsUpdateData(ProductData &prodData, int type,
                                       QString name) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QDomDocument doc(sett().getProdutcsDocName());
   QDomElement root;
@@ -1163,7 +1165,7 @@ bool XmlDataLayer::productsUpdateData(ProductData &prodData, int type,
 
 bool XmlDataLayer::productsDeleteData(QString name) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QDomDocument doc(sett().getProdutcsDocName());
   QDomElement root;
@@ -1257,7 +1259,7 @@ bool XmlDataLayer::productsDeleteData(QString name) {
 void XmlDataLayer::invoiceSellerDataToElem(DocumentData &,
                                            QDomElement &o_element) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QSettings userSettings("elinux", "user");
   o_element.setAttribute("name", userSettings.value("name").toString());
@@ -1276,7 +1278,7 @@ void XmlDataLayer::invoiceSellerDataToElem(DocumentData &,
 
 void XmlDataLayer::invoiceSellerElemToData(InvoiceData &, QDomElement) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 }
 
 void XmlDataLayer::invoiceBuyerDataToElem(DocumentData &i_invData,
@@ -1313,7 +1315,7 @@ void XmlDataLayer::invoiceBuyerDataToElem(DocumentData &i_invData,
 
 void XmlDataLayer::invoiceBuyerElemToData(InvoiceData &, QDomElement) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 }
 
 void XmlDataLayer::invoiceProdDataToElem(const ProductData &i_prodData,
@@ -1396,13 +1398,13 @@ void XmlDataLayer::warehouseProdDataToElem(const ProductData &i_prodData,
 
 void XmlDataLayer::invoiceProdElemToData(InvoiceData &, QDomElement) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 }
 
 bool XmlDataLayer::nameFilter(QString nameToCheck, QDate start, QDate end,
                               QString docName, QString path) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QDomDocument doc(docName);
   QDomElement root;
@@ -1450,7 +1452,7 @@ bool XmlDataLayer::nameFilter(QString nameToCheck, QDate start, QDate end,
 InvoiceData XmlDataLayer::invoiceSelectData(QString name, int type,
                                             bool onlyCheck) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
   qDebug() << "filename: " << name;
   qDebug() << "type number: " << QString::number(type);
 
@@ -1656,7 +1658,7 @@ InvoiceData XmlDataLayer::invoiceSelectData(QString name, int type,
 WarehouseData XmlDataLayer::warehouseSelectData(QString name, int type,
                                                 bool onlyCheck) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   WarehouseData o_invData;
 
@@ -1819,7 +1821,7 @@ WarehouseData XmlDataLayer::warehouseSelectData(QString name, int type,
 QVector<InvoiceData> XmlDataLayer::invoiceSelectAllData(QDate start,
                                                         QDate end, bool onlyCheck) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   allSymbols.clear();
   QVector<InvoiceData> o_invDataVec;
@@ -1959,7 +1961,7 @@ QVector<InvoiceData> XmlDataLayer::invoiceSelectAllData(QDate start,
 QVector<WarehouseData> XmlDataLayer::warehouseSelectAllData(QDate start,
                                                             QDate end) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   allSymbolsWarehouse.clear();
   QVector<WarehouseData> o_invDataVec;
@@ -2088,7 +2090,7 @@ QVector<WarehouseData> XmlDataLayer::warehouseSelectAllData(QDate start,
 
 void XmlDataLayer::checkAllSymbInFiles() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   allSymbols.clear();
 
@@ -2163,7 +2165,7 @@ void XmlDataLayer::checkAllSymbInFiles() {
 
 void XmlDataLayer::checkAllSymbWareInFiles() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   allSymbolsWarehouse.clear();
 
@@ -2237,7 +2239,7 @@ void XmlDataLayer::checkAllSymbWareInFiles() {
 
 QList<int> const XmlDataLayer::getAllSymbols() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (allSymbols.count() == 0)
     allSymbols.append(0);
@@ -2246,7 +2248,7 @@ QList<int> const XmlDataLayer::getAllSymbols() {
 
 QList<int> const XmlDataLayer::getAllSymbolsWarehouse() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   if (allSymbolsWarehouse.count() == 0)
     allSymbolsWarehouse.append(0);
@@ -2255,7 +2257,7 @@ QList<int> const XmlDataLayer::getAllSymbolsWarehouse() {
 
 bool XmlDataLayer::invoiceInsertData(InvoiceData &oi_invData, int type) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QDomDocument doc(sett().getInoiveDocName());
   QDomElement root;
@@ -2388,7 +2390,7 @@ bool XmlDataLayer::invoiceInsertData(InvoiceData &oi_invData, int type) {
 
 bool XmlDataLayer::warehouseInsertData(WarehouseData &oi_invData, int type) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QDomDocument doc(sett().getWarehouseDocName());
   QDomElement root;
@@ -2510,7 +2512,7 @@ bool XmlDataLayer::warehouseInsertData(WarehouseData &oi_invData, int type) {
 
 bool XmlDataLayer::ifThereOldDocuments(QString docname, QString docdir, QStringList filters) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   yearsList.clear();
   categorizedFiles.clear();
@@ -2579,7 +2581,7 @@ bool XmlDataLayer::ifThereOldDocuments(QString docname, QString docdir, QStringL
 
 void XmlDataLayer::separateOldDocuments(QString path) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   yearsList.removeDuplicates();
 
@@ -2620,21 +2622,21 @@ void XmlDataLayer::separateOldDocuments(QString path) {
 
 bool XmlDataLayer::invoiceUpdateData(InvoiceData &, int, QString) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   return true;
 }
 
 bool XmlDataLayer::warehouseUpdateData(WarehouseData &, int, QString) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   return true;
 }
 
 bool XmlDataLayer::invoiceDeleteData(QString name) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QFile file(sett().getInvoicesDir() + name);
 
@@ -2648,7 +2650,7 @@ bool XmlDataLayer::invoiceDeleteData(QString name) {
 
 bool XmlDataLayer::warehouseDeleteData(QString name) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QFile file(sett().getWarehouseFullDir() + name);
 

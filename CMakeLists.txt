@@ -6,8 +6,8 @@ if(POLICY CMP0071)
 endif()
 
 set(QT_MIN_VERSION "5.10.0")
-
 set(QT_QMAKE_EXECUTABLE "~/Qt/5.12.4/gcc_64/bin")
+set(CMAKE_CXX_STANDARD 17)
 
 # Set project version
 set (QFAKTURY_VERSION_MAJOR "0")
@@ -25,15 +25,12 @@ message(STATUS "${CMAKE_MODULE_PATH}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden -Werror -Wall -Wextra -Wno-unused-parameter -pedantic -Wno-reorder -std=c++0x")
 find_package( Qt5 REQUIRED COMPONENTS Gui Core Widgets PrintSupport Xml XmlPatterns Network )
 
-
 option(FEDORA "Check if this Fedora" ON)
 option(QUAZIP_FOUND "Check if QuaZipn is installed and accessible" ON)
-
 
 find_package(Fedora)
 
 find_package(QuaZip5)
-
 
 if(FEDORA)
   add_definitions(-DFEDORA_FOUND)
@@ -45,7 +42,6 @@ if(QUAZIP_FOUND)
 else()
   message("EN: QuaZip hasn't been found in FindQuaZip5.cmake. It's not possible to create backup. \nPL: Brak biblioteki dla QuaZip. Tworzenie kopii zapasowych zablokowane")
 endif()
-
 
 if(NOT QUAZIP_FOUND)
     set(QUAZIP_INCLUDE_DIR "")
@@ -63,10 +59,9 @@ if(NOT QUAZIP_FOUND)
     endif()
 endif()
 
-
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
-set( SOURCES    
+set( SOURCES
      src/xmldatalayer.cpp
      src/buyerdata.cpp
      src/custompaymdata.cpp
@@ -81,7 +76,7 @@ set( SOURCES
      src/buyers.cpp
      src/buyerslist.cpp
      src/correction.cpp
-     src/main.cpp 
+     src/main.cpp
      src/mainwindow.cpp
      src/goods.cpp
      src/goodslist.cpp
@@ -105,13 +100,16 @@ set( SOURCES
      src/csvexport.cpp
 )
 
+set( HEADER_FILE_ONLY
+      src/debug_message.h
+)
+
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${QUAZIP_INCLUDE_DIRS}
     src/SimpleSmtp_SSL_QT5/smtp_attachements
 )
-
 
 qt5_wrap_ui( UIS_HDRS
     ui/setting.ui
@@ -131,11 +129,9 @@ qt5_wrap_ui( UIS_HDRS
     src/SimpleSmtp_SSL_QT5/smtp_attachements/emailwindow.ui
 )
 
-
 QT5_ADD_RESOURCES(RESOURCES qfaktury.qrc)
 
-
-add_executable(qfaktury ${SOURCES} ${UIS_HDRS} ${RESOURCES})
+add_executable(qfaktury ${SOURCES} ${HEADER_FILE_ONLY} ${UIS_HDRS} ${RESOURCES})
 
 target_link_libraries (qfaktury
     Qt5::Gui
@@ -144,19 +140,17 @@ target_link_libraries (qfaktury
     Qt5::PrintSupport
     Qt5::Xml
     Qt5::XmlPatterns
-    Qt5::Network 
+    Qt5::Network
     ${QUAZIP_LIBRARIES}
-    )
+)
 
+SET(QFAKTURY_PATH "/usr/share/qfaktury")
 
-    SET(QFAKTURY_PATH "/usr/share/qfaktury")
-
-    install(TARGETS qfaktury DESTINATION /usr/bin)
-    install(DIRECTORY icons DESTINATION ${QFAKTURY_PATH})
-    install(DIRECTORY schemas DESTINATION ${QFAKTURY_PATH})
-    install(DIRECTORY templates DESTINATION ${QFAKTURY_PATH})
-    install(DIRECTORY docs DESTINATION /usr/share/doc/qfaktury)
-    install(FILES QFaktury.desktop DESTINATION /usr/share/applications)
-    install(DIRECTORY src DESTINATION ${QFAKTURY_PATH})
-    install(DIRECTORY ui DESTINATION ${QFAKTURY_PATH})
-
+install(TARGETS qfaktury DESTINATION /usr/bin)
+install(DIRECTORY icons DESTINATION ${QFAKTURY_PATH})
+install(DIRECTORY schemas DESTINATION ${QFAKTURY_PATH})
+install(DIRECTORY templates DESTINATION ${QFAKTURY_PATH})
+install(DIRECTORY docs DESTINATION /usr/share/doc/qfaktury)
+install(FILES QFaktury.desktop DESTINATION /usr/share/applications)
+install(DIRECTORY src DESTINATION ${QFAKTURY_PATH})
+install(DIRECTORY ui DESTINATION ${QFAKTURY_PATH})

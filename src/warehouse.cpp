@@ -1,28 +1,31 @@
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+
 #include "warehouse.h"
 #include "const.h"
 #include "mainwindow.h"
 #include "xmldatalayer.h"
 
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QLineEdit>
+#include "debug_message.h"
 
 /** Constructor
  */
 
 Warehouse::Warehouse(QWidget *parent, IDataLayer *dl, QString in_form)
-    : Invoice(parent, dl, in_form) {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    : Invoice(parent, dl, in_form), wareData {nullptr}
+{
+  StrDebug;
 }
 
 /** Destructor
  */
 
-Warehouse::~Warehouse() {}
+Warehouse::~Warehouse() {StrDebug;}
 
 void Warehouse::readWarehouseData(QString invFile) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   backBtn->setEnabled(false);
   invNr->setEnabled(false);

@@ -631,10 +631,15 @@ void Buyers::on_gusBtn_clicked() {
                                       "Jeśli tego nie zrobisz, powinieneś "
                                       "znaleźć plik php.ini, znaleźć wiersz "
                                       ";extension=soap.so i usunąć średnik. "),
-                               trUtf8("Tak"), trUtf8("Nie"), 0, 0, 1) == 0) {
+                               trUtf8("Tak"), trUtf8("Nie"), nullptr, 0, 1) == 0) {
+          int end_info;
 
-          if (DISTRO_FEDORA) system("beesu -l /usr/share/qfaktury/src/GusApi/soap-php.sh");
-          else system("gksudo sh /usr/share/qfaktury/src/GusApi/soap-php.sh");
+          if (DISTRO_FEDORA)
+              end_info = system("beesu -l /usr/share/qfaktury/src/GusApi/soap-php.sh");
+          else
+              end_info = system("gksudo sh /usr/share/qfaktury/src/GusApi/soap-php.sh");
+
+          (void)end_info;
       }
     }
 

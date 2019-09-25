@@ -12,12 +12,13 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
+#include "debug_message.h"
 
 Backup::Backup(QString action, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Backup)
 {
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug;
 
     ui->setupUi(this);
 
@@ -41,7 +42,7 @@ Backup::Backup(bool withGui, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Backup)
 {
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug;
 
     ui->setupUi(this);
 
@@ -65,7 +66,7 @@ Backup::~Backup()
 
 void Backup::prepareConnections() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug;
 
     connect(ui->browseButton, &QAbstractButton::clicked, this,
             &Backup::choosePathBackup);
@@ -75,9 +76,9 @@ void Backup::prepareConnections() {
 }
 
 
-const QString Backup::getBackupPath() {
+const QString Backup::getBackupPath() const {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug;
 
     QString backupPath = sett().getWorkingDir();
     QSettings settings("elinux", "qfaktury");
@@ -96,9 +97,9 @@ const QString Backup::getBackupPath() {
 
 }
 
-const QString Backup::getDirectoryPath() {
+const QString Backup::getDirectoryPath() const {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug;
 
     QString dirPath = QString();
     QSettings settings("elinux", "qfaktury");
@@ -111,9 +112,9 @@ const QString Backup::getDirectoryPath() {
 }
 
 
-const QString Backup::getFilename() {
+const QString Backup::getFilename() const {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug;
 
     QString checkSlashPath = getDirectoryPath();
 
@@ -129,7 +130,7 @@ const QString Backup::getFilename() {
 
 void Backup::putDataToWidgets(const QString dirPath, const QString filename) {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug;
 
     ui->directoryLineEdit->setText(dirPath);
     ui->fileLineEdit->setText(filename);
@@ -138,7 +139,7 @@ void Backup::putDataToWidgets(const QString dirPath, const QString filename) {
 
 void Backup::whenAutoBackup() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug;
 
     QSettings settings("elinux", "qfaktury");
 
@@ -179,7 +180,7 @@ void Backup::createBackupWithoutGui() {
 
 #if QUAZIP_FOUND
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug;
 
     QString checkPath = (getBackupPath().endsWith('/'))
                             ? getBackupPath()
@@ -244,7 +245,7 @@ void Backup::createBackupWithoutGui() {
 
 void Backup::choosePathBackup() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QString directory =
       QDir::toNativeSeparators(QFileDialog::getExistingDirectory(
@@ -261,7 +262,7 @@ void Backup::createBackup() {
 
 #if QUAZIP_FOUND
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QStringList listConf = QStringList()
                          << sett().fileName()
@@ -311,7 +312,7 @@ void Backup::loadBackup() {
 
 #if QUAZIP_FOUND
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug;
 
   QMessageBox msgBox;
   msgBox.setText(

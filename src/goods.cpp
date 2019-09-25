@@ -1,18 +1,19 @@
+#include <QDesktopServices>
+#include <QUrl>
 
 #include "goods.h"
 #include "idatalayer.h"
 #include "settings.h"
 #include "validations.h"
 
-#include <QDesktopServices>
-#include <QUrl>
+#include "debug_message.h"
 
 /** Constructor
  */
 
 Goods::Goods(QWidget *parent, int mode, IDataLayer *dl) : QDialog(parent) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug;
 
   workMode = mode;
   dataLayer = dl;
@@ -26,7 +27,7 @@ Goods::Goods(QWidget *parent, int mode, IDataLayer *dl) : QDialog(parent) {
 
 void Goods::init() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug;
 
   selectData("", 0);
 
@@ -57,14 +58,14 @@ void Goods::init() {
   /** Slot
    *  Finds PKWIU code on the net
    */
-  connect(pkwiuBtn, &QToolButton::clicked, [this]() {
+  connect(pkwiuBtn, &QToolButton::clicked, []() {
     QDesktopServices::openUrl(QUrl(tr(
         "http://www.vat.pl/pkwiu/index.php?rodzajKlasyfikacji=pkwiuvat&kod")));
   });
 }
 
 const QString Goods::getRetGoods() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug;
   return ret;
 }
 
@@ -76,7 +77,7 @@ const QString Goods::getRetGoods() {
 
 void Goods::okClick() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug;
 
   if (Validations::instance()->isEmptyField(nameEdit->text(),
                                             textLabel3->text()))
@@ -120,10 +121,11 @@ void Goods::okClick() {
 // helper method which sets "-" in input forms
 QString Goods::isEmpty(QString in) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug;
 
   if (in == "")
     return " ";
+
   return in;
 }
 
@@ -134,7 +136,7 @@ QString Goods::isEmpty(QString in) {
 
 void Goods::selectData(QString idx, int type) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug;
 
   if (idx == "") {
 
@@ -168,7 +170,7 @@ void Goods::selectData(QString idx, int type) {
 
 bool Goods::insertData() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug;
 
   ProductData prodData;
   setData(prodData);
@@ -182,7 +184,7 @@ bool Goods::insertData() {
 
 bool Goods::updateData() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug;
 
   ProductData prodData;
   setData(prodData);
@@ -196,7 +198,7 @@ bool Goods::updateData() {
 
 void Goods::getData(ProductData prodData) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug;
 
   idxEdit->setText(QString::number(prodData.id));
   nameEdit->setText(prodData.name);
@@ -222,7 +224,7 @@ void Goods::getData(ProductData prodData) {
 
 void Goods::setData(ProductData &prodData) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug;
 
   prodData.id = idxEdit->text().toInt();
   prodData.name = nameEdit->text();
@@ -233,5 +235,6 @@ void Goods::setData(ProductData &prodData) {
 
   for (int i = 0; i < 4; i++)
     prodData.prices[i] = sett().stringToDouble(net[i]);
+
   prodData.vat = cbVat->currentText().toInt();
 }
