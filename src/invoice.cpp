@@ -17,6 +17,8 @@
 #include <QPushButton>
 #include <QComboBox>
 
+#include <memory>
+
 #include "debug_message.h"
 
 short invType;
@@ -55,8 +57,8 @@ Invoice::Invoice(QWidget *parent, IDataLayer *dl, QString Inv)
                              "się różni wybór waluty z listy obok."));
 
   init();
-  StrDebug
-           << "EXIT";
+
+  StrDebug << "EXIT";
 }
 
 /** Destructor
@@ -64,38 +66,36 @@ Invoice::Invoice(QWidget *parent, IDataLayer *dl, QString Inv)
 
 Invoice::~Invoice() {
 
-  qDebug() << __FUNCTION__ << __LINE__ << __FILE__;
+  StrDebug;
 
-  m_instance = nullptr;
-  delete reply;
   delete manager;
-  if (ratesCombo != 0)
-    ratesCombo = 0;
-  delete ratesCombo;
-  if (labelRate != 0)
-    labelRate = 0;
-  delete labelRate;
-  if (rateLabel != 0)
-    rateLabel = 0;
-  delete rateLabel;
-  if (restLabel != 0)
-    restLabel = 0;
-  delete restLabel;
-  if (sendKind != 0)
-    sendKind = 0;
-  delete sendKind;
-  if (rateLabelInfo != 0)
-    rateLabelInfo = 0;
-  delete rateLabelInfo;
-  if (restLabelInfo != 0)
-    restLabelInfo = 0;
-  delete restLabelInfo;
-  if (sendKindInfo != 0)
-    sendKindInfo = 0;
-  delete sendKindInfo;
 
-  StrDebug
-           << "EXIT";
+//  if (ratesCombo != 0)
+//    ratesCombo = 0;
+//  delete ratesCombo;
+//  if (labelRate != 0)
+//    labelRate = 0;
+//  delete labelRate;
+//  if (rateLabel != 0)
+//    rateLabel = 0;
+//  delete rateLabel;
+//  if (restLabel != 0)
+//    restLabel = 0;
+//  delete restLabel;
+//  if (sendKind != 0)
+//    sendKind = 0;
+//  delete sendKind;
+//  if (rateLabelInfo != 0)
+//    rateLabelInfo = 0;
+//  delete rateLabelInfo;
+//  if (restLabelInfo != 0)
+//    restLabelInfo = 0;
+//  delete restLabelInfo;
+//  if (sendKindInfo != 0)
+//    sendKindInfo = 0;
+//  delete sendKindInfo;
+
+  StrDebug << "EXIT";
 }
 
 Invoice *Invoice::instance() { return m_instance; }
@@ -119,7 +119,6 @@ void Invoice::init() {
 
   StrDebug;
 
-  reply = 0;
   manager = 0;
   ratesCombo = new QComboBox();
   labelRate = 0;
@@ -267,14 +266,13 @@ void Invoice::init() {
 
   canClose = true;
 
-  StrDebug
-           << "EXIT";
+  StrDebug << "EXIT";
 }
 
 void Invoice::whatTypeFromTitle(QString title, bool ifForm, bool kadded,
-                                InvoiceType invTyp, int numbType) {
-
-  qDebug() << __FUNCTION__ << __LINE__ << __FILE__;
+                                InvoiceType invTyp, int numbType)
+{
+  StrDebug;
 
   if (inv_form == title) {
 
@@ -284,8 +282,7 @@ void Invoice::whatTypeFromTitle(QString title, bool ifForm, bool kadded,
     type = numbType;
   }
 
-  StrDebug
-           << "EXIT";
+  StrDebug << "EXIT";
 }
 
 /**
@@ -294,7 +291,7 @@ void Invoice::whatTypeFromTitle(QString title, bool ifForm, bool kadded,
 
 QString Invoice::getInvoiceTypeAndSaveNr() {
 
-  qDebug() << __FUNCTION__ << __LINE__ << __FILE__;
+  StrDebug;
 
   ret = QString();
 
@@ -881,21 +878,19 @@ void Invoice::buyerClick() {
 
   StrDebug;
 
-  Buyers *buyersWindow;
-  buyersWindow = new Buyers(this, 0, dataLayer);
+  auto buyersWindow = std::make_unique<Buyers>(this, 0, dataLayer);
 
   if (buyersWindow->exec() == QDialog::Accepted) {
 
     kAdded = true;
     QStringList row = buyersWindow->getRetBuyer().split("|");
+
     buyerName->setText(row[0] + "," + row[3] + "," + row[6] + " " + row[2] +
                        "," + s_TIC + row[5] + "," + row[7] + "," + row[8] +
                        "," + row[9] + "," + row[10]);
+
     buyerName->setCursorPosition(0);
   }
-
-  delete buyersWindow;
-  buyersWindow = NULL;
 }
 
 void Invoice::keyPressEvent(QKeyEvent *event) {
@@ -915,7 +910,7 @@ void Invoice::getCustomer() {
 
   StrDebug;
 
-  BuyersList *buylistWindow = new BuyersList(this);
+  auto buylistWindow = std::make_unique<BuyersList>(this);
 
   if (buylistWindow->exec() == QDialog::Accepted) {
     buyerName->setText(buylistWindow->getRetBuyerList());
@@ -923,9 +918,6 @@ void Invoice::getCustomer() {
     saveBtn->setEnabled(true);
     canClose = false;
   }
-
-  delete buylistWindow;
-  buylistWindow = NULL;
 }
 
 /** Slot
@@ -962,7 +954,7 @@ void Invoice::discountChange() {
 
   if (paysCombo->currentText() == trUtf8("zaliczka")) {
 
-    if ((am1 + am2) != sett().stringToDouble(sum3->text())) {
+    if ((am1 + am2) != (sett().stringToDouble(sum3->text()))) {
       payTextChanged(trUtf8("zaliczka"));
     }
   }

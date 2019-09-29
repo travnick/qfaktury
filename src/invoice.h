@@ -24,7 +24,8 @@ class IDataLayer;
 enum InvoiceType { FVat, FPro, EFVat, EFPro, KBR, BILL, DUP, RR, WZ, RW };
 
 // class for creating and updating invoice with GUI
-class Invoice : public QDialog, public Ui::Invoice {
+class Invoice : public QDialog, public Ui::Invoice
+{
 
   Q_OBJECT
 

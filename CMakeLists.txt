@@ -7,7 +7,8 @@ endif()
 
 set(QT_MIN_VERSION "5.10.0")
 set(QT_QMAKE_EXECUTABLE "~/Qt/5.12.4/gcc_64/bin")
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 # Set project version
 set (QFAKTURY_VERSION_MAJOR "0")
@@ -22,14 +23,14 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 message(STATUS "${CMAKE_MODULE_PATH}")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden -Werror -Wall -Wextra -Wno-unused-parameter -pedantic -Wno-reorder -std=c++0x")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fvisibility=hidden -fvisibility-inlines-hidden -Werror -Wall -Wextra -fsanitize=address -fsanitize=leak -Wno-unused-parameter -pedantic -Wno-reorder")
+
 find_package( Qt5 REQUIRED COMPONENTS Gui Core Widgets PrintSupport Xml XmlPatterns Network )
 
 option(FEDORA "Check if this Fedora" ON)
 option(QUAZIP_FOUND "Check if QuaZipn is installed and accessible" ON)
 
 find_package(Fedora)
-
 find_package(QuaZip5)
 
 if(FEDORA)
@@ -38,9 +39,9 @@ if(FEDORA)
 endif()
 if(QUAZIP_FOUND)
   add_definitions(-DQUAZIP)
-  message("EN: QuaZip has been found. It's possible to create backup \nPL: Znaleziono QuaZip. Jest możliwe tworzenie kopii zapasowych")
+  message("QuaZip has been found. It's possible to create backup")
 else()
-  message("EN: QuaZip hasn't been found in FindQuaZip5.cmake. It's not possible to create backup. \nPL: Brak biblioteki dla QuaZip. Tworzenie kopii zapasowych zablokowane")
+  message("QuaZip hasn't been found in FindQuaZip5.cmake. It's not possible to create backup.")
 endif()
 
 if(NOT QUAZIP_FOUND)
@@ -53,9 +54,9 @@ if(NOT QUAZIP_FOUND)
     set(QUAZIP_INCLUDE_DIRS ${QUAZIP_INCLUDE_DIR} ${ZLIB_INCLUDE_DIR}) # QUAZIP_INCLUDE_DIRS contains includes for zlib and quazip in FindQuaZip5.cmake
     find_library(QUAZIP_LIBRARIES quazip5)
     if(NOT QUAZIP_INCLUDE_DIRS OR NOT QUAZIP_LIBRARIES)
-        message("NEXT STEP OF QUAZIP SEARCHING \nEN: Could NOT find optional library quazip. PL: Nie można znaleźć biblioteki quazip w kolejnym kroku. Możliwość tworzenia backup jest zablokowana.")
+        message("Could NOT find optional library quazip.")
     else()
-        message("NEXT STEP OF QUAZIP SEARCHING \nEN: Found optional library quazip. PL: Znaleziono opcjonalną bibliotekę quazip. Możliwe tworzenie kopii zapasowych")
+        message("Found optional library quazip.")
     endif()
 endif()
 
