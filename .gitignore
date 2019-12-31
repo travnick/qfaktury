@@ -62,3 +62,7 @@ CMakeLists.txt.user*
 .*
 build
 doxygen
+/bin/
+GPATH
+GRTAGS
+GTAGS

@@ -12,6 +12,9 @@
 #ifndef CONST_H_
 #define CONST_H_
 
+#include <QString>
+#include <QObject>
+
 // window title names
 static const QString s_PROFORMA = QObject::trUtf8("Faktura Pro Forma");
 static const QString s_INVOICE = QObject::trUtf8("Faktura VAT");

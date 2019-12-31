@@ -32,7 +32,7 @@ public:
     const QString getHouseNumer(QString fullAddress);
     const QString getDoorNumer(QString fullAddress);
 
-    enum JPKType { JPK_VAT, JPK_FA };
+    enum JPKType : unsigned char { JPK_VAT, JPK_FA };
     Q_ENUM(JPKType)
 
 public slots:

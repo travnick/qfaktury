@@ -6,9 +6,9 @@ if(POLICY CMP0071)
 endif()
 
 set(QT_MIN_VERSION "5.10.0")
-set(QT_QMAKE_EXECUTABLE "~/Qt/5.12.4/gcc_64/bin")
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_VERBOSE_MAKEFILE OFF)
+set(QT_QMAKE_EXECUTABLE "~/Qt/5.12.0")
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Set project version
 set (QFAKTURY_VERSION_MAJOR "0")
@@ -21,9 +21,10 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} "${CMAKE_CURRENT_S
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-message(STATUS "${CMAKE_MODULE_PATH}")
+# message(STATUS "${CMAKE_MODULE_PATH}")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fvisibility=hidden -fvisibility-inlines-hidden -Werror -Wall -Wextra -fsanitize=address -fsanitize=leak -Wno-unused-parameter -pedantic -Wno-reorder")
+add_compile_options(-fvisibility=hidden -fvisibility-inlines-hidden -O3 -Werror -Wall -Wextra -Wno-unused-parameter -pedantic -Wno-reorder)
+# -g -finstrument-functions  -fsanitize=address -fno-omit-frame-pointer -fsanitize=leak)
 
 find_package( Qt5 REQUIRED COMPONENTS Gui Core Widgets PrintSupport Xml XmlPatterns Network )
 
@@ -37,6 +38,7 @@ if(FEDORA)
   add_definitions(-DFEDORA_FOUND)
   message("It's Fedora. It's possible to run beesu instead of gksu")
 endif()
+
 if(QUAZIP_FOUND)
   add_definitions(-DQUAZIP)
   message("QuaZip has been found. It's possible to create backup")
@@ -99,6 +101,7 @@ set( SOURCES
      src/runguard.cpp
      src/backup.cpp
      src/csvexport.cpp
+     cyg_profile_func.cpp
 )
 
 set( HEADER_FILE_ONLY
@@ -133,6 +136,8 @@ qt5_wrap_ui( UIS_HDRS
 QT5_ADD_RESOURCES(RESOURCES qfaktury.qrc)
 
 add_executable(qfaktury ${SOURCES} ${HEADER_FILE_ONLY} ${UIS_HDRS} ${RESOURCES})
+
+set_property(TARGET qfaktury PROPERTY CXX_STANDARD 17)
 
 target_link_libraries (qfaktury
     Qt5::Gui

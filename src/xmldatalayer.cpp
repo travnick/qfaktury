@@ -13,7 +13,7 @@
 
 #include "debug_message.h"
 
-XmlDataLayer::XmlDataLayer() : IDataLayer() {
+XmlDataLayer::XmlDataLayer(){
   StrDebug;
 }
 
@@ -34,7 +34,7 @@ QString XmlDataLayer::getRetWarehouse() const {
 // ************ KONTRAHENCI START *****************
 // helper method
 void XmlDataLayer::buyersElemToData(BuyerData &o_buyerData,
-                                    QDomElement i_element) {
+                                    QDomElement const &i_element) {
 
   StrDebug;
 

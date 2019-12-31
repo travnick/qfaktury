@@ -66,7 +66,6 @@ private:
 
 };
 
-
 class EmailPage : public QWizardPage {
   Q_OBJECT
 
@@ -100,7 +99,7 @@ private:
   bool checkedPortButton;
   QString protocol;
   QString checkedMail;
-  QLineEdit *edit1;
+  QLineEdit *editCos;
   QLineEdit *edit2;
 
 };

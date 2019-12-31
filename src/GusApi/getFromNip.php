@@ -20,12 +20,13 @@ $gus = new GusApi(
 $mapper = new ReportTypeMapper();
 
 try {
+
     $nipToCheck = $argv[1]; // NIP as first argument from running script
     $sessionId = $gus->login();
-    
+
     $gusReports = $gus->getByNip($sessionId, $nipToCheck);
-    
-    foreach ($gusReports as $gusReport) {   
+
+    foreach ($gusReports as $gusReport) {
         $reportType = $mapper->getReportType($gusReport);
 
         $var = $gus->getFullReport(
@@ -33,8 +34,8 @@ try {
             $gusReport,
             $reportType
         );
-        
-        
+
+
         #echo $var['dane']['praw_nazwa']; // praw_nazwa
         #echo $var['dane']['praw_adSiedzKodPocztowy']; // kod pocztowy
         #echo $var['dane']['praw_adSiedzMiejscowosc_Nazwa']; // miejscowość
@@ -44,14 +45,14 @@ try {
         #echo $var['dane']['praw_adresEmail']; // email
         #echo $var['dane']['praw_adSiedzNumerNieruchomosci']; // numer nieruchomości
         #echo $var['dane']['praw_adresStronyinternetowej']; // strona www
-        
+
+        var_dump($var);
+
         $fp = fopen($_SERVER['HOME'] . "/.local/share/data/elinux/gus/result.json", 'w');
         fwrite($fp, json_encode($var));
         fclose($fp);
-        
-        }
-        
-    
+    }
+
 } catch (InvalidUserKeyException $e) {
     echo 'Bad user key';
 } catch (\GusApi\Exception\NotFoundException $e) {

@@ -8,7 +8,7 @@
 #include <QMessageBox>
 #include <QRegExp>
 
-Validations *Validations::m_instance = nullptr;
+Validations *Validations::m_instance {nullptr};
 
 Validations::Validations(QObject *parent) : QObject(parent) {
 
@@ -96,6 +96,7 @@ bool Validations::validateEmail(QString text) {
 
     if (helpConst1 == ".")
       notTwoDotted = false;
+      
     if (helpConst2 == ".")
       notTwoDotted = false;
   }

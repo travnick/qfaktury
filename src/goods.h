@@ -16,7 +16,7 @@ class Goods : public QDialog, public Ui::Goods {
   Q_OBJECT
 
 public:
-  Goods(QWidget *parent, int mode, IDataLayer *dl);
+  Goods(QWidget *parent, int mode, IDataLayer * const dl);
   void selectData(QString idx, int type); // called from MainWindow
   const QString getRetGoods();
 
@@ -25,7 +25,7 @@ public slots:
   void okClick();
 
 private:
-  IDataLayer *dataLayer;
+  IDataLayer* const dataLayer;
   QString ret;
   QStringList net;
   int workMode; // Working mode - 0 = new; 1 = edit

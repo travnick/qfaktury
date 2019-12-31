@@ -27,7 +27,7 @@ Correction::~Correction() {
   qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
 
   delete invData;
-  invData = NULL;
+  invData = nullptr;
 }
 
 bool Correction::getMode() const {
@@ -67,7 +67,7 @@ void Correction::correctionInit(bool mode) {
 
   invoiceType = trUtf8("Korekta");
 
-  invData = NULL;      // set to null
+  invData = nullptr;      // set to null
   origGrossTotal = -1; // -1
 
   editMode = mode;
@@ -515,7 +515,7 @@ void Correction::canQuit() {
     if (QMessageBox::warning(
             this, "QFaktury",
             trUtf8("Dane zostały zmienione. Czy chcesz zapisać?"),
-            trUtf8("Tak"), trUtf8("Nie"), 0, 0, 1) == 1) {
+            trUtf8("Tak"), trUtf8("Nie"), nullptr, 0, 1) == 1) {
 
       saveColumnsWidth();
       reject();

@@ -527,9 +527,9 @@ QStringList SaftfileOutput::getSortedVats(QVector<InvoiceData> inv) {
 
             for (int j = 0; j < products1.count(); j++) {
 
+              QString vat = QString("%1").arg(static_cast<double>(products1.at(j).vat)/100.0);
 
-              QString vat = QString("%1").arg(static_cast<float>(products1.at(j).vat)/100);
-
+              // FIXME: wrażliwe na strefy czasowe(lokalizację)
               if (vat != "0.23" || vat != "0.05" ) {
                 if (!vats.contains(vat)) vats.append(vat);
               }
@@ -599,7 +599,7 @@ const QString SaftfileOutput::getInvTypeForJPKFA(QString abbrInv, QString paymen
     else if ((abbrInv == "FVAT") || (abbrInv == "FBrutto")) return "VAT";
     else return "POZ";
 
-    return "VAT";
+    return QString("VAT");
 }
 
 

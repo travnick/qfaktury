@@ -15,7 +15,8 @@
 
 Saftfile::Saftfile(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Saftfile)
+    ui(new Ui::Saftfile),
+    groupAppPurp(nullptr)
 {
     qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
 

@@ -65,7 +65,7 @@ public:
   virtual void readInvoiceData(){};
 
 private:
-  void buyersElemToData(BuyerData &o_buyerData, QDomElement i_element);
+  void buyersElemToData(BuyerData &o_buyerData, QDomElement const &i_element);
   void buyersDataToElem(BuyerData &i_buyerData, QDomElement &o_element);
 
   void productsElemToData(ProductData &o_prodData, QDomElement i_element);

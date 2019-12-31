@@ -294,13 +294,13 @@ EmailPage::EmailPage(QWidget *parent) : QWizardPage(parent) {
   labLay->addWidget(lab1);
   labLay->addWidget(lab2);
 
-  edit1 = new QLineEdit;
-  lab1->setBuddy(edit1);
+  editCos = new QLineEdit;
+  lab1->setBuddy(editCos);
 
   edit2 = new QLineEdit;
   lab2->setBuddy(edit2);
 
-  datLay->addWidget(edit1);
+  datLay->addWidget(editCos);
   datLay->addWidget(edit2);
 
   mainL->addLayout(labLay);
@@ -394,7 +394,7 @@ EmailPage::EmailPage(QWidget *parent) : QWizardPage(parent) {
   mainLSmtp->addLayout(labLay2);
   mainLSmtp->addLayout(datLay2);
 
-  registerField("host", edit1);
+  registerField("host", editCos);
   registerField("port", edit2);
 
   label = new QLabel;
@@ -425,7 +425,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
   qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
 
   if (checked == "Gmail") {
-    edit1->setText("smtp.gmail.com");
+    editCos->setText("smtp.gmail.com");
 
     if (protocol == "SSL")
       edit2->setText("465");
@@ -439,7 +439,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
     } else if (protocol == "TLS")
       edit2->setText("587");
   } else if (checked == "Onet") {
-    edit1->setText("smtp.poczta.onet.pl");
+    editCos->setText("smtp.poczta.onet.pl");
 
     if (protocol == "SSL")
       edit2->setText("465");
@@ -453,7 +453,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
     } else if (protocol == "TLS")
       edit2->setText("587");
   } else if (checked == "o2") {
-    edit1->setText("poczta.o2.pl");
+    editCos->setText("poczta.o2.pl");
 
     if (protocol == "SSL")
       edit2->setText("465");
@@ -467,7 +467,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
     } else if (protocol == "TLS")
       edit2->setText("587");
   } else if (checked == "Interia") {
-    edit1->setText("poczta.interia.pl");
+    editCos->setText("poczta.interia.pl");
 
     if (protocol == "SSL")
       edit2->setText("465");
@@ -481,7 +481,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
     } else if (protocol == "TLS")
       edit2->setText("587");
   } else if (checked == "WP") {
-    edit1->setText("smtp.wp.pl");
+    editCos->setText("smtp.wp.pl");
 
     if (protocol == "SSL")
       edit2->setText("465");
@@ -495,7 +495,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
     } else if (protocol == "TLS")
       edit2->setText("587");
   } else if (checked == "Yahoo") {
-    edit1->setText("smtp.mail.yahoo.com");
+    editCos->setText("smtp.mail.yahoo.com");
 
     if (protocol == "SSL")
       edit2->setText("465");
@@ -509,7 +509,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
     } else if (protocol == "TLS")
       edit2->setText("587");
   } else if (checked == "Outlook") {
-    edit1->setText("smtp-mail.outlook.com");
+    editCos->setText("smtp-mail.outlook.com");
 
     if (protocol == "SSL") {
       this->protocol = "";
@@ -523,7 +523,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
     else if (protocol == "TLS")
       edit2->setText("587");
   } else if (checked == "Foxmail / QQMail") {
-    edit1->setText("smtp.qq.com");
+    editCos->setText("smtp.qq.com");
 
     if (protocol == "SSL")
       edit2->setText("465");
@@ -532,7 +532,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
     else if (protocol == "TLS")
       edit2->setText("587");
   } else if (checked == "Aol") {
-    edit1->setText("smtp.aol.com");
+    editCos->setText("smtp.aol.com");
 
     if (protocol == "SSL") {
       this->protocol = "";
@@ -551,7 +551,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
     } else if (protocol == "TLS")
       edit2->setText("587");
   } else if (checked == "Gazeta") {
-    edit1->setText("smtp.gazeta.pl");
+    editCos->setText("smtp.gazeta.pl");
 
     if (protocol == "SSL")
       edit2->setText("465");
@@ -571,7 +571,7 @@ void EmailPage::setHostPort(QString checked, QString protocol) {
                                "protokół SSL.");
     }
   } else if (checked == "HotMail (stare serwery)") {
-    edit1->setText("smtp.live.com");
+    editCos->setText("smtp.live.com");
 
     if (protocol == "SSL") {
       this->protocol = "";

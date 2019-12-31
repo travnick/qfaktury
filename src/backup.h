@@ -16,7 +16,7 @@ class Backup : public QWidget
     Q_OBJECT
 
 public:
-    explicit Backup(QString action = QString("create"), QWidget *parent = 0); // "create" or "load"
+    explicit Backup(QString action = QString("create"), QWidget *parent = nullptr); // "create" or "load"
     Backup(bool withGui, QWidget* parent = 0); // false -> without Gui
     ~Backup();
 

@@ -50,8 +50,7 @@ private slots:
   void on_WZAction_triggered();
   void on_RWAction_triggered();
 
-
-public slots:
+  public slots:
 
   void tableClear(QTableWidget *tab);
   void tabChanged();

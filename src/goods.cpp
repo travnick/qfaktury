@@ -11,12 +11,14 @@
 /** Constructor
  */
 
-Goods::Goods(QWidget *parent, int mode, IDataLayer *dl) : QDialog(parent) {
+Goods::Goods(QWidget *parent, int mode, IDataLayer* const dl) :
+    QDialog(parent),
+    dataLayer {dl}
+{
 
-  StrDebug;
+  StrDebug();
 
   workMode = mode;
-  dataLayer = dl;
 
   setupUi(this);
   init();
