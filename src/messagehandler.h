@@ -27,8 +27,11 @@ public:
     }
 
 protected:
-    virtual void handleMessage(QtMsgType type, const QString &description,
-                               const QUrl &identifier, const QSourceLocation &sourceLocation)
+    virtual void handleMessage(
+        QtMsgType type,
+        const QString &description,
+        const QUrl &identifier,
+        const QSourceLocation &sourceLocation)
     {
         Q_UNUSED(type);
         Q_UNUSED(identifier);

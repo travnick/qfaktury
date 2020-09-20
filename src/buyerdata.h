@@ -15,25 +15,25 @@
 #include <QString>
 
 // class for holding buyers data. One instance -> One buyer
-class BuyerData {
-
+class BuyerData
+{
 public:
-  BuyerData();
-  virtual ~BuyerData();
-  QString name;
-  QString place;
-  QString code;
-  QString address;
-  QString tic;
-  QString account;
-  QString phone;
-  QString email;
-  QString www;
-  QString fax;
-  QString krs;
-  QString bank;
-  QString swift;
-  QString type;
+    BuyerData();
+    virtual ~BuyerData();
+    QString name;
+    QString place;
+    QString code;
+    QString address;
+    QString tic;
+    QString account;
+    QString phone;
+    QString email;
+    QString www;
+    QString fax;
+    QString krs;
+    QString bank;
+    QString swift;
+    QString type;
 };
 
 #endif /* BUYERDATA_H_ */

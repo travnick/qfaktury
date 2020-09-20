@@ -23,13 +23,40 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # message(STATUS "${CMAKE_MODULE_PATH}")
 
-add_compile_options(-fvisibility=hidden -fvisibility-inlines-hidden -O3 -Werror -Wall -Wextra -Wno-unused-parameter -pedantic -Wno-reorder)
-# -g -finstrument-functions  -fsanitize=address -fno-omit-frame-pointer -fsanitize=leak)
+add_compile_options(
+    -fvisibility=hidden
+    -fvisibility-inlines-hidden
+
+    -fstack-protector
+)
+
+# enable warnings
+add_compile_options(
+    -Werror
+
+    -Wall
+    -Wextra
+    -Wpedantic
+)
+
+# disable warnings
+add_compile_options(
+    -Wno-reorder
+    -Wno-unused-parameter
+    -Wno-deprecated-declarations
+)
+
+# usefull switches for debugging
+#add_compile_options(
+#    -finstrument-functions
+#    -fsanitize=address
+#    -fno-omit-frame-pointer
+#    -fsanitize=leak
+#)
 
 find_package( Qt5 REQUIRED COMPONENTS Gui Core Widgets PrintSupport Xml XmlPatterns Network )
 
 option(FEDORA "Check if this Fedora" ON)
-option(QUAZIP_FOUND "Check if QuaZipn is installed and accessible" ON)
 
 find_package(Fedora)
 find_package(QuaZip5)
@@ -64,54 +91,99 @@ endif()
 
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
-set( SOURCES
-     src/xmldatalayer.cpp
-     src/buyerdata.cpp
-     src/custompaymdata.cpp
-     src/custompayment.cpp
-     src/correctgross.cpp
-     src/goodsgrosslist.cpp
-     src/bill.cpp
-     src/invoicegross.cpp
-     src/duplicate.cpp
-     src/convertamount.cpp
-     src/invoice.cpp
-     src/buyers.cpp
-     src/buyerslist.cpp
-     src/correction.cpp
-     src/main.cpp
-     src/mainwindow.cpp
-     src/goods.cpp
-     src/goodslist.cpp
-     src/setting.cpp
-     src/user.cpp
-     src/changeamount.cpp
-     src/validations.cpp
-     src/invoicerr.cpp
-     src/SimpleSmtp_SSL_QT5/smtp_attachements/emailwindow.cpp
-     src/SimpleSmtp_SSL_QT5/smtp_attachements/smtp.cpp
-     src/send.cpp
-     src/owncalendar.cpp
-     src/warehouse.cpp
-     src/deliverynote.cpp
-     src/goodsissuednotes.cpp
-     src/organizer.cpp
-     src/saftfile.cpp
-     src/saftfileoutput.cpp
-     src/runguard.cpp
-     src/backup.cpp
-     src/csvexport.cpp
-     cyg_profile_func.cpp
+set(SOURCES
+    src/xmldatalayer.cpp
+    src/buyerdata.cpp
+    src/custompaymdata.cpp
+    src/custompayment.cpp
+    src/correctgross.cpp
+    src/goodsgrosslist.cpp
+    src/bill.cpp
+    src/invoicegross.cpp
+    src/duplicate.cpp
+    src/convertamount.cpp
+    src/invoice.cpp
+    src/buyers.cpp
+    src/buyerslist.cpp
+    src/correction.cpp
+    src/main.cpp
+    src/mainwindow.cpp
+    src/goods.cpp
+    src/goodslist.cpp
+    src/setting.cpp
+    src/user.cpp
+    src/changeamount.cpp
+    src/validations.cpp
+    src/invoicerr.cpp
+    src/SimpleSmtp_SSL_QT5/smtp_attachements/emailwindow.cpp
+    src/SimpleSmtp_SSL_QT5/smtp_attachements/smtp.cpp
+    src/send.cpp
+    src/owncalendar.cpp
+    src/warehouse.cpp
+    src/deliverynote.cpp
+    src/goodsissuednotes.cpp
+    src/organizer.cpp
+    src/saftfile.cpp
+    src/saftfileoutput.cpp
+    src/runguard.cpp
+    src/backup.cpp
+    src/csvexport.cpp
+    cyg_profile_func.cpp
 )
 
-set( HEADER_FILE_ONLY
-      src/debug_message.h
+set(HEADER_FILES
+    src/backup.h
+    src/bill.h
+    src/buyerdata.h
+    src/buyers.h
+    src/buyerslist.h
+    src/changeamount.cpp
+    src/changeamount.h
+    src/config.h
+    src/const.h
+    src/convertamount.h
+    src/correctgross.h
+    src/correction.h
+    src/csvexport.h
+    src/custompaymdata.h
+    src/custompayment.h
+    src/datewidgetitem.h
+    src/debug_message.h
+    src/deliverynote.h
+    src/detector.h
+    src/documentdata.h
+    src/duplicate.h
+    src/goodsgrosslist.h
+    src/goods.h
+    src/goodsissuednotes.h
+    src/goodslist.h
+    src/idatalayer.h
+    src/invoicedata.h
+    src/invoicegross.h
+    src/invoice.h
+    src/invoicerr.h
+    src/mainwindow.h
+    src/messagehandler.h
+    src/organizer.h
+    src/owncalendar.h
+    src/productdata.h
+    src/runguard.h
+    src/saftfile.h
+    src/saftfileoutput.h
+    src/send.h
+    src/setting.h
+    src/settings.h
+    src/user.h
+    src/validations.h
+    src/warehouse.cpp
+    src/warehousedata.h
+    src/warehouse.h
+    src/xmldatalayer.h
 )
 
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${QUAZIP_INCLUDE_DIRS}
     src/SimpleSmtp_SSL_QT5/smtp_attachements
 )
 
@@ -135,9 +207,7 @@ qt5_wrap_ui( UIS_HDRS
 
 QT5_ADD_RESOURCES(RESOURCES qfaktury.qrc)
 
-add_executable(qfaktury ${SOURCES} ${HEADER_FILE_ONLY} ${UIS_HDRS} ${RESOURCES})
-
-set_property(TARGET qfaktury PROPERTY CXX_STANDARD 17)
+add_executable(qfaktury ${SOURCES} ${HEADER_FILES} ${UIS_HDRS} ${RESOURCES})
 
 target_link_libraries (qfaktury
     Qt5::Gui
