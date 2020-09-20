@@ -57,7 +57,6 @@ add_compile_options(
 find_package( Qt5 REQUIRED COMPONENTS Gui Core Widgets PrintSupport Xml XmlPatterns Network )
 
 option(FEDORA "Check if this Fedora" ON)
-option(QUAZIP_FOUND "Check if QuaZipn is installed and accessible" ON)
 
 find_package(Fedora)
 find_package(QuaZip5)
@@ -209,8 +208,6 @@ qt5_wrap_ui( UIS_HDRS
 QT5_ADD_RESOURCES(RESOURCES qfaktury.qrc)
 
 add_executable(qfaktury ${SOURCES} ${HEADER_FILES} ${UIS_HDRS} ${RESOURCES})
-
-set_property(TARGET qfaktury PROPERTY CXX_STANDARD 17)
 
 target_link_libraries (qfaktury
     Qt5::Gui
