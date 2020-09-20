@@ -10,10 +10,12 @@
 
 #include <QDebug>
 
-BuyerData::BuyerData() {
-  StrDebug();
+BuyerData::BuyerData()
+{
+    StrDebug();
 }
 
-BuyerData::~BuyerData() {
-  StrDebug();
+BuyerData::~BuyerData()
+{
+    StrDebug();
 }

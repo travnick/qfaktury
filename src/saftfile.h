@@ -13,7 +13,8 @@ class IDataLayer;
 class QTableWidget;
 class QButtonGroup;
 
-namespace Ui {
+namespace Ui
+{
 class Saftfile;
 }
 
@@ -23,10 +24,8 @@ class Saftfile : public QWidget
 
 public:
     explicit Saftfile(QWidget *parent = 0);
-    Saftfile(IDataLayer* dl, QWidget* parent = 0);
+    Saftfile(IDataLayer *dl, QWidget *parent = 0);
     ~Saftfile();
-
-
 
 private slots:
     void initInvoicesRange();
@@ -44,12 +43,12 @@ protected:
     const QString getCorrectionNr();
 
 private:
-    IDataLayer* dlSaftfile;
+    IDataLayer *dlSaftfile;
     Ui::Saftfile *ui;
     QVector<InvoiceData> invs;
     QHash<QString, QString> data;
-    QButtonGroup* groupAppPurp;
-    QButtonGroup* groupArtFiles;
+    QButtonGroup *groupAppPurp;
+    QButtonGroup *groupArtFiles;
 
     bool toDateisLower();
     void putIntoTable(QVector<InvoiceData> invoices);
@@ -58,7 +57,6 @@ private:
     void showConnections();
     QVector<InvoiceData> removeUnusedInvoices(QVector<InvoiceData> inv);
     QVector<InvoiceData> addSAFTFieldsToList(QVector<InvoiceData> invoices);
-
 };
 
 #endif // SAFTFILE_H

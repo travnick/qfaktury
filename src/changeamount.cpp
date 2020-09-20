@@ -6,64 +6,67 @@
 
 ChangeAmount *ChangeAmount::m_instance = nullptr;
 
-ChangeAmount::ChangeAmount(QWidget *parent) : QDialog(parent) {
+ChangeAmount::ChangeAmount(QWidget *parent)
+    : QDialog(parent)
+{
+    StrDebug();
 
-  StrDebug();
-
-  setupUi(this);
-  init();
+    setupUi(this);
+    init();
 }
 
-void ChangeAmount::init() {
+void ChangeAmount::init()
+{
+    StrDebug();
 
-  StrDebug();
+    if (m_instance == nullptr)
+        m_instance = this;
 
-  if (m_instance == nullptr)
-    m_instance = this;
+    if (this->parent()->objectName() == "GoodsIssuedNotes")
+    {
+        textLabel2->hide();
+        spinAmount->hide();
 
-  if (this->parent()->objectName() == "GoodsIssuedNotes") {
+        requiredAm = new QLabel;
+        requiredAm->setText("Ilość żądana*: ");
 
-    textLabel2->hide();
-    spinAmount->hide();
+        givedOutAm = new QLabel;
+        givedOutAm->setText("Ilość wydana*: ");
 
-    requiredAm = new QLabel;
-    requiredAm->setText("Ilość żądana*: ");
+        labelsList->addWidget(requiredAm);
+        labelsList->addWidget(givedOutAm);
 
-    givedOutAm = new QLabel;
-    givedOutAm->setText("Ilość wydana*: ");
+        requiredAmBox = new QSpinBox;
 
-    labelsList->addWidget(requiredAm);
-    labelsList->addWidget(givedOutAm);
+        givedOutBox = new QSpinBox;
 
-    requiredAmBox = new QSpinBox;
-
-    givedOutBox = new QSpinBox;
-
-    descList->addWidget(requiredAmBox);
-    descList->addWidget(givedOutBox);
-  }
+        descList->addWidget(requiredAmBox);
+        descList->addWidget(givedOutBox);
+    }
 }
 
-ChangeAmount::~ChangeAmount() {
+ChangeAmount::~ChangeAmount()
+{
+    StrDebug();
 
-  StrDebug();
+    if (this->parent()->objectName() == "GoodsIssuedNotes")
+    {
+        textLabel2->show();
+        spinAmount->show();
 
-  if (this->parent()->objectName() == "GoodsIssuedNotes") {
-    textLabel2->show();
-    spinAmount->show();
+        requiredAm->deleteLater();
+        requiredAmBox->deleteLater();
 
-    requiredAm->deleteLater();
-    requiredAmBox->deleteLater();
+        givedOutAm->deleteLater();
+        givedOutAm->deleteLater();
+    }
 
-    givedOutAm->deleteLater();
-    givedOutAm->deleteLater();
-  }
-
-  if (m_instance != nullptr)
-    m_instance = nullptr;
+    if (m_instance != nullptr)
+        m_instance = nullptr;
 }
 
-ChangeAmount *ChangeAmount::instance() {
-  StrDebug();
-  return m_instance;
+ChangeAmount *ChangeAmount::instance()
+{
+    StrDebug();
+    return m_instance;
 }

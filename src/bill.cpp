@@ -10,24 +10,29 @@
 #include "debug_message.h"
 
 Bill::Bill(QWidget *parent, IDataLayer *dl, QString in_form)
-    : Invoice(parent, dl, in_form) {
-  StrDebug();
+    : Invoice(parent, dl, in_form)
+{
+    StrDebug();
 }
 
-Bill::~Bill() { StrDebug(); }
+Bill::~Bill()
+{
+    StrDebug();
+}
 
 // on start type of document is changed
-void Bill::billInit() {
-  StrDebug();
-  invoiceType = s_BILL;
+void Bill::billInit()
+{
+    StrDebug();
+    invoiceType = s_BILL;
 }
 
 // outputs type of document
-QString Bill::getInvoiceTypeAndSaveNr() {
+QString Bill::getInvoiceTypeAndSaveNr()
+{
+    StrDebug();
 
-  StrDebug();
-
-  QString bill = "rachunek";
-  sett().setValue("fvat", invNr->text());
-  return bill;
+    QString bill = "rachunek";
+    sett().setValue("fvat", invNr->text());
+    return bill;
 }

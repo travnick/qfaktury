@@ -10,10 +10,12 @@
 
 #include <QDebug>
 
-CustomPaymData::CustomPaymData() {
-  StrDebug();
+CustomPaymData::CustomPaymData()
+{
+    StrDebug();
 }
 
-CustomPaymData::~CustomPaymData() {
-  StrDebug();
+CustomPaymData::~CustomPaymData()
+{
+    StrDebug();
 }

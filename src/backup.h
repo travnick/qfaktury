@@ -7,7 +7,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class Backup;
 }
 
@@ -16,8 +17,10 @@ class Backup : public QWidget
     Q_OBJECT
 
 public:
-    explicit Backup(QString action = QString("create"), QWidget *parent = nullptr); // "create" or "load"
-    Backup(bool withGui, QWidget* parent = 0); // false -> without Gui
+    explicit Backup(
+        QString action = QString("create"),
+        QWidget *parent = nullptr); // "create" or "load"
+    Backup(bool withGui, QWidget *parent = 0); // false -> without Gui
     ~Backup();
 
     const QString getBackupPath() const;
@@ -37,8 +40,7 @@ private:
 
     void loadBackup();
     void prepareConnections();
-    void putDataToWidgets(const QString dirPath,const QString filename);
-
+    void putDataToWidgets(const QString dirPath, const QString filename);
 };
 
 #endif // BACKUP_H

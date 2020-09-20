@@ -17,28 +17,28 @@
 class CustomPaymData;
 
 // class for splitting cost sum with GUI, when prepayment method is checked
-class CustomPayment : public QDialog, public Ui::CustomPaymentDialog {
-
-  Q_OBJECT
+class CustomPayment : public QDialog, public Ui::CustomPaymentDialog
+{
+    Q_OBJECT
 
 public:
-  CustomPayment(QWidget *parent);
-  virtual ~CustomPayment();
+    CustomPayment(QWidget *parent);
+    virtual ~CustomPayment();
 
-  bool validateForm();
-  void setInvoiceAmount(double a);
-  void init();
+    bool validateForm();
+    void setInvoiceAmount(double a);
+    void init();
 
-  CustomPaymData *custPaymData;
+    CustomPaymData *custPaymData;
 
 public slots:
 
-  void okClicked();
-  void amount1Changed(double a);
-  void amount2Changed(double a);
+    void okClicked();
+    void amount1Changed(double a);
+    void amount2Changed(double a);
 
 private:
-  double invoiceAmount;
+    double invoiceAmount;
 };
 
 #endif /* CUSTOMPAYMENT_H_ */
