@@ -1,19 +1,37 @@
 name: C/C++ CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  build:
+  build-release:
+  
+    strategy:
+      matrix:
+        build-type: [Debug, Release]
 
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v1
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    - uses: actions/checkout@v2
+
+    - name: Create Build Environment
+      run: cmake -E make_directory ${{runner.workspace}}/build
+
+    - name: Configure CMake
+    
+      shell: bash
+      working-directory: ${{runner.workspace}}/build
+      
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{matrix.build-type}}
+
+    - name: Build
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      
+      run: cmake --build . --config $BUILD_TYPE
+
+    - name: Test
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      
+      run: ctest -C $BUILD_TYPE
