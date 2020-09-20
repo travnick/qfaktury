@@ -1,13 +1,14 @@
+#include "debug_message.h"
 #include "invoicerr.h"
 
 InvoiceRR::InvoiceRR(QWidget *parent, IDataLayer *dl, QString in_form)
     : Invoice(parent, dl, in_form) {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 }
 
 InvoiceRR::~InvoiceRR() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   additEdit->clear();
   additEdit->setDisabled(false);
@@ -17,7 +18,7 @@ InvoiceRR::~InvoiceRR() {
 
 void InvoiceRR::invoiceRRInit() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   additEdit->setText(trUtf8("Oświadczam, że jestem rolnikiem ryczałtowym "
                             "zwolnionym od podatku od towarów"
@@ -32,7 +33,7 @@ void InvoiceRR::invoiceRRInit() {
 
 QString InvoiceRR::getInvoiceTypeAndSaveNr() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   QString itype = "RR";
   sett().setValue("rr", invNr->text());
@@ -41,7 +42,7 @@ QString InvoiceRR::getInvoiceTypeAndSaveNr() {
 
 void InvoiceRR::makeInvoice(bool to_print) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   if (!ifpaysVAT->isChecked()) {
     QMessageBox::information(this, "QFaktury",
@@ -98,7 +99,7 @@ void InvoiceRR::makeInvoice(bool to_print) {
 
 void InvoiceRR::setData(InvoiceData &invData) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   invData.id = fName;
   invData.customer = buyerName->text();
@@ -175,13 +176,12 @@ void InvoiceRR::setData(InvoiceData &invData) {
   invData.liabDate = liabDate->date();
   invData.currencyType = currCombo->currentText();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 void InvoiceRR::getData(InvoiceData invData) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   buyerName->setText(invData.customer);
   invNr->setText(invData.invNr);
@@ -272,6 +272,5 @@ void InvoiceRR::getData(InvoiceData invData) {
             SLOT(rateDateChanged(QString)));
   }
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }

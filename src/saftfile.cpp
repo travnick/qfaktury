@@ -1,24 +1,23 @@
-#include "saftfile.h"
-#include "ui_saftfile.h"
-#include "saftfileoutput.h"
-
+#include "debug_message.h"
 #include "idatalayer.h"
-#include "xmldatalayer.h"
 #include "runguard.h"
+#include "saftfile.h"
+#include "saftfileoutput.h"
+#include "ui_saftfile.h"
+#include "xmldatalayer.h"
 
-#include <QMessageBox>
-#include <QTableWidgetItem>
-#include <QComboBox>
-#include <QPointer>
 #include <QButtonGroup>
-
+#include <QComboBox>
+#include <QMessageBox>
+#include <QPointer>
+#include <QTableWidgetItem>
 
 Saftfile::Saftfile(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Saftfile),
     groupAppPurp(nullptr)
 {
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     ui->setupUi(this);
 
@@ -42,7 +41,7 @@ Saftfile::Saftfile(IDataLayer* dl, QWidget* parent) :
     QWidget(parent), dlSaftfile(dl),
     ui(new Ui::Saftfile)
 {
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     ui->setupUi(this);
 
@@ -63,7 +62,7 @@ Saftfile::Saftfile(IDataLayer* dl, QWidget* parent) :
 
 Saftfile::~Saftfile()
 {
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     if (dlSaftfile != nullptr) dlSaftfile = nullptr;
     delete dlSaftfile;
@@ -81,7 +80,7 @@ Saftfile::~Saftfile()
 
 void Saftfile::showConnections() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     connect(ui->showSAFTinvBtn, SIGNAL(clicked(bool)), this, SLOT(initInvoicesRange()));
     connect(ui->generationBtn, SIGNAL(clicked(bool)), this, SLOT(prepareNextStep()));
@@ -112,7 +111,7 @@ void Saftfile::showConnections() {
 
 void Saftfile::putBtnToGroup() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     groupAppPurp = new QButtonGroup();
     groupAppPurp->addButton(ui->correctionAppBtn);
@@ -126,7 +125,7 @@ void Saftfile::putBtnToGroup() {
 
 const QString Saftfile::getFromDateJPK() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     QString date = ui->jpksFromDate->date().toString("yyyy-MM-dd");
     qDebug() << date << " getFromDateJPK in Saftfile";
@@ -136,7 +135,7 @@ const QString Saftfile::getFromDateJPK() {
 
 const QString Saftfile::getToDateJPK() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     QString date = ui->jpksToDate->date().toString("yyyy-MM-dd");
     qDebug() << date << " getToDateJPK in Saftfile";
@@ -146,7 +145,7 @@ const QString Saftfile::getToDateJPK() {
 
 const QString Saftfile::getApplicationPurpose() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     QString text = groupAppPurp->checkedButton()->text();
     return text.remove('&');
@@ -155,7 +154,7 @@ const QString Saftfile::getApplicationPurpose() {
 
 const QString Saftfile::getJpkFileArtWithVersion() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     QString text = groupArtFiles->checkedButton()->text();
     text = text.remove('&');
@@ -167,7 +166,7 @@ const QString Saftfile::getJpkFileArtWithVersion() {
 
 const QString Saftfile::getJpkFileArt() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     QString text = groupArtFiles->checkedButton()->text();
     text = text.remove('&');
@@ -179,7 +178,7 @@ const QString Saftfile::getJpkFileArt() {
 
 const QString Saftfile::getDefaultCur() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     QString text = ui->currCombo->currentText();
     text = text.remove('&');
@@ -189,14 +188,14 @@ const QString Saftfile::getDefaultCur() {
 
 const QString Saftfile::getTaxOfficeNr() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     return ui->codeTaxOffice->text();
 }
 
 const QString Saftfile::getCorrectionNr() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     return ui->correctionJpkNr->text();
 }
@@ -204,7 +203,7 @@ const QString Saftfile::getCorrectionNr() {
 
 bool Saftfile::toDateisLower() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     if (ui->jpksToDate->date() < ui->jpksFromDate->date())
         return true;
@@ -215,7 +214,7 @@ bool Saftfile::toDateisLower() {
 
 QVector<InvoiceData> Saftfile::getInvFromRange() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     if (toDateisLower()) {
         QMessageBox::information(this, "Błąd przedziału czasu", "Data końcowa nie może być wcześniejsza od daty początkowej");
@@ -239,7 +238,7 @@ QVector<InvoiceData> Saftfile::getInvFromRange() {
 
 void Saftfile::insertRowToTable(QTableWidget *t, int row) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   t->insertRow(row);
 
@@ -252,7 +251,7 @@ void Saftfile::insertRowToTable(QTableWidget *t, int row) {
 
 void Saftfile::putIntoTable(QVector<InvoiceData> invoices) {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     ui->saftInvoicesTable->setRowCount(0);
 
@@ -294,7 +293,7 @@ void Saftfile::putIntoTable(QVector<InvoiceData> invoices) {
 
 QVector<InvoiceData> Saftfile::addSAFTFieldsToList(QVector<InvoiceData> invoices) {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     for (int i = 0; i < invoices.size(); ++i) {
 
@@ -312,7 +311,7 @@ QVector<InvoiceData> Saftfile::addSAFTFieldsToList(QVector<InvoiceData> invoices
 
 QVector<InvoiceData> Saftfile::removeUnusedInvoices(QVector<InvoiceData> inv) {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     QVector<InvoiceData> invv;
     qDebug() << "JPK file art " << getJpkFileArt();
@@ -363,7 +362,7 @@ QVector<InvoiceData> Saftfile::removeUnusedInvoices(QVector<InvoiceData> inv) {
 
 void Saftfile::initInvoicesRange() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     invs.clear();
     invs = getInvFromRange();
@@ -378,7 +377,7 @@ void Saftfile::initInvoicesRange() {
 
 void Saftfile::prepareNextStep() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     //is automatically set to 0 when the referenced object is destroyed
     qDebug() << getTaxOfficeNr() << " getTaxOfficeNr";

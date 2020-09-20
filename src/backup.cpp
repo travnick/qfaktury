@@ -18,7 +18,7 @@ Backup::Backup(QString action, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Backup)
 {
-    StrDebug;
+    StrDebug();
 
     ui->setupUi(this);
 
@@ -42,7 +42,7 @@ Backup::Backup(bool withGui, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Backup)
 {
-    StrDebug;
+    StrDebug();
 
     ui->setupUi(this);
 
@@ -66,7 +66,7 @@ Backup::~Backup()
 
 void Backup::prepareConnections() {
 
-    StrDebug;
+    StrDebug();
 
     connect(ui->browseButton, &QAbstractButton::clicked, this,
             &Backup::choosePathBackup);
@@ -78,7 +78,7 @@ void Backup::prepareConnections() {
 
 const QString Backup::getBackupPath() const {
 
-    StrDebug;
+    StrDebug();
 
     QString backupPath = sett().getWorkingDir();
     QSettings settings("elinux", "qfaktury");
@@ -99,7 +99,7 @@ const QString Backup::getBackupPath() const {
 
 const QString Backup::getDirectoryPath() const {
 
-    StrDebug;
+    StrDebug();
 
     QString dirPath = QString();
     QSettings settings("elinux", "qfaktury");
@@ -114,7 +114,7 @@ const QString Backup::getDirectoryPath() const {
 
 const QString Backup::getFilename() const {
 
-    StrDebug;
+    StrDebug();
 
     QString checkSlashPath = getDirectoryPath();
 
@@ -130,7 +130,7 @@ const QString Backup::getFilename() const {
 
 void Backup::putDataToWidgets(const QString dirPath, const QString filename) {
 
-    StrDebug;
+    StrDebug();
 
     ui->directoryLineEdit->setText(dirPath);
     ui->fileLineEdit->setText(filename);
@@ -139,7 +139,7 @@ void Backup::putDataToWidgets(const QString dirPath, const QString filename) {
 
 void Backup::whenAutoBackup() {
 
-    StrDebug;
+    StrDebug();
 
     QSettings settings("elinux", "qfaktury");
 
@@ -180,7 +180,7 @@ void Backup::createBackupWithoutGui() {
 
 #if QUAZIP_FOUND
 
-    StrDebug;
+    StrDebug();
 
     QString checkPath = (getBackupPath().endsWith('/'))
                             ? getBackupPath()
@@ -245,7 +245,7 @@ void Backup::createBackupWithoutGui() {
 
 void Backup::choosePathBackup() {
 
-  StrDebug;
+  StrDebug();
 
   QString directory =
       QDir::toNativeSeparators(QFileDialog::getExistingDirectory(
@@ -262,7 +262,7 @@ void Backup::createBackup() {
 
 #if QUAZIP_FOUND
 
-  StrDebug;
+  StrDebug();
 
   QStringList listConf = QStringList()
                          << sett().fileName()
@@ -312,7 +312,7 @@ void Backup::loadBackup() {
 
 #if QUAZIP_FOUND
 
-  StrDebug;
+  StrDebug();
 
   QMessageBox msgBox;
   msgBox.setText(

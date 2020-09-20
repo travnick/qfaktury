@@ -15,17 +15,17 @@
 Warehouse::Warehouse(QWidget *parent, IDataLayer *dl, QString in_form)
     : Invoice(parent, dl, in_form), wareData {nullptr}
 {
-  StrDebug;
+  StrDebug();
 }
 
 /** Destructor
  */
 
-Warehouse::~Warehouse() {StrDebug;}
+Warehouse::~Warehouse() {StrDebug();}
 
 void Warehouse::readWarehouseData(QString invFile) {
 
-  StrDebug;
+  StrDebug();
 
   backBtn->setEnabled(false);
   invNr->setEnabled(false);
@@ -175,13 +175,12 @@ void Warehouse::readWarehouseData(QString invFile) {
   setIsEditAllowed(sett().value("edit").toBool());
   file.close();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 bool Warehouse::saveInvoice() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__ << fName;
+  StrDebug(<< fName);
 
   bool result = false;
   if (!validateForm())
@@ -218,7 +217,7 @@ bool Warehouse::saveInvoice() {
 
 void Warehouse::setData(WarehouseData &invData) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   invData.id = fName;
   invData.customer = buyerName->text();
@@ -245,13 +244,12 @@ void Warehouse::setData(WarehouseData &invData) {
 
   invData.liabDate = liabDate->date();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 void Warehouse::backBtnClick() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   QString prefix, suffix;
   prefix = sett().value("prefix").toString();
@@ -289,8 +287,7 @@ void Warehouse::backBtnClick() {
 
 void Warehouse::canQuit() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << ": canClose " << canClose;
+  StrDebug(<< ": canClose " << canClose);
 
   if (canClose) {
 
@@ -322,7 +319,7 @@ void Warehouse::canQuit() {
 
 void Warehouse::readData(QString fraFile) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
   prepayFile = fraFile;
   qDebug() << "prepayFile w readData: " << prepayFile;
   backBtn->setEnabled(false);
@@ -335,13 +332,12 @@ void Warehouse::readData(QString fraFile) {
 
   setIsEditAllowed(sett().value("edit").toBool());
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 void Warehouse::getData(WarehouseData invData) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   buyerName->setText(invData.customer);
   invNr->setText(invData.invNr);
@@ -357,6 +353,5 @@ void Warehouse::getData(WarehouseData invData) {
   paysCombo->setCurrentText(invData.paymentType);
   liabDate->setDate(invData.liabDate);
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }

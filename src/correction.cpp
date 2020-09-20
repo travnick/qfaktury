@@ -1,6 +1,6 @@
-
-#include "correction.h"
 #include "const.h"
+#include "correction.h"
+#include "debug_message.h"
 #include "invoicedata.h"
 #include "mainwindow.h"
 #include "settings.h"
@@ -8,40 +8,38 @@
 #include <QComboBox>
 #include <QLabel>
 
-// constructor
 Correction::Correction(QWidget *parent, IDataLayer *dl, QString in_form,
                        bool edMode)
     : Invoice(parent, dl, in_form), editMode(edMode) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   firstRunned = true;
   origGrossBureau = 0;
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 Correction::~Correction() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   delete invData;
   invData = nullptr;
 }
 
 bool Correction::getMode() const {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return editMode;
 }
 
 bool Correction::getFirstRun() const {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return firstRunned;
 }
 
 const QString Correction::getRet() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return ret;
 }
 
@@ -50,7 +48,7 @@ const QString Correction::getRet() {
 
 void Correction::correctionInit(bool mode) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   labelReason1 = new QLabel();
   labelReason1->setText(trUtf8("Przyczyna korekty:"));
@@ -86,8 +84,7 @@ void Correction::correctionInit(bool mode) {
             canClose = false;
           });
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 //*********************************************** SLOTS START
@@ -99,7 +96,7 @@ void Correction::correctionInit(bool mode) {
 
 void Correction::backBtnClick() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   QString tmp = sett().value("korNr").toString();
   QString prefix, suffix;
@@ -131,8 +128,8 @@ void Correction::backBtnClick() {
   saveBtn->setEnabled(true);
 
   fName = "";
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+
+  StrDebug(<< "EXIT");
 }
 
 /** Slot
@@ -141,8 +138,7 @@ void Correction::backBtnClick() {
 
 bool Correction::saveInvoice() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << fName;
+  StrDebug(<< fName);
 
   QDomDocument doc(sett().getCorrDocName());
   QDomElement root;
@@ -438,10 +434,8 @@ bool Correction::saveInvoice() {
   saveFailed = false;
   canClose = true;
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << ": canClose " << canClose;
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< ": canClose " << canClose);
+  StrDebug(<< "EXIT");
 
   return canClose;
 }
@@ -452,7 +446,7 @@ bool Correction::saveInvoice() {
 
 void Correction::makeInvoice(bool to_print) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   invoiceType = s_CORRECTION;
   invStrList.clear();
@@ -490,8 +484,7 @@ void Correction::makeInvoice(bool to_print) {
 
   if (to_print) print();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 /** Slot
@@ -500,8 +493,7 @@ void Correction::makeInvoice(bool to_print) {
 
 void Correction::canQuit() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << ": canClose " << canClose;
+  StrDebug(<< ": canClose " << canClose);
 
   if (canClose) {
 
@@ -532,8 +524,7 @@ void Correction::canQuit() {
     }
   }
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 //*********************************************** SLOTS END
 //****************************************/
@@ -543,7 +534,7 @@ void Correction::canQuit() {
 
 void Correction::readCorrData(QString invFile) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   backBtn->setEnabled(false);
   invNr->setEnabled(false);
@@ -799,8 +790,7 @@ void Correction::readCorrData(QString invFile) {
   calculateSum();
   file.close();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 /** Sets the controls into disabled/enabled state
@@ -808,7 +798,7 @@ void Correction::readCorrData(QString invFile) {
 
 void Correction::setIsEditAllowed(bool isAllowed) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   if (editMode == false) {
 
@@ -860,8 +850,7 @@ void Correction::setIsEditAllowed(bool isAllowed) {
   if (invData == NULL)
     invData = createOriginalInv();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 /**  Creates object with the orignal invoice
@@ -869,7 +858,7 @@ void Correction::setIsEditAllowed(bool isAllowed) {
 
 InvoiceData *Correction::createOriginalInv() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   invData = new InvoiceData();
   invData->customer = buyerName->text();
@@ -904,9 +893,10 @@ InvoiceData *Correction::createOriginalInv() {
   invData->additText = additEdit->toPlainText();
 
   backBtnClick(); // populate correct correction symbol
+
+  StrDebug(<< "EXIT");
+
   return invData;
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
 }
 
 /** Not used in this class
@@ -914,11 +904,11 @@ InvoiceData *Correction::createOriginalInv() {
 
 void Correction::calculateDiscount() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 }
 
 void Correction::schemaCalcSum() {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   double net = 0;
   double price = 0;
@@ -1072,7 +1062,7 @@ void Correction::calculateSum() {
 
 void Correction::calculateOneDiscount(int i) {
 
-  qDebug() << __FUNCTION__ << __LINE__ << __FILE__;
+  StrDebug();
 
   double quantity = 0;
   double vat = 0;
@@ -1104,18 +1094,16 @@ void Correction::calculateOneDiscount(int i) {
   tableGoods->item(i, 8)->setText(sett().numberToString(net));    // net
   tableGoods->item(i, 10)->setText(sett().numberToString(gross)); // gross
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 QString Correction::getInvoiceTypeAndSaveNr() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   sett().setValue("korNr", invNr->text());
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 
   return "korekta";
 }
@@ -1222,7 +1210,7 @@ void Correction::makeBeforeCorrProducts() {
 
 void Correction::makeBeforeCorrSumm() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
   invStrList += "<table width=\"100%\" border=\"0\" cellpadding=\"5\">";
 
   double vatPrice = origGrossTotal - origNettTotal;
@@ -1253,7 +1241,7 @@ void Correction::makeBeforeCorrSumm() {
 
 void Correction::makeInvoiceSumm() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   invStrList += "<table width=\"100%\" border=\"0\" cellpadding=\"5\">";
 
@@ -1283,7 +1271,7 @@ void Correction::makeInvoiceSumm() {
 
 void Correction::makeInvoiceSummAll() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   invStrList += "<table class=\"page_break\" width=\"100%\" border=\"0\" cellpadding=\"7\">";
   invStrList += "<tr class=\"summary\">";

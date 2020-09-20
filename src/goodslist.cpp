@@ -1,4 +1,4 @@
-
+#include "debug_message.h"
 #include "goodslist.h"
 #include "settings.h"
 
@@ -8,14 +8,11 @@
 #include <QVBoxLayout>
 #include <QtXml/qdom.h>
 
-/** Constructor
- */
-
 GoodsList *GoodsList::m_instance = nullptr;
 
 GoodsList::GoodsList(QWidget *parent) : QDialog(parent) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   setupUi(this);
   if (parent->objectName() == "GoodsIssuedNotes")
@@ -30,7 +27,7 @@ GoodsList::GoodsList(QWidget *parent) : QDialog(parent) {
 
 GoodsList::~GoodsList() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (ifGoodIssueNote) {
 
@@ -59,7 +56,7 @@ GoodsList::~GoodsList() {
 
 void GoodsList::init() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (ifGoodIssueNote) {
 
@@ -120,27 +117,27 @@ void GoodsList::init() {
 }
 
 GoodsList *GoodsList::instance() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return m_instance;
 }
 
 const QString GoodsList::getGoodsId() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return id;
 }
 
 const QString GoodsList::getSelItem() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return selectedItem;
 }
 
 const QMap<QString, int> GoodsList::getVatsVal() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return vats;
 }
 
 const QString GoodsList::getRetVal() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return ret;
 }
 
@@ -153,7 +150,7 @@ const QString GoodsList::getRetVal() {
 
 void GoodsList::spinChanged(int a) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (listWidget->selectedItems().size() == 1) {
 
@@ -169,7 +166,7 @@ void GoodsList::spinChanged(int a) {
  */
 void GoodsList::doAccept() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (countSpinBox->text() == "" || countSpinBox->value() < 0.001) {
     QMessageBox::information(this, "QFaktury", trUtf8("Podaj ilość"),
@@ -251,7 +248,7 @@ void GoodsList::doAccept() {
 
 void GoodsList::lv1selChanged() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (listWidget->selectedItems().size() == 1) {
 
@@ -270,7 +267,7 @@ void GoodsList::lv1selChanged() {
 
 void GoodsList::calcNet() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (listWidget->selectedItems().size() == 1) {
 
@@ -305,7 +302,7 @@ void GoodsList::calcNet() {
 
 void GoodsList::readGoods() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   QDomDocument doc(sett().getProdutcsDocName());
   QDomElement root;
@@ -401,7 +398,7 @@ void GoodsList::readGoods() {
 
 void GoodsList::displayData(int x) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   listWidget->clear();
 
@@ -435,7 +432,7 @@ void GoodsList::displayData(int x) {
 
 void GoodsList::displayNet(QString index) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   priceBoxEdit->setValue(nets[index].split("|")[0].toDouble());
   spinBox2->setValue(1);
@@ -446,7 +443,7 @@ void GoodsList::displayNet(QString index) {
 
 QString GoodsList::trimZeros(QString in) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   // code to remove unncessery zeros
   QStringList quan = in.split(sett().getDecimalPointStr());
@@ -460,7 +457,7 @@ QString GoodsList::trimZeros(QString in) {
 
 void GoodsList::lockWidgetsDelNotes() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   textLabel1_8->hide();
   discountSpin->hide();
@@ -472,7 +469,7 @@ void GoodsList::lockWidgetsDelNotes() {
 
 void GoodsList::unlockWidgetsDelNotes() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   textLabel1_8->show();
   discountSpin->show();

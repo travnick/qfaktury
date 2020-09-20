@@ -6,11 +6,9 @@
  */
 
 #include "correctgross.h"
+#include "debug_message.h"
 #include "goodsgrosslist.h"
 #include "mainwindow.h"
-
-/* Constructor
- */
 
 CorrectGross::CorrectGross(QWidget *parent, IDataLayer *dl, QString in_form,
                            bool edMode)
@@ -18,7 +16,7 @@ CorrectGross::CorrectGross(QWidget *parent, IDataLayer *dl, QString in_form,
 
 QString CorrectGross::getInvoiceTypeAndSaveNr() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   sett().setValue("korNr", invNr->text());
   return "kbrutto";
@@ -29,7 +27,7 @@ QString CorrectGross::getInvoiceTypeAndSaveNr() {
 
 void CorrectGross::calculateOneDiscount(int i) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   double quantity = 0, vat = 0, gross = 0;
   double net = 0, price = 0;
@@ -67,7 +65,7 @@ void CorrectGross::calculateOneDiscount(int i) {
 
 void CorrectGross::addGoods() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   GoodsGrossList *goodsWindow = new GoodsGrossList(this);
 

@@ -1,5 +1,5 @@
-
 #include "changeamount.h"
+#include "debug_message.h"
 
 #include <QDebug>
 #include <QWidget>
@@ -8,7 +8,7 @@ ChangeAmount *ChangeAmount::m_instance = nullptr;
 
 ChangeAmount::ChangeAmount(QWidget *parent) : QDialog(parent) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   setupUi(this);
   init();
@@ -16,7 +16,7 @@ ChangeAmount::ChangeAmount(QWidget *parent) : QDialog(parent) {
 
 void ChangeAmount::init() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (m_instance == nullptr)
     m_instance = this;
@@ -46,7 +46,7 @@ void ChangeAmount::init() {
 
 ChangeAmount::~ChangeAmount() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (this->parent()->objectName() == "GoodsIssuedNotes") {
     textLabel2->show();
@@ -64,6 +64,6 @@ ChangeAmount::~ChangeAmount() {
 }
 
 ChangeAmount *ChangeAmount::instance() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return m_instance;
 }

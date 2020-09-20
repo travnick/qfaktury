@@ -54,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    StrDebug;
+    StrDebug();
 
     ui->setupUi(this);
     m_instance = this;
@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow *MainWindow::instance()
 {
-    StrDebug;
+    StrDebug();
 
     return m_instance;
 }
@@ -73,7 +73,7 @@ MainWindow *MainWindow::instance()
 
 MainWindow::~MainWindow()
 {
-    StrDebug;
+    StrDebug();
 
     saveAllSett();
 
@@ -100,7 +100,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::init()
 {
-    StrDebug;
+    StrDebug();
 
     // first run
     if (firstRun()) {
@@ -423,7 +423,7 @@ void MainWindow::checkIntervalsForBackup()
 
 bool MainWindow::ifpdfDirExists()
 {
-    StrDebug;
+    StrDebug();
 
     QDir mainPath(sett().getPdfDir());
 
@@ -436,7 +436,7 @@ bool MainWindow::ifpdfDirExists()
 
 void MainWindow::createPdfDir()
 {
-    StrDebug;
+    StrDebug();
 
     QDir mainPath;
     mainPath.mkpath(sett().getPdfDir());
@@ -445,7 +445,7 @@ void MainWindow::createPdfDir()
 
 void MainWindow::generatePdfFromList()
 {
-    StrDebug;
+    StrDebug();
 
     shouldHidden = true;
 
@@ -464,7 +464,7 @@ void MainWindow::generatePdfFromList()
 
 bool MainWindow::ifEmergTemplateExists()
 {
-    StrDebug;
+    StrDebug();
 
     QFileInfo fileInfo(sett().getEmergTemplate());
 
@@ -476,7 +476,7 @@ bool MainWindow::ifEmergTemplateExists()
 
 void MainWindow::createEmergTemplate()
 {
-    StrDebug;
+    StrDebug();
 
     QDir mainPath(QDir::homePath() + "/.local/share/data/elinux/template");
 
@@ -505,7 +505,7 @@ void MainWindow::createEmergTemplate()
 
 bool MainWindow::firstRun()
 {
-    StrDebug;
+    StrDebug();
 
     bool ok = sett().value("firstrun", true).toBool();
 
@@ -527,7 +527,7 @@ bool MainWindow::firstRun()
 
 void MainWindow::categorizeYears()
 {
-    StrDebug;
+    StrDebug();
 
     if (dl->ifThereOldDocuments(sett().getInoiveDocName(),
                                 sett().getInvoicesDir(),
@@ -543,7 +543,7 @@ void MainWindow::categorizeYears()
 
 void MainWindow::openWebTableK(int row, int column)
 {
-    StrDebug;
+    StrDebug();
 
     if (column == 6) {
         if ((!ui->tableK->item(row, column)->text().isEmpty())
@@ -562,7 +562,7 @@ void MainWindow::openWebTableK(int row, int column)
 
 void MainWindow::saveColumnWidth()
 {
-    StrDebug;
+    StrDebug();
 
     // width of the columns in the towary "goods" tab
     sett().setValue("towCol0", ui->tableT->columnWidth(0));
@@ -607,7 +607,7 @@ void MainWindow::saveColumnWidth()
 
 void MainWindow::saveAllSettAsDefault()
 {
-    StrDebug;
+    StrDebug();
     sett().resetSettings();
 }
 
@@ -616,7 +616,7 @@ void MainWindow::saveAllSettAsDefault()
 
 void MainWindow::saveAllSett()
 {
-    StrDebug;
+    StrDebug();
 
     // saves filtr
     sett().setValue("filtrStart", ui->filtrStart->text());
@@ -637,7 +637,7 @@ void MainWindow::saveAllSett()
 
 void MainWindow::tableClear(QTableWidget *tab)
 {
-    StrDebug;
+    StrDebug();
     tab->setRowCount(0);
 }
 
@@ -646,7 +646,7 @@ void MainWindow::tableClear(QTableWidget *tab)
 
 void MainWindow::insertRow(QTableWidget *t, int row)
 {
-    StrDebug;
+    StrDebug();
 
     t->insertRow(row);
 
@@ -657,7 +657,7 @@ void MainWindow::insertRow(QTableWidget *t, int row)
 
 int MainWindow::getMaxSymbol() const
 {
-    StrDebug;
+    StrDebug();
 
     int max = *std::max_element(allSymbols.begin(), allSymbols.end());
 
@@ -666,7 +666,7 @@ int MainWindow::getMaxSymbol() const
 
 int MainWindow::getMaxSymbolWarehouse() const
 {
-    StrDebug;
+    StrDebug();
 
     int max = *std::max_element(allSymbolsWarehouse.begin(), allSymbolsWarehouse.end());
     return max;
@@ -678,7 +678,7 @@ int MainWindow::getMaxSymbolWarehouse() const
 
 void MainWindow::readHist()
 {
-    StrDebug;
+    StrDebug();
 
     QVector<InvoiceData> invoicesVec;
     invoicesVec = dl->invoiceSelectAllData(ui->filtrStart->date(), ui->filtrEnd->date());
@@ -717,7 +717,7 @@ void MainWindow::readHist()
 
 void MainWindow::readWarehouses()
 {
-    StrDebug;
+    StrDebug();
 
     QVector<WarehouseData> wareVec;
     wareVec = dl->warehouseSelectAllData(ui->warehouseFromDate->date(), ui->warehouseToDate->date());
@@ -755,7 +755,7 @@ void MainWindow::readWarehouses()
 
 void MainWindow::readBuyer()
 {
-    StrDebug;
+    StrDebug();
 
     tableClear(ui->tableK);
     ui->tableK->setSortingEnabled(false);
@@ -790,7 +790,7 @@ void MainWindow::readBuyer()
 
 void MainWindow::readGoods()
 {
-    StrDebug;
+    StrDebug();
 
     tableClear(ui->tableT);
     QVector<ProductData> prodVec = dl->productsSelectAllData();
@@ -831,7 +831,7 @@ void MainWindow::readGoods()
 
 void MainWindow::setupDir()
 {
-    StrDebug;
+    StrDebug();
 
     workingDir = sett().getWorkingDir();
     QDir dir(workingDir);
@@ -861,7 +861,7 @@ void MainWindow::setupDir()
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    StrDebug;
+    StrDebug();
 
     if (event->key() == Qt::Key_F5) {
         newInv();
@@ -909,7 +909,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::showTableMenuT(QPoint p)
 {
-    StrDebug;
+    StrDebug();
 
     QMenu *menuTableT = new QMenu(ui->tableT);
     menuTableT->addAction(ui->addGoodsAction);
@@ -926,7 +926,7 @@ void MainWindow::showTableMenuT(QPoint p)
  */
 void MainWindow::showTableMenuK(QPoint p)
 {
-    StrDebug;
+    StrDebug();
 
     auto menuTable = std::make_unique<QMenu>(ui->tableK);
 
@@ -938,7 +938,7 @@ void MainWindow::showTableMenuK(QPoint p)
 
 void MainWindow::showTableMenuM(QPoint p)
 {
-    StrDebug;
+    StrDebug();
 
     auto menuTable = std::make_unique<QMenu>(ui->tableM);
 
@@ -954,7 +954,7 @@ void MainWindow::showTableMenuM(QPoint p)
  */
 void MainWindow::showTableMenuH(QPoint p)
 {
-    StrDebug;
+    StrDebug();
 
     auto menuTable = std::make_unique<QMenu>(ui->tableH);
 
@@ -983,7 +983,7 @@ void MainWindow::mainUpdateStatus(QTableWidgetItem *item)
     // QMainWindow and UiMainWindow are the same... I guess there is a way to
     // avoid it.
 
-    StrDebug;
+    StrDebug();
 
     QStatusBar *stat = qobject_cast<QMainWindow *>(this)->statusBar();
 
@@ -1041,7 +1041,7 @@ void MainWindow::tabChanged()
  */
 void MainWindow::rereadHist(bool)
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->filtrStart->date() > ui->filtrEnd->date()) {
         QMessageBox::information(this,
@@ -1059,7 +1059,7 @@ void MainWindow::rereadHist(bool)
  */
 void MainWindow::rereadWarehouses(bool)
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->warehouseFromDate->date() > ui->warehouseToDate->date()) {
         QMessageBox::information(this,
@@ -1078,7 +1078,7 @@ void MainWindow::rereadWarehouses(bool)
 
 void MainWindow::aboutProg()
 {
-    StrDebug;
+    StrDebug();
 
     QMessageBox::about(
         this,
@@ -1119,7 +1119,7 @@ void MainWindow::aboutProg()
 
 void MainWindow::editFHist()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableH->selectedItems().count() <= 0) {
         QMessageBox::information(this,
@@ -1323,7 +1323,7 @@ void MainWindow::editFHist()
 
 void MainWindow::warehouseEdit()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableM->selectedItems().count() <= 0) {
         QMessageBox::information(this,
@@ -1396,7 +1396,7 @@ void MainWindow::warehouseEdit()
 
 void MainWindow::delFHist()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableH->selectedItems().count() <= 0) {
         QMessageBox::information(this,
@@ -1427,7 +1427,7 @@ void MainWindow::delFHist()
 
 void MainWindow::delMHist()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableM->selectedItems().count() <= 0) {
         QMessageBox::information(this,
@@ -1461,7 +1461,7 @@ void MainWindow::delMHist()
 
 void MainWindow::userDataClick()
 {
-    StrDebug;
+    StrDebug();
 
     auto userDataWindow = std::make_unique<User>(this);
     userDataWindow->exec();
@@ -1472,7 +1472,7 @@ void MainWindow::userDataClick()
 
 void MainWindow::settClick()
 {
-    StrDebug;
+    StrDebug();
 
     auto settWindow = std::make_unique<Setting>(this);
     settWindow->exec();
@@ -1483,7 +1483,7 @@ void MainWindow::settClick()
 
 void MainWindow::buyerClick()
 {
-    StrDebug;
+    StrDebug();
 
     auto buyersWindow = std::make_unique<Buyers>(this, 0, dl);
 
@@ -1509,7 +1509,7 @@ void MainWindow::buyerClick()
 
 void MainWindow::buyerDel()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableK->selectedItems().count() <= 0) {
         QMessageBox::information(this,
@@ -1543,7 +1543,7 @@ void MainWindow::buyerDel()
 
 void MainWindow::buyerEd()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableK->selectedItems().count() <= 0) {
         QMessageBox::information(this,
@@ -1579,7 +1579,7 @@ void MainWindow::buyerEd()
 
 void MainWindow::printBuyerList()
 {
-    StrDebug;
+    StrDebug();
 
     QPrinter printer(QPrinter::HighResolution);
     QPrintPreviewDialog preview(&printer, this);
@@ -1607,7 +1607,7 @@ void MainWindow::printBuyerList()
 
 void MainWindow::printList(QPrinter *printer)
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableK->rowCount() != 0) {
         QTextDocument doc(trUtf8("Lista kontrahentów"));
@@ -1700,7 +1700,7 @@ void MainWindow::printList(QPrinter *printer)
 
 QString MainWindow::changeIfEmpty(QString text)
 {
-    StrDebug;
+    StrDebug();
 
     QString result = QString();
 
@@ -1718,7 +1718,7 @@ QString MainWindow::changeIfEmpty(QString text)
 
 void MainWindow::newInv()
 {
-    StrDebug;
+    StrDebug();
 
     auto invWindow = std::make_unique<Invoice>(this, dl, s_INVOICE);
 
@@ -1748,7 +1748,7 @@ void MainWindow::newInv()
 
 void MainWindow::newInvRR()
 {
-    StrDebug;
+    StrDebug();
 
     auto invWindow = std::make_unique<InvoiceRR>(this, dl, s_RR);
 
@@ -1782,7 +1782,7 @@ void MainWindow::newInvRR()
  */
 void MainWindow::newInvBill()
 {
-    StrDebug;
+    StrDebug();
 
     auto billWindow = std::make_unique<Bill>(this, dl, s_BILL);
 
@@ -1818,7 +1818,7 @@ void MainWindow::newInvBill()
  */
 void MainWindow::newInvGross()
 {
-    StrDebug;
+    StrDebug();
 
     auto invWindow = std::make_unique<InvoiceGross>(this, dl, s_FBRUTTO);
 
@@ -1854,7 +1854,7 @@ void MainWindow::newInvGross()
 
 void MainWindow::newPForm()
 {
-    StrDebug;
+    StrDebug();
 
     auto invWindow = std::make_unique<Invoice>(this, dl, s_PROFORMA);
 
@@ -1892,7 +1892,7 @@ void MainWindow::newPForm()
 
 void MainWindow::newCor()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableH->selectedItems().count() <= 0) {
         QMessageBox::information(this,
@@ -1964,7 +1964,7 @@ void MainWindow::newCor()
 
 void MainWindow::newDuplicate()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableH->selectedItems().count() <= 0) {
         QMessageBox::information(this,
@@ -2032,7 +2032,7 @@ void MainWindow::newDuplicate()
 
 void MainWindow::goodsAdd()
 {
-    StrDebug;
+    StrDebug();
 
     auto goodsWindow = std::make_unique<Goods>(this, 0, dl);
 
@@ -2063,7 +2063,7 @@ void MainWindow::goodsAdd()
  */
 void MainWindow::goodsDel()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableT->selectedItems().count() <= 0) {
         QMessageBox::information(this,
@@ -2099,7 +2099,7 @@ void MainWindow::goodsDel()
 
 void MainWindow::goodsEdit()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->tableT->selectedItems().count() <= 0) {
         QMessageBox::information(this,
@@ -2176,7 +2176,7 @@ void MainWindow::checkDateRange(const QDate &date)
 
 void MainWindow::noteDownTask(const QDate &date)
 {
-    StrDebug;
+    StrDebug();
 
     //is automatically set to 0 when the referenced object is destroyed
     QPointer<Organizer> organizer = new Organizer(ui->todayExercise, date);
@@ -2187,7 +2187,7 @@ void MainWindow::noteDownTask(const QDate &date)
 
 void MainWindow::openHideOrganizer()
 {
-    StrDebug;
+    StrDebug();
 
     if (ui->organizer->isHidden()) {
         ui->organizer->show();
@@ -2204,7 +2204,7 @@ void MainWindow::openHideOrganizer()
 
 bool MainWindow::close()
 {
-    StrDebug;
+    StrDebug();
 
     if (QMessageBox::question(this,
                               trUtf8("Potwierdź"),
@@ -2225,7 +2225,7 @@ bool MainWindow::close()
 
 void MainWindow::sendEmailToBuyer()
 {
-    StrDebug;
+    StrDebug();
 
     QPointer<Send> sendEmailWidget = new Send(dl->buyersSelectAllData(),
                                               dl->invoiceSelectAllData(ui->filtrStart->date(),
@@ -2242,7 +2242,7 @@ void MainWindow::sendEmailToBuyer()
 
 void MainWindow::on_WZAction_triggered()
 {
-    StrDebug;
+    StrDebug();
 
     auto noteWindow = std::make_unique<DeliveryNote>(this, dl, s_WZ);
 
@@ -2280,7 +2280,7 @@ void MainWindow::on_WZAction_triggered()
 
 void MainWindow::on_RWAction_triggered()
 {
-    StrDebug;
+    StrDebug();
 
     auto noteWindow = std::make_unique<GoodsIssuedNotes>(this, dl, s_RW);
 
@@ -2313,7 +2313,7 @@ void MainWindow::on_RWAction_triggered()
 
 void MainWindow::openJPKGenerator()
 {
-    StrDebug;
+    StrDebug();
 
     RunGuard guard("saftfile_run_protection");
 
@@ -2328,28 +2328,28 @@ void MainWindow::openJPKGenerator()
 
 void MainWindow::createBackupMode()
 {
-    StrDebug;
+    StrDebug();
 
     QPointer<Backup> backup = new Backup(QString("create"));
 }
 
 void MainWindow::loadBackupMode()
 {
-    StrDebug;
+    StrDebug();
 
     QPointer<Backup> backup = new Backup(QString("load"));
 }
 
 void MainWindow::intervalBackup()
 {
-    StrDebug;
+    StrDebug();
 
     QPointer<Backup> backup = new Backup(false);
 }
 
 void MainWindow::exportCsv()
 {
-    StrDebug;
+    StrDebug();
 
     QPointer<CsvExport> csvexport = new CsvExport(dl);
 }

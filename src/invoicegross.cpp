@@ -5,23 +5,23 @@
  *      Author: TPIELECH
  */
 
-#include "invoicegross.h"
+#include "debug_message.h"
 #include "goodsgrosslist.h"
+#include "invoicegross.h"
 #include "mainwindow.h"
 
-// constructor
 InvoiceGross::InvoiceGross(QWidget *parent, IDataLayer *dl, QString in_form)
     : Invoice(parent, dl, in_form) {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 }
 
 void InvoiceGross::invoiceGrossInit() {
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 }
 
 QString InvoiceGross::getInvoiceTypeAndSaveNr() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   QString itype = "FBrutto";
   sett().setValue("fvat", invNr->text());
@@ -33,7 +33,7 @@ QString InvoiceGross::getInvoiceTypeAndSaveNr() {
 
 void InvoiceGross::calculateOneDiscount(int i) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   double quantity = 0, vat = 0, gross = 0;
   double net = 0, price = 0;
@@ -76,7 +76,7 @@ void InvoiceGross::calculateOneDiscount(int i) {
 
 void InvoiceGross::addGoods() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   GoodsGrossList *goodsWindow = new GoodsGrossList(this);
 

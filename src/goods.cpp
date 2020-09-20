@@ -29,7 +29,7 @@ Goods::Goods(QWidget *parent, int mode, IDataLayer* const dl) :
 
 void Goods::init() {
 
-  StrDebug;
+  StrDebug();
 
   selectData("", 0);
 
@@ -67,7 +67,7 @@ void Goods::init() {
 }
 
 const QString Goods::getRetGoods() {
-  StrDebug;
+  StrDebug();
   return ret;
 }
 
@@ -79,7 +79,7 @@ const QString Goods::getRetGoods() {
 
 void Goods::okClick() {
 
-  StrDebug;
+  StrDebug();
 
   if (Validations::instance()->isEmptyField(nameEdit->text(),
                                             textLabel3->text()))
@@ -123,7 +123,7 @@ void Goods::okClick() {
 // helper method which sets "-" in input forms
 QString Goods::isEmpty(QString in) {
 
-  StrDebug;
+  StrDebug();
 
   if (in == "")
     return " ";
@@ -138,7 +138,7 @@ QString Goods::isEmpty(QString in) {
 
 void Goods::selectData(QString idx, int type) {
 
-  StrDebug;
+  StrDebug();
 
   if (idx == "") {
 
@@ -172,7 +172,7 @@ void Goods::selectData(QString idx, int type) {
 
 bool Goods::insertData() {
 
-  StrDebug;
+  StrDebug();
 
   ProductData prodData;
   setData(prodData);
@@ -186,7 +186,7 @@ bool Goods::insertData() {
 
 bool Goods::updateData() {
 
-  StrDebug;
+  StrDebug();
 
   ProductData prodData;
   setData(prodData);
@@ -200,7 +200,7 @@ bool Goods::updateData() {
 
 void Goods::getData(ProductData prodData) {
 
-  StrDebug;
+  StrDebug();
 
   idxEdit->setText(QString::number(prodData.id));
   nameEdit->setText(prodData.name);
@@ -226,7 +226,7 @@ void Goods::getData(ProductData prodData) {
 
 void Goods::setData(ProductData &prodData) {
 
-  StrDebug;
+  StrDebug();
 
   prodData.id = idxEdit->text().toInt();
   prodData.name = nameEdit->text();

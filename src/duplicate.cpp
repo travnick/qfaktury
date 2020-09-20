@@ -5,18 +5,18 @@
  *      Author: moux, juliagoda
  */
 
+#include "debug_message.h"
 #include "duplicate.h"
 
-// constructor
 Duplicate::Duplicate(QWidget *parent, IDataLayer *dl, QString in_form,
                      bool ifEdited)
     : Invoice(parent, dl, in_form), editMode(ifEdited) {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 }
 
 Duplicate::~Duplicate() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (labelDupDate != 0)
     labelDupDate = 0;
@@ -29,7 +29,7 @@ Duplicate::~Duplicate() {
 
 void Duplicate::duplicateInit() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   labelDupDate = new QLabel(this);
   labelDupDate->setText(trUtf8("Data duplikatu:"));
@@ -61,7 +61,7 @@ void Duplicate::duplicateInit() {
 
 void Duplicate::setData(InvoiceData &invData) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   invData.id = getfName();
   invData.customer = buyerName->text();
@@ -141,7 +141,7 @@ void Duplicate::setData(InvoiceData &invData) {
 void Duplicate::makeInvoiceHeadar(bool sellDate, bool breakPage,
                                   bool original) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   QString breakPageStr = "class=\"page_break\"";
 
@@ -208,7 +208,7 @@ void Duplicate::makeInvoiceHeadar(bool sellDate, bool breakPage,
 
 void Duplicate::canQuit() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (canClose) {
 

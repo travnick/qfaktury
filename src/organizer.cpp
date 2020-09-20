@@ -1,19 +1,19 @@
-﻿#include "ui_organizer.h"
+﻿#include "debug_message.h"
 #include "organizer.h"
 #include "settings.h"
+#include "ui_organizer.h"
 
-#include <QTabWidget>
-#include <QPushButton>
-#include <QFileInfo>
-#include <QTextEdit>
 #include <QCalendarWidget>
-
+#include <QFileInfo>
+#include <QPushButton>
+#include <QTabWidget>
+#include <QTextEdit>
 
 Organizer::Organizer(QTextEdit* exercisesField, const QDate& calendarD, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Organizer)
 {
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     tasksWindowToday = exercisesField;
     calendarDate = calendarD;
@@ -29,7 +29,7 @@ Organizer::Organizer(QTabWidget* tabWidgetOrganizer, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Organizer)
 {
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     tasksWindowToday = tabWidgetOrganizer->findChild<QTextEdit *>("organizer");
     calendarDate = tabWidgetOrganizer->findChild<QCalendarWidget *>("organizer")->selectedDate();
@@ -41,7 +41,7 @@ Organizer::Organizer(QTabWidget* tabWidgetOrganizer, QWidget *parent) :
 // private
 void Organizer::init() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     checkMainDirExist(sett().getPlansDir());
 
@@ -56,7 +56,7 @@ void Organizer::init() {
 // private, get to template
 bool Organizer::checkMainDirExist(QString planDir) {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     QDir mainPath(planDir);
 
@@ -71,7 +71,7 @@ bool Organizer::checkMainDirExist(QString planDir) {
 
 Organizer::~Organizer()
 {
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     if (tasksWindowToday.isNull())
         delete tasksWindowToday;
@@ -83,7 +83,7 @@ Organizer::~Organizer()
 // protected
 const QString Organizer::getNoteFile(const QDate &taskDate) {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     QString planDir = sett().getPlansDir() + "/" +
                       taskDate.toString() + ".txt";
@@ -97,7 +97,7 @@ const QString Organizer::getNoteFile(const QDate &taskDate) {
 // private
 bool Organizer::ifNoteExists(QString filenameArg) {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
     QFile filename(filenameArg);
     return filename.exists();
 
@@ -106,7 +106,7 @@ bool Organizer::ifNoteExists(QString filenameArg) {
 // protected
 void Organizer::updateOrganizerGUI(bool fileNoteExists, bool fileNoteEmpty) {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     if (fileNoteExists && !fileNoteEmpty) {
         ui->addNextTask->setDisabled(false);
@@ -127,7 +127,7 @@ void Organizer::updateOrganizerGUI(bool fileNoteExists, bool fileNoteEmpty) {
 // private
 void Organizer::noteDownTask(const QDate &taskDate) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   QString stringFileName = getNoteFile(taskDate);
 
@@ -166,7 +166,7 @@ void Organizer::noteDownTask(const QDate &taskDate) {
 // private
 void Organizer::communicateAboutRemove(QFile* file,bool removed) {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     if (removed) {
 
@@ -202,7 +202,7 @@ void Organizer::communicateAboutRemove(QFile* file,bool removed) {
 // protected
 void Organizer::delTasksFromDay(const QDate &markedDate) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   QString stringFileName = getNoteFile(markedDate);
 
@@ -223,7 +223,7 @@ void Organizer::delTasksFromDay(const QDate &markedDate) {
 // private
 void Organizer::addTaskToList(const QDate& markedDate) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   QFile file(getNoteFile(markedDate));
 
@@ -261,7 +261,7 @@ void Organizer::addTaskToList(const QDate& markedDate) {
 // private
 void Organizer::addNextTaskFromDay(const QDate& markedDate) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   QFile file(getNoteFile(markedDate));
 
@@ -326,7 +326,7 @@ void Organizer::addNextTaskFromDay(const QDate& markedDate) {
 // public
 void Organizer::checkTodayTask() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   QString today = QDate::currentDate().toString();
   qDebug() << "TODAY IS " << today;
@@ -390,7 +390,7 @@ void Organizer::checkTodayTask() {
 // protected
 void Organizer::removeTodayTask() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     QString today = QDate::currentDate().toString();
     qDebug() << "TODAY IS " << today;
@@ -416,7 +416,7 @@ void Organizer::removeTodayTask() {
 // protected
 void Organizer::calendarNoteJustify(QString text) {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     tasksWindowToday->append(text);
 
@@ -432,21 +432,21 @@ void Organizer::calendarNoteJustify(QString text) {
 
 void Organizer::delTasksDay() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     delTasksFromDay(calendarDate);
 }
 
 void Organizer::addNextTask() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     addNextTaskFromDay(calendarDate);
 }
 
 void Organizer::addTaskToDir() {
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     addTaskToList(calendarDate);
 }

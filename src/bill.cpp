@@ -7,27 +7,25 @@
 
 #include "bill.h"
 #include "const.h"
+#include "debug_message.h"
 
-
-// constructor
 Bill::Bill(QWidget *parent, IDataLayer *dl, QString in_form)
     : Invoice(parent, dl, in_form) {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 }
 
-// destructor
-Bill::~Bill() { qDebug() << __FILE__ << __LINE__ << __FUNCTION__; }
+Bill::~Bill() { StrDebug(); }
 
 // on start type of document is changed
 void Bill::billInit() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   invoiceType = s_BILL;
 }
 
 // outputs type of document
 QString Bill::getInvoiceTypeAndSaveNr() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   QString bill = "rachunek";
   sett().setValue("fvat", invNr->text());

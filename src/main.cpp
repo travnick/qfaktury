@@ -1,10 +1,11 @@
+#include "debug_message.h"
 #include "mainwindow.h"
-#include "settings.h"
 #include "runguard.h"
+#include "settings.h"
 
-#include <QtWidgets/QApplication>
 #include <QtCore/QCommandLineParser>
 #include <QtCore/QResource>
+#include <QtWidgets/QApplication>
 #include <QtWidgets/QSplashScreen>
 #include <QtWidgets/QStyle>
 
@@ -12,7 +13,7 @@ int main(int argc, char **argv) {
 
 	QT_REQUIRE_VERSION(argc, argv, "5.10.0");
 
-	qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+	StrDebug();
 
 	RunGuard guard( "main_run_protection" );
 	if ( !guard.tryToRun() )

@@ -1,4 +1,5 @@
 #include "buyers.h"
+#include "debug_message.h"
 #include "idatalayer.h"
 #include "validations.h"
 
@@ -12,13 +13,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
-/** Constructor
- */
-
 Buyers::Buyers(QWidget *parent, int mode, IDataLayer *dl) : QDialog(parent) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   workingMode = mode;
   dataLayer = dl;
@@ -26,12 +23,9 @@ Buyers::Buyers(QWidget *parent, int mode, IDataLayer *dl) : QDialog(parent) {
   init();
 }
 
-/** init()
- */
-
 void Buyers::init() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   allNames = dataLayer->buyersGetFirmList();
 
@@ -45,7 +39,7 @@ void Buyers::init() {
 
 const QString Buyers::getRetBuyer() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return ret;
 }
 
@@ -55,7 +49,7 @@ const QString Buyers::getRetBuyer() {
 
 void Buyers::okClick() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   QStringList list = QStringList()
                      << nameEdit->text() << typeCombo->currentText()
@@ -86,7 +80,7 @@ void Buyers::okClick() {
 
 void Buyers::requiredTic(int type) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (type == 2)
     textLabel2_2->setText(trUtf8("NIP:"));
@@ -103,7 +97,7 @@ void Buyers::requiredTic(int type) {
 
 void Buyers::selectData(QString name, int type) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   setWindowTitle(trUtf8("Edytuj kontrahenta"));
   getData(dataLayer->buyersSelectData(name, type));
@@ -122,7 +116,7 @@ void Buyers::selectData(QString name, int type) {
 // new customer insert data
 bool Buyers::insertData() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   bool result = false;
   BuyerData buyerData;
@@ -140,7 +134,7 @@ bool Buyers::insertData() {
 // update existing
 bool Buyers::updateData() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   bool result = false;
   BuyerData buyerData;
@@ -178,7 +172,7 @@ bool Buyers::updateData() {
 
 bool Buyers::validate() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (Validations::instance()->isEmptyField(nameEdit->text(),
                                             textLabel1->text()))
@@ -266,7 +260,7 @@ bool Buyers::validate() {
 
 bool Buyers::validateUpdated() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (Validations::instance()->isEmptyField(nameEdit->text(),
                                             textLabel1->text()))
@@ -330,7 +324,7 @@ bool Buyers::validateUpdated() {
 
 void Buyers::setData(BuyerData &buyerData) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   buyerData.name = nameEdit->text();
   buyerData.place = placeEdit->text();
@@ -348,7 +342,7 @@ void Buyers::setData(BuyerData &buyerData) {
 
 void Buyers::getData(BuyerData buyerData) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   nameEdit->setText(buyerData.name);
   placeEdit->setText(buyerData.place);
@@ -363,7 +357,7 @@ void Buyers::getData(BuyerData buyerData) {
 
 // executes shell script for preparation before connection to GUS
 bool Buyers::checkGusPath() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   const char *homedir;
 
@@ -392,7 +386,7 @@ bool Buyers::connectGUS() {
   if (QFile(sett().getGUSDir() + "/result.json").exists())
     QFile::resize(sett().getGUSDir() + "/result.json", 0);
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   const char *firstPart =
       "php -f /usr/share/qfaktury/src/GusApi/getFromNip.php ";
@@ -467,7 +461,7 @@ void Buyers::RaportTypesContainer(QStringList &listJsonNodes,
 // buyer taken from GUS
 void Buyers::setDataFromGUS() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   QFile file;
   file.setFileName(QDir::homePath() +
@@ -574,7 +568,7 @@ void Buyers::createComposerJson(QString path, QString filename) {
 
 QString Buyers::isEmpty(QString in) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (in == "")
     return "-";
@@ -584,7 +578,7 @@ QString Buyers::isEmpty(QString in) {
 // signal for connection to GUS and update data in QLineEdits
 void Buyers::on_gusBtn_clicked() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   QLabel *lbl = new QLabel;
   QMovie *movie = new QMovie(lbl);

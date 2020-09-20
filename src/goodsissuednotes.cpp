@@ -1,6 +1,7 @@
-#include "goodsissuednotes.h"
 #include "changeamount.h"
 #include "const.h"
+#include "debug_message.h"
+#include "goodsissuednotes.h"
 #include "goodslist.h"
 #include "mainwindow.h"
 #include "xmldatalayer.h"
@@ -12,14 +13,11 @@
 #include <QLineEdit>
 #include <QTableWidget>
 
-/** Constructor
- */
-
 GoodsIssuedNotes::GoodsIssuedNotes(QWidget *parent, IDataLayer *dl,
                                    QString in_form)
     : Warehouse(parent, dl, in_form) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   tableGoods->setHorizontalHeaderItem(9, new QTableWidgetItem("Ilość żądana"));
   tableGoods->setHorizontalHeaderItem(10, new QTableWidgetItem("Ilość wydana"));
@@ -101,7 +99,7 @@ GoodsIssuedNotes::GoodsIssuedNotes(QWidget *parent, IDataLayer *dl,
 
 GoodsIssuedNotes::~GoodsIssuedNotes() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   disconnect(lineEdit1, SIGNAL(textEdited(const QString &)), this,
              SLOT(emitChange(const QString &)));
@@ -145,7 +143,7 @@ GoodsIssuedNotes::~GoodsIssuedNotes() {
 
 void GoodsIssuedNotes::readWarehouseData(QString invFile) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   backBtn->setEnabled(false);
   invNr->setEnabled(false);
@@ -317,13 +315,12 @@ void GoodsIssuedNotes::readWarehouseData(QString invFile) {
   setIsEditAllowed(sett().value("edit").toBool());
   file.close();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 void GoodsIssuedNotes::makeInvoiceHeadar(bool, bool breakPage, bool original) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   QString breakPageStr = "class=\"page_break\"";
   if (breakPage == false)
@@ -413,7 +410,7 @@ void GoodsIssuedNotes::makeInvoiceHeadar(bool, bool breakPage, bool original) {
 
 void GoodsIssuedNotes::makeInvoiceBody() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   invStrList += "<tr width=\"100%\"><td width=\"100%\">";
   invStrList += "<table width=\"100%\" border=\"0\">";
@@ -501,7 +498,7 @@ void GoodsIssuedNotes::makeInvoiceBody() {
 
 void GoodsIssuedNotes::makeInvoiceProductsHeadar() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   invStrList += "<tr align=\"center\" valign=\"middle\" "
                 "class=\"productsHeader\" width=\"100%\" >"; // TUTAJ
@@ -538,7 +535,7 @@ void GoodsIssuedNotes::makeInvoiceProductsHeadar() {
 
 void GoodsIssuedNotes::makeInvoiceProducts() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   invStrList += "<tr width=\"100%\"><td width=\"100%\">";
 
@@ -579,7 +576,7 @@ void GoodsIssuedNotes::makeInvoiceProducts() {
 
 void GoodsIssuedNotes::makeInvoiceSumm() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   invStrList += "<tr width=\"100%\"><td width=\"100%\">";
   if (sett().value("css").toString() == "tables.css") {
@@ -630,7 +627,7 @@ void GoodsIssuedNotes::makeInvoiceSumm() {
 
 void GoodsIssuedNotes::makeInvoiceSummAll() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   invStrList += "<table width=\"100%\" border=\"0\">";
 
@@ -662,7 +659,7 @@ void GoodsIssuedNotes::makeInvoiceSummAll() {
 
 void GoodsIssuedNotes::makeInvoiceFooter() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   invStrList += "<tr comment=\"podpis\" align=\"center\"><td>";
   invStrList += "<br><br><br><br>";
@@ -705,7 +702,7 @@ void GoodsIssuedNotes::makeInvoiceFooter() {
 
 bool GoodsIssuedNotes::saveInvoice() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__ << fName;
+  StrDebug(<< fName);
 
   bool result = false;
   if (!validateForm())
@@ -742,7 +739,7 @@ bool GoodsIssuedNotes::saveInvoice() {
 
 void GoodsIssuedNotes::setData(WarehouseData &invData) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   invData.id = fName;
   invData.customer = buyerName->text();
@@ -779,13 +776,12 @@ void GoodsIssuedNotes::setData(WarehouseData &invData) {
 
   invData.liabDate = liabDate->date();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 void GoodsIssuedNotes::setData(InvoiceData &invData) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   invData.id = fName;
   invData.customer = buyerName->text();
@@ -858,13 +854,12 @@ void GoodsIssuedNotes::setData(InvoiceData &invData) {
   invData.liabDate = liabDate->date();
   invData.currencyType = currCombo->currentText();
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 void GoodsIssuedNotes::readData(QString fraFile) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   prepayFile = fraFile;
   qDebug() << "prepayFile w readData: " << prepayFile;
@@ -878,13 +873,12 @@ void GoodsIssuedNotes::readData(QString fraFile) {
 
   setIsEditAllowed(sett().value("edit").toBool());
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 void GoodsIssuedNotes::getData(WarehouseData invData) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   buyerName->setText(invData.customer);
   invNr->setText(invData.invNr);
@@ -905,13 +899,12 @@ void GoodsIssuedNotes::getData(WarehouseData invData) {
   paysCombo->setCurrentText(invData.paymentType);
   liabDate->setDate(invData.liabDate);
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }
 
 void GoodsIssuedNotes::addGoods() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   GoodsList *goodslistWindow = new GoodsList(this);
 
@@ -943,7 +936,7 @@ void GoodsIssuedNotes::addGoods() {
 
 void GoodsIssuedNotes::editGoods() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
   // we can only modify quantity
 
   goodsEdited = true;
@@ -1026,12 +1019,12 @@ void GoodsIssuedNotes::editGoods() {
     }
   }
 
-  qDebug() << __FUNCTION__ << ": EXIT";
+  StrDebug(<< "EXIT");
 }
 
 void GoodsIssuedNotes::delGoods() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   tableGoods->removeRow(tableGoods->currentRow());
 
@@ -1055,7 +1048,7 @@ void GoodsIssuedNotes::emitChange(const QDate &) { saveBtn->setEnabled(true); }
  */
 void GoodsIssuedNotes::setIsEditAllowed(bool isAllowed) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   if (!sett().value("editSymbol").toBool())
     invNr->setEnabled(isAllowed);
@@ -1084,6 +1077,5 @@ void GoodsIssuedNotes::setIsEditAllowed(bool isAllowed) {
   dateTimeEdit1->setEnabled(true);
   dateTimeEdit2->setEnabled(true);
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__
-           << "EXIT";
+  StrDebug(<< "EXIT");
 }

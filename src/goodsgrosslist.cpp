@@ -5,20 +5,21 @@
  *      Author: TPIELECH
  */
 
+#include "debug_message.h"
 #include "goodsgrosslist.h"
 #include "settings.h"
 
 GoodsGrossList::GoodsGrossList(QWidget *parent) : GoodsList(parent) {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 }
 
 GoodsGrossList::~GoodsGrossList() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 }
 
 QString GoodsGrossList::getPriceOfCurrent() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   double price =
       sett().stringToDouble(grossLabel->text()) / countSpinBox->value();
@@ -26,7 +27,7 @@ QString GoodsGrossList::getPriceOfCurrent() {
 }
 
 QString const GoodsGrossList::getRetValGoodsBr() {
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   return ret;
 }
 
@@ -36,7 +37,7 @@ QString const GoodsGrossList::getRetValGoodsBr() {
 
 void GoodsGrossList::doAccept() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (countSpinBox->text() == "" || countSpinBox->value() < 0.001) {
     QMessageBox::information(this, "QFaktury", trUtf8("Podaj ilość"),
@@ -85,7 +86,7 @@ void GoodsGrossList::doAccept() {
 
 void GoodsGrossList::calcNet() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (listWidget->selectedItems().size() == 1) {
     double price =

@@ -1,9 +1,9 @@
 ﻿#include "csvexport.h"
-#include "ui_csvexport.h"
-
-#include "settings.h"
-#include "xmldatalayer.h"
+#include "debug_message.h"
 #include "invoicedata.h"
+#include "settings.h"
+#include "ui_csvexport.h"
+#include "xmldatalayer.h"
 
 #include <QFileDialog>
 
@@ -13,7 +13,7 @@ CsvExport::CsvExport(IDataLayer* dlCsv, QWidget *parent) :
 {      
     ui->setupUi(this);
 
-    qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    StrDebug();
 
     putDataIntoWidgets(getPathCsv());
     prepareConnections();
@@ -29,7 +29,7 @@ CsvExport::~CsvExport()
 
 void CsvExport::prepareConnections() {
 
-      qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+      StrDebug();
 
     connect(ui->browseButton, &QAbstractButton::clicked, this,
             &CsvExport::choosePathCsv);
@@ -42,7 +42,7 @@ void CsvExport::prepareConnections() {
 
 const QString CsvExport::getPathCsv() {
 
-      qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+      StrDebug();
 
     QString path = QDir::toNativeSeparators(sett().getCSVDir());
 
@@ -69,7 +69,7 @@ void CsvExport::putDataIntoWidgets(QString dirPath) {
 
 void CsvExport::choosePathCsv() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   QString directory =
       QDir::toNativeSeparators(QFileDialog::getExistingDirectory(
@@ -84,7 +84,7 @@ void CsvExport::choosePathCsv() {
 
 bool CsvExport::createPathCsv(const QString path) {
 
-      qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+      StrDebug();
 
       QDir csvDir(path);
       if (!csvDir.exists())
@@ -98,7 +98,7 @@ bool CsvExport::createPathCsv(const QString path) {
 
 void CsvExport::splitCsvTasks(bool expBuyers, bool expGoods, bool expInvoices, bool expWarehouses) {
 
-      qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+      StrDebug();
 
     sett().beginGroup("csv_settings");
 
@@ -130,7 +130,7 @@ void CsvExport::splitCsvTasks(bool expBuyers, bool expGoods, bool expInvoices, b
 
 void CsvExport::createCsvFiles() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   createPathCsv(getPathCsv());
 
@@ -170,7 +170,7 @@ QString CsvExport::preventNull(QString elementText) {
 
 void CsvExport::createBuyersCsvFiles(QString format) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   if (!idCvsBuyer.isEmpty())
     idCvsBuyer.clear();
@@ -223,7 +223,7 @@ void CsvExport::createBuyersCsvFiles(QString format) {
 
 void CsvExport::createProductsCsvFiles(QString format) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   if (!idCvsProducts.isEmpty())
     idCvsProducts.clear();
@@ -284,7 +284,7 @@ void CsvExport::createProductsCsvFiles(QString format) {
 
 void CsvExport::createSellersCsvFiles(QString format) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   if (!idCvsSeller.isEmpty())
     idCvsSeller.clear();
@@ -348,7 +348,7 @@ void CsvExport::createSellersCsvFiles(QString format) {
 
 void CsvExport::createInvoicesCsvFiles(QString format, QDate from, QDate to) {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  StrDebug();
 
   if (!idCvsInvoices.isEmpty())
     idCvsInvoices.clear();

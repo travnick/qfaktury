@@ -5,13 +5,14 @@
  *      Author: moux
  */
 
-#include "custompayment.h"
 #include "custompaymdata.h"
+#include "custompayment.h"
+#include "debug_message.h"
 #include "settings.h"
 
 CustomPayment::CustomPayment(QWidget *parent) : QDialog(parent) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
   setupUi(this);
   // TODO Auto-generated constructor stub
   init();
@@ -19,7 +20,7 @@ CustomPayment::CustomPayment(QWidget *parent) : QDialog(parent) {
 
 CustomPayment::~CustomPayment() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (custPaymData != 0)
     custPaymData = 0;
@@ -28,7 +29,7 @@ CustomPayment::~CustomPayment() {
 
 void CustomPayment::init() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   connect(okButton, SIGNAL(clicked()), this, SLOT(okClicked()));
   connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
@@ -50,7 +51,7 @@ void CustomPayment::init() {
 
 void CustomPayment::setInvoiceAmount(double a) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   invoiceAmount = a;
   amount1->setValue(invoiceAmount);
@@ -61,7 +62,7 @@ void CustomPayment::setInvoiceAmount(double a) {
 
 bool CustomPayment::validateForm() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if ((amount1->value() == 0) || (amount2->value() == 0)) {
 
@@ -87,7 +88,7 @@ bool CustomPayment::validateForm() {
 
 void CustomPayment::amount1Changed(double) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   disconnect(amount2, SIGNAL(valueChanged(double)), this,
              SLOT(amount2Changed(double)));
@@ -98,7 +99,7 @@ void CustomPayment::amount1Changed(double) {
 
 void CustomPayment::amount2Changed(double) {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   disconnect(amount1, SIGNAL(valueChanged(double)), this,
              SLOT(amount1Changed(double)));
@@ -109,7 +110,7 @@ void CustomPayment::amount2Changed(double) {
 
 void CustomPayment::okClicked() {
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+  StrDebug();
 
   if (validateForm()) {
 
