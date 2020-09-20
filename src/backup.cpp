@@ -3,8 +3,8 @@
 #include "ui_backup.h"
 
 #if QUAZIP_FOUND
-#include "JlCompress.h"
-#include "quazipdir.h"
+#include "quazip5/JlCompress.h"
+#include "quazip5/quazipdir.h"
 #endif
 
 #include <QDir>

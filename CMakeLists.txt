@@ -185,7 +185,6 @@ set(HEADER_FILES
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${QUAZIP_INCLUDE_DIRS}
     src/SimpleSmtp_SSL_QT5/smtp_attachements
 )
 
