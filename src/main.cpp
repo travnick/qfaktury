@@ -11,7 +11,7 @@
 
 int main(int argc, char **argv)
 {
-    QT_REQUIRE_VERSION(argc, argv, "5.10.0");
+    QT_REQUIRE_VERSION(argc, argv, "5.10.0")
 
     StrDebug();
 
