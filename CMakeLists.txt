@@ -6,7 +6,6 @@ if(POLICY CMP0071)
 endif()
 
 set(QT_MIN_VERSION "5.10.0")
-set(QT_QMAKE_EXECUTABLE "~/Qt/5.12.0")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -37,6 +36,22 @@ add_compile_options(
     -Wall
     -Wextra
     -Wpedantic
+
+    -Wcast-align
+    -Wcast-qual
+    -Wctor-dtor-privacy
+    -Wlogical-op
+    -Wnoexcept
+    -Wold-style-cast
+    -Wredundant-decls
+    -Wstack-protector
+    -Wstrict-null-sentinel
+
+    # Code fixes required to enable following warnings
+#    -Wconversion
+#    -Wdouble-promotion
+#    -Woverloaded-virtual
+#    -Wzero-as-null-pointer-constant
 )
 
 # disable warnings
