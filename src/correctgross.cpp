@@ -46,7 +46,7 @@ void CorrectGross::calculateOneDiscount(int i)
     discountValue = price * discount;
 
     gross = price - discountValue;
-    int vatValue = sett().stringToDouble(tableGoods->item(i, 9)->text());
+    auto vatValue = sett().stringToDouble(tableGoods->item(i, 9)->text());
     vat = (gross * vatValue) / (100 + vatValue);
 
     net = gross - vat;

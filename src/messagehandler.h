@@ -16,12 +16,12 @@ public:
         return m_description;
     }
 
-    int line() const
+    qint64 line() const
     {
         return m_sourceLocation.line();
     }
 
-    int column() const
+    qint64 column() const
     {
         return m_sourceLocation.column();
     }
