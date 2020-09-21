@@ -148,15 +148,15 @@ void Invoice::init()
 {
     StrDebug();
 
-    manager = 0;
+    manager = nullptr;
     ratesCombo = new QComboBox();
-    labelRate = 0;
-    rateLabel = 0;
-    restLabel = 0;
-    sendKind = 0;
-    rateLabelInfo = 0;
-    restLabelInfo = 0;
-    sendKindInfo = 0;
+    labelRate = nullptr;
+    rateLabel = nullptr;
+    restLabel = nullptr;
+    sendKind = nullptr;
+    rateLabelInfo = nullptr;
+    restLabelInfo = nullptr;
+    sendKindInfo = nullptr;
     rComboWasChanged = false;
     goodsEdited = false;
 
@@ -1249,7 +1249,7 @@ void Invoice::canQuit()
                 trUtf8("Dane zostały zmienione. Czy chcesz zapisać?"),
                 trUtf8("Tak"),
                 trUtf8("Nie"),
-                0,
+                nullptr,
                 0,
                 1)
             == 1)
@@ -1300,7 +1300,7 @@ void Invoice::payTextChanged(QString text)
 
     if (text != trUtf8("zaliczka"))
     {
-        if (restLabel != 0 && rateLabelInfo != 0)
+        if (restLabel && rateLabelInfo)
         {
             rComboWasChanged = false;
             disconnect(
@@ -1310,23 +1310,23 @@ void Invoice::payTextChanged(QString text)
                 SLOT(rateDateChanged(QString)));
 
             ratesCombo->deleteLater();
-            ratesCombo = 0;
+            ratesCombo = nullptr;
             labelRate->deleteLater();
-            labelRate = 0;
+            labelRate = nullptr;
 
             rateLabel->deleteLater();
-            rateLabel = 0;
+            rateLabel = nullptr;
             restLabel->deleteLater();
-            restLabel = 0;
+            restLabel = nullptr;
             sendKind->deleteLater();
-            sendKind = 0;
+            sendKind = nullptr;
 
             rateLabelInfo->deleteLater();
-            rateLabelInfo = 0;
+            rateLabelInfo = nullptr;
             restLabelInfo->deleteLater();
-            restLabelInfo = 0;
+            restLabelInfo = nullptr;
             sendKindInfo->deleteLater();
-            sendKindInfo = 0;
+            sendKindInfo = nullptr;
         }
     }
     else
@@ -1338,7 +1338,6 @@ void Invoice::payTextChanged(QString text)
 
         if (cp->exec() == QDialog::Accepted)
         {
-            custPaymData = 0;
             custPaymData = cp->custPaymData;
 
             rComboWasChanged = true;
@@ -1348,10 +1347,10 @@ void Invoice::payTextChanged(QString text)
                 this,
                 SLOT(rateDateChanged(QString)));
 
-            if (ratesCombo == 0)
+            if (!ratesCombo)
                 ratesCombo = new QComboBox();
 
-            if (labelRate == 0)
+            if (!labelRate)
                 labelRate = new QLabel();
 
             labelRate->setText(trUtf8("Termin raty:"));
@@ -1363,35 +1362,35 @@ void Invoice::payTextChanged(QString text)
             ratesCombo->setCurrentText(custPaymData->date1.toString(sett().getDateFormat()));
             addData->addWidget(ratesCombo);
 
-            if (rateLabel == 0)
+            if (!rateLabel)
                 rateLabel = new QLabel();
             rateLabel->setText(trUtf8("Rata:"));
             rateLabel->setAlignment(Qt::AlignRight);
             descPayments->addWidget(rateLabel);
 
-            if (sendKind == 0)
+            if (!sendKind)
                 sendKind = new QLabel();
             sendKind->setText(trUtf8("Rodzaj zapłaty:"));
             sendKind->setAlignment(Qt::AlignRight);
             descPayments->addWidget(sendKind);
 
-            if (restLabel == 0)
+            if (!restLabel)
                 restLabel = new QLabel();
             restLabel->setText(trUtf8("Pozostało do spłaty:"));
             restLabel->setAlignment(Qt::AlignRight);
             descPayments->addWidget(restLabel);
 
-            if (rateLabelInfo == 0)
+            if (!rateLabelInfo)
                 rateLabelInfo = new QLabel();
             rateLabelInfo->setText(sett().numberToString(custPaymData->amount1, 'f', 2));
             dataPayments->addWidget(rateLabelInfo);
 
-            if (sendKindInfo == 0)
+            if (!sendKindInfo)
                 sendKindInfo = new QLabel();
             sendKindInfo->setText(custPaymData->payment1);
             dataPayments->addWidget(sendKindInfo);
 
-            if (restLabelInfo == 0)
+            if (!restLabelInfo)
                 restLabelInfo = new QLabel();
             restLabelInfo->setText(sett().numberToString(custPaymData->amount2, 'f', 2));
             dataPayments->addWidget(restLabelInfo);

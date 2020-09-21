@@ -61,7 +61,7 @@ private:
     QPointer<QPushButton> overwriteBtn;
     QPointer<QLabel> statusText;
 
-    void createNoteJPKWindow(MessageHandler *messageHandler = 0);
+    void createNoteJPKWindow(MessageHandler *messageHandler = nullptr);
     void saveXmlFile();
     void saveXmlFileJKP_VAT(QXmlStreamWriter &xmlWriter);
     void saveXmlFileJKP_FA(QXmlStreamWriter &xmlWriter);

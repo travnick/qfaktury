@@ -94,5 +94,5 @@ void CorrectGross::addGoods()
     }
 
     delete goodsWindow;
-    goodsWindow = 0;
+    goodsWindow = nullptr;
 }

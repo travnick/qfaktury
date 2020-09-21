@@ -300,7 +300,7 @@ void Warehouse::canQuit()
                 trUtf8("Dane zostały zmienione. Czy chcesz zapisać?"),
                 trUtf8("Tak"),
                 trUtf8("Nie"),
-                0,
+                nullptr,
                 0,
                 1)
             == 1)

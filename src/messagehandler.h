@@ -7,7 +7,7 @@ class MessageHandler : public QAbstractMessageHandler
 {
 public:
     MessageHandler()
-        : QAbstractMessageHandler(0)
+        : QAbstractMessageHandler(nullptr)
     {
     }
 

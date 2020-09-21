@@ -670,7 +670,7 @@ void Correction::readCorrData(QString invFile)
         labelRate->setAlignment(Qt::AlignRight);
         addDataLabels->addWidget(labelRate);
 
-        if (ratesCombo == 0)
+        if (!ratesCombo)
             ratesCombo = new QComboBox();
         disconnect(
             ratesCombo, SIGNAL(currentIndexChanged(QString)), this, SLOT(rateDateChanged(QString)));

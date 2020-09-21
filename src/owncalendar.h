@@ -23,7 +23,7 @@ class ownCalendarWidget : public QCalendarWidget
     Q_OBJECT
 
 public:
-    ownCalendarWidget(QWidget *parent = 0);
+    ownCalendarWidget(QWidget *parent = nullptr);
     ~ownCalendarWidget();
 
     void ourCall(QDate);

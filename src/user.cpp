@@ -653,7 +653,7 @@ void User::delcurrSel()
             trUtf8("Usunąć dane kolejnego sprzedawcy/oddziału?"),
             trUtf8("Tak"),
             trUtf8("Nie"),
-            0,
+            nullptr,
             0,
             1)
         == 0)

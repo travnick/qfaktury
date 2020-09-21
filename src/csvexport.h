@@ -15,7 +15,7 @@ class CsvExport : public QWidget
     Q_OBJECT
 
 public:
-    explicit CsvExport(IDataLayer *dlCsv, QWidget *parent = 0);
+    explicit CsvExport(IDataLayer *dlCsv, QWidget *parent = nullptr);
     ~CsvExport();
 
     const QString getPathCsv();
