@@ -7,15 +7,21 @@
 #include "documentdata.h"
 #include "productdata.h"
 
+#include <QDate>
+
 // class for holding informations about warehouse documents. One instance -> one
 // document
-class WarehouseData : public DocumentData
+class WarehouseData final : public DocumentData
 {
 public:
-    QString getCustomer()
-    {
-        return customer;
-    }
+    QString getCustomer() const override;
+
+    /**
+     *  Return invoice type
+     */
+
+    QString getInvoiceTypeAndSaveNr(int invoiceType);
+
     QString customer; // buyer
     QMap<int, ProductData> products;
     QDate liabDate;
@@ -46,30 +52,6 @@ public:
     QDate goodFromDate;
     QDate goodToDate;
     // *END*
-
-    /**
-     *  Return invoice type
-     */
-
-    QString getInvoiceTypeAndSaveNr(int invoiceType)
-    {
-        QString ret = "WZ";
-
-        switch (invoiceType)
-        {
-        case 9:
-            ret = QObject::trUtf8("WZ");
-            break;
-        case 10:
-            ret = QObject::trUtf8("RW");
-            break;
-        default:
-            ret = QObject::trUtf8("WZ");
-            break;
-        }
-
-        return ret;
-    }
 };
 
 #endif

@@ -6,9 +6,11 @@
  */
 
 #include "correctgross.h"
-#include "debug_message.h"
 #include "goodsgrosslist.h"
 #include "mainwindow.h"
+#include "settings.h"
+
+#include "debug_message.h"
 
 CorrectGross::CorrectGross(QWidget *parent, IDataLayer *dl, QString in_form, bool edMode)
     : Correction(parent, dl, in_form, edMode)
@@ -46,7 +48,7 @@ void CorrectGross::calculateOneDiscount(int i)
     discountValue = price * discount;
 
     gross = price - discountValue;
-    int vatValue = sett().stringToDouble(tableGoods->item(i, 9)->text());
+    auto vatValue = sett().stringToDouble(tableGoods->item(i, 9)->text());
     vat = (gross * vatValue) / (100 + vatValue);
 
     net = gross - vat;
@@ -94,5 +96,5 @@ void CorrectGross::addGoods()
     }
 
     delete goodsWindow;
-    goodsWindow = 0;
+    goodsWindow = nullptr;
 }

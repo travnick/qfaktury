@@ -6,7 +6,12 @@
  */
 
 #include "duplicate.h"
+#include "invoicedata.h"
+#include "settings.h"
+
 #include "debug_message.h"
+
+#include <QMessageBox>
 
 Duplicate::Duplicate(QWidget *parent, IDataLayer *dl, QString in_form, bool ifEdited)
     : Invoice(parent, dl, in_form)
@@ -224,7 +229,7 @@ void Duplicate::canQuit()
                 trUtf8("Dane zostały zmienione. Czy chcesz zapisać?"),
                 trUtf8("Tak"),
                 trUtf8("Nie"),
-                0,
+                nullptr,
                 0,
                 1)
             == 1)

@@ -8,7 +8,7 @@
 #include "ui_user.h"
 
 // class for creating, saving and updating user account with GUI
-class User : public QDialog, public Ui::User
+class User final : public QDialog, public Ui::User
 {
     Q_OBJECT
 

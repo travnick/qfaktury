@@ -7,10 +7,10 @@
 
 #include "ui_setting.h"
 
-class QTextCodec;
+#include "fwd.hpp"
 
 // class for creating window with settings with GUI
-class Setting : public QDialog, public Ui::Setting
+class Setting final : public QDialog, public Ui::Setting
 {
     Q_OBJECT
 
@@ -67,53 +67,10 @@ private:
     QString getAll(QListWidget *lb);
     QVector<QTextCodec *> codecs;
 
-    inline QString settWriteBackup()
-    {
-        if (backupOnceDay->isChecked())
-            return "1D";
-        else if (backupOnceWeek->isChecked())
-            return "1W";
-        else if (backupOnceMonth->isChecked())
-            return "1M";
-        else if (backupEveryHour->isChecked())
-            return QString::number(howManyHours->value()) + "h";
-        else if (backupEveryMin->isChecked())
-            return QString::number(howManyMin->value()) + "m";
-        else
-            return "none";
-    }
+    inline QString settWriteBackup();
 
-    inline void settReadBackup(QString settValue)
-    {
-        if (settValue != "none")
-        {
-            if (settValue == "1D")
-                backupOnceDay->setChecked(true);
-            else if (settValue == "1W")
-                backupOnceWeek->setChecked(true);
-            else if (settValue == "1M")
-                backupOnceMonth->setChecked(true);
-            else if (settValue.back() == 'h')
-            {
-                backupEveryHour->setChecked(true);
-                settValue.chop(1);
-                howManyHours->setValue(settValue.toInt());
-            }
-            else if (settValue.back() == 'm')
-            {
-                backupEveryMin->setChecked(true);
-                settValue.chop(1);
-                howManyMin->setValue(settValue.toInt());
-            }
-        }
-    }
+    inline void settReadBackup(QString settValue);
 
-    inline void uncheckRadio(QRadioButton *btn)
-    {
-        btn->setAutoExclusive(false);
-        btn->setChecked(false);
-        btn->setAutoExclusive(true);
-        btn->setEnabled(false);
-    }
+    inline void uncheckRadio(QRadioButton *btn);
 };
 #endif

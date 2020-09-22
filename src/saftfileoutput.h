@@ -6,16 +6,12 @@
 #define SAFTFILEOUTPUT_H
 
 #include "saftfile.h"
+
 #include <QPointer>
-#include <QWidget>
-#include <QXmlSchema>
-#include <QXmlStreamWriter>
 
-class QPlainTextEdit;
-class QPushButton;
-class MessageHandler;
+#include "fwd.hpp"
 
-class SaftfileOutput : public Saftfile
+class SaftfileOutput final : public Saftfile
 {
     Q_OBJECT
 
@@ -31,7 +27,7 @@ public:
     const QString getHouseNumer(QString fullAddress);
     const QString getDoorNumer(QString fullAddress);
 
-    enum JPKType : unsigned char
+    enum class JPKType : unsigned char
     {
         JPK_VAT,
         JPK_FA
@@ -61,7 +57,7 @@ private:
     QPointer<QPushButton> overwriteBtn;
     QPointer<QLabel> statusText;
 
-    void createNoteJPKWindow(MessageHandler *messageHandler = 0);
+    void createNoteJPKWindow(MessageHandler *messageHandler = nullptr);
     void saveXmlFile();
     void saveXmlFileJKP_VAT(QXmlStreamWriter &xmlWriter);
     void saveXmlFileJKP_FA(QXmlStreamWriter &xmlWriter);

@@ -12,7 +12,7 @@ namespace Ui
 class Backup;
 }
 
-class Backup : public QWidget
+class Backup final : public QWidget
 {
     Q_OBJECT
 
@@ -20,7 +20,7 @@ public:
     explicit Backup(
         QString action = QString("create"),
         QWidget *parent = nullptr); // "create" or "load"
-    Backup(bool withGui, QWidget *parent = 0); // false -> without Gui
+    Backup(bool withGui, QWidget *parent = nullptr); // false -> without Gui
     ~Backup();
 
     const QString getBackupPath() const;

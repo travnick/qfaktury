@@ -6,16 +6,3 @@
  */
 
 #include "custompaymdata.h"
-#include "debug_message.h"
-
-#include <QDebug>
-
-CustomPaymData::CustomPaymData()
-{
-    StrDebug();
-}
-
-CustomPaymData::~CustomPaymData()
-{
-    StrDebug();
-}

@@ -2,17 +2,20 @@
 #include "settings.h"
 #include "ui_backup.h"
 
+#include "debug_message.h"
+
 #if QUAZIP_FOUND
 #include "quazip5/JlCompress.h"
 #include "quazip5/quazipdir.h"
 #endif
 
+#include <QDate>
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
 
-#include "debug_message.h"
+#include <QDebug>
 
 Backup::Backup(QString action, QWidget *parent)
     : QWidget(parent)

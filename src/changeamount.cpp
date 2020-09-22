@@ -1,7 +1,7 @@
 #include "changeamount.h"
+
 #include "debug_message.h"
 
-#include <QDebug>
 #include <QWidget>
 
 ChangeAmount *ChangeAmount::m_instance = nullptr;

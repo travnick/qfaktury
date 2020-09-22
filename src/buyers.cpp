@@ -1,16 +1,22 @@
+#include "buyerdata.h"
 #include "buyers.h"
-#include "debug_message.h"
 #include "idatalayer.h"
+#include "settings.h"
 #include "validations.h"
 
+#include "debug_message.h"
+
+#include <QDir>
+#include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QMessageBox>
 #include <QMovie>
 
+#include <QDebug>
+
 #include <pwd.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 Buyers::Buyers(QWidget *parent, int mode, IDataLayer *dl)
@@ -261,7 +267,7 @@ bool Buyers::validate()
     if (allNames.indexOf(QRegExp(nameEdit->text(), Qt::CaseSensitive, QRegExp::FixedString)) != -1)
     {
         QMessageBox::critical(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Kontrahent nie moze zostać dodany, ponieważ "
                    "istnieje już kontrahent o tej nazwie."));

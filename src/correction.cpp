@@ -1,12 +1,18 @@
-#include "correction.h"
 #include "const.h"
-#include "debug_message.h"
+#include "convertamount.h"
+#include "correction.h"
 #include "invoicedata.h"
 #include "mainwindow.h"
 #include "settings.h"
 
+#include "debug_message.h"
+
 #include <QComboBox>
+#include <QFileInfo>
 #include <QLabel>
+#include <QMessageBox>
+
+#include <QDebug>
 
 Correction::Correction(QWidget *parent, IDataLayer *dl, QString in_form, bool edMode)
     : Invoice(parent, dl, in_form)
@@ -670,7 +676,7 @@ void Correction::readCorrData(QString invFile)
         labelRate->setAlignment(Qt::AlignRight);
         addDataLabels->addWidget(labelRate);
 
-        if (ratesCombo == 0)
+        if (!ratesCombo)
             ratesCombo = new QComboBox();
         disconnect(
             ratesCombo, SIGNAL(currentIndexChanged(QString)), this, SLOT(rateDateChanged(QString)));

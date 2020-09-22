@@ -1,18 +1,20 @@
-#include "debug_message.h"
 #include "mainwindow.h"
 #include "runguard.h"
 #include "settings.h"
 
+#include "debug_message.h"
+
+#include <QMessageBox>
 #include <QtCore/QCommandLineParser>
 #include <QtCore/QResource>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QSplashScreen>
 #include <QtWidgets/QStyle>
 
+#include <QDebug>
+
 int main(int argc, char **argv)
 {
-    QT_REQUIRE_VERSION(argc, argv, "5.10.0");
-
     StrDebug();
 
     RunGuard guard("main_run_protection");

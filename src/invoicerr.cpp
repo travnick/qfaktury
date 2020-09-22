@@ -1,5 +1,12 @@
+#include "invoicedata.h"
 #include "invoicerr.h"
+#include "settings.h"
+
 #include "debug_message.h"
+
+#include <QMessageBox>
+
+#include <QDebug>
 
 InvoiceRR::InvoiceRR(QWidget *parent, IDataLayer *dl, QString in_form)
     : Invoice(parent, dl, in_form)

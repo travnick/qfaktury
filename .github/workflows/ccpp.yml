@@ -3,7 +3,7 @@ name: C/C++ CI
 on: [push, pull_request]
 
 jobs:
-  build-release:
+  build:
   
     strategy:
       matrix:

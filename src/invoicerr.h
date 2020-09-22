@@ -8,7 +8,7 @@
 #include "invoice.h"
 
 // class for creating and updating Invoice VAT RR
-class InvoiceRR : public Invoice
+class InvoiceRR final : public Invoice
 {
 public:
     InvoiceRR(QWidget *parent, IDataLayer *dl, QString in_form = QString());

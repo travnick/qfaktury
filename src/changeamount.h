@@ -7,11 +7,10 @@
 
 #include "ui_changeamount.h"
 
-class QLabel;
-class QSpinBox;
+#include <QDialog>
 
 // class for changing quantity of good/service with GUI
-class ChangeAmount : public QDialog, public Ui::ChangeAmount
+class ChangeAmount final : public QDialog, public Ui::ChangeAmount
 {
     Q_OBJECT
 

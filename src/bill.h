@@ -15,7 +15,7 @@
 #include "invoice.h"
 
 // class for creating bills, using invoice class form
-class Bill : public Invoice
+class Bill final : public Invoice
 {
     Q_OBJECT
 

@@ -1,16 +1,24 @@
-#include "invoice.h"
 #include "buyers.h"
 #include "buyerslist.h"
 #include "changeamount.h"
 #include "const.h"
+#include "convertamount.h"
 #include "custompaymdata.h"
 #include "custompayment.h"
 #include "goodslist.h"
 #include "idatalayer.h"
+#include "invoice.h"
+#include "invoicedata.h"
 #include "mainwindow.h"
+#include "settings.h"
+
+#include "debug_message.h"
 
 #include <QComboBox>
+#include <QDir>
+#include <QFileInfo>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QPrintPreviewDialog>
@@ -19,9 +27,6 @@
 
 #include <memory>
 
-#include "debug_message.h"
-
-short invType;
 Invoice *Invoice::m_instance = nullptr;
 
 /** Constructor
@@ -148,35 +153,35 @@ void Invoice::init()
 {
     StrDebug();
 
-    manager = 0;
+    manager = nullptr;
     ratesCombo = new QComboBox();
-    labelRate = 0;
-    rateLabel = 0;
-    restLabel = 0;
-    sendKind = 0;
-    rateLabelInfo = 0;
-    restLabelInfo = 0;
-    sendKindInfo = 0;
+    labelRate = nullptr;
+    rateLabel = nullptr;
+    restLabel = nullptr;
+    sendKind = nullptr;
+    rateLabelInfo = nullptr;
+    restLabelInfo = nullptr;
+    sendKindInfo = nullptr;
     rComboWasChanged = false;
     goodsEdited = false;
 
     this->setWindowTitle(inv_form);
-    whatTypeFromTitle(s_PROFORMA, true, false, FPro, 2);
-    whatTypeFromTitle(s_WIN_PROFORMA_EDIT, true, true, FPro, 2);
-    whatTypeFromTitle(s_INVOICE, false, false, FVat, 1);
-    whatTypeFromTitle(s_WIN_INVOICE_EDIT, false, true, FVat, 1);
-    whatTypeFromTitle(s_CORRECT_TITLE, false, true, EFVat, 3);
-    whatTypeFromTitle(s_WIN_CORRECT_EDIT, false, true, EFVat, 3);
-    whatTypeFromTitle(s_FBRUTTO, false, false, EFPro, 4);
-    whatTypeFromTitle(s_BR_INVOICE_EDIT, false, true, EFPro, 4);
-    whatTypeFromTitle(s_CORRECT_BRUTTO, false, true, KBR, 5);
-    whatTypeFromTitle(s_BILL, false, false, BILL, 6);
-    whatTypeFromTitle(s_BILL_EDIT, false, true, BILL, 6);
-    whatTypeFromTitle(s_DUPLICATE, false, true, DUP, 7);
-    whatTypeFromTitle(s_WIN_DUPLICATE_LOOK, false, true, DUP, 7);
-    whatTypeFromTitle(s_RR, false, false, RR, 8);
-    whatTypeFromTitle(s_WZ, false, false, WZ, 9);
-    whatTypeFromTitle(s_RW, false, false, RW, 10);
+    whatTypeFromTitle(s_PROFORMA, true, false, InvoiceType::FPro, 2);
+    whatTypeFromTitle(s_WIN_PROFORMA_EDIT, true, true, InvoiceType::FPro, 2);
+    whatTypeFromTitle(s_INVOICE, false, false, InvoiceType::FVat, 1);
+    whatTypeFromTitle(s_WIN_INVOICE_EDIT, false, true, InvoiceType::FVat, 1);
+    whatTypeFromTitle(s_CORRECT_TITLE, false, true, InvoiceType::EFVat, 3);
+    whatTypeFromTitle(s_WIN_CORRECT_EDIT, false, true, InvoiceType::EFVat, 3);
+    whatTypeFromTitle(s_FBRUTTO, false, false, InvoiceType::EFPro, 4);
+    whatTypeFromTitle(s_BR_INVOICE_EDIT, false, true, InvoiceType::EFPro, 4);
+    whatTypeFromTitle(s_CORRECT_BRUTTO, false, true, InvoiceType::KBR, 5);
+    whatTypeFromTitle(s_BILL, false, false, InvoiceType::BILL, 6);
+    whatTypeFromTitle(s_BILL_EDIT, false, true, InvoiceType::BILL, 6);
+    whatTypeFromTitle(s_DUPLICATE, false, true, InvoiceType::DUP, 7);
+    whatTypeFromTitle(s_WIN_DUPLICATE_LOOK, false, true, InvoiceType::DUP, 7);
+    whatTypeFromTitle(s_RR, false, false, InvoiceType::RR, 8);
+    whatTypeFromTitle(s_WZ, false, false, InvoiceType::WZ, 9);
+    whatTypeFromTitle(s_RW, false, false, InvoiceType::RW, 10);
 
     if (sett().value("editSymbol").toBool())
         invNr->setEnabled(false);
@@ -301,7 +306,7 @@ void Invoice::whatTypeFromTitle(
     QString title,
     bool ifForm,
     bool kadded,
-    InvoiceType invTyp,
+    InvoiceType /*invTyp*/,
     int numbType)
 {
     StrDebug();
@@ -310,7 +315,6 @@ void Invoice::whatTypeFromTitle(
     {
         pforma = ifForm;
         kAdded = kadded;
-        invType = invTyp;
         type = numbType;
     }
 
@@ -1249,7 +1253,7 @@ void Invoice::canQuit()
                 trUtf8("Dane zostały zmienione. Czy chcesz zapisać?"),
                 trUtf8("Tak"),
                 trUtf8("Nie"),
-                0,
+                nullptr,
                 0,
                 1)
             == 1)
@@ -1300,7 +1304,7 @@ void Invoice::payTextChanged(QString text)
 
     if (text != trUtf8("zaliczka"))
     {
-        if (restLabel != 0 && rateLabelInfo != 0)
+        if (restLabel && rateLabelInfo)
         {
             rComboWasChanged = false;
             disconnect(
@@ -1310,23 +1314,23 @@ void Invoice::payTextChanged(QString text)
                 SLOT(rateDateChanged(QString)));
 
             ratesCombo->deleteLater();
-            ratesCombo = 0;
+            ratesCombo = nullptr;
             labelRate->deleteLater();
-            labelRate = 0;
+            labelRate = nullptr;
 
             rateLabel->deleteLater();
-            rateLabel = 0;
+            rateLabel = nullptr;
             restLabel->deleteLater();
-            restLabel = 0;
+            restLabel = nullptr;
             sendKind->deleteLater();
-            sendKind = 0;
+            sendKind = nullptr;
 
             rateLabelInfo->deleteLater();
-            rateLabelInfo = 0;
+            rateLabelInfo = nullptr;
             restLabelInfo->deleteLater();
-            restLabelInfo = 0;
+            restLabelInfo = nullptr;
             sendKindInfo->deleteLater();
-            sendKindInfo = 0;
+            sendKindInfo = nullptr;
         }
     }
     else
@@ -1338,7 +1342,6 @@ void Invoice::payTextChanged(QString text)
 
         if (cp->exec() == QDialog::Accepted)
         {
-            custPaymData = 0;
             custPaymData = cp->custPaymData;
 
             rComboWasChanged = true;
@@ -1348,10 +1351,10 @@ void Invoice::payTextChanged(QString text)
                 this,
                 SLOT(rateDateChanged(QString)));
 
-            if (ratesCombo == 0)
+            if (!ratesCombo)
                 ratesCombo = new QComboBox();
 
-            if (labelRate == 0)
+            if (!labelRate)
                 labelRate = new QLabel();
 
             labelRate->setText(trUtf8("Termin raty:"));
@@ -1363,35 +1366,35 @@ void Invoice::payTextChanged(QString text)
             ratesCombo->setCurrentText(custPaymData->date1.toString(sett().getDateFormat()));
             addData->addWidget(ratesCombo);
 
-            if (rateLabel == 0)
+            if (!rateLabel)
                 rateLabel = new QLabel();
             rateLabel->setText(trUtf8("Rata:"));
             rateLabel->setAlignment(Qt::AlignRight);
             descPayments->addWidget(rateLabel);
 
-            if (sendKind == 0)
+            if (!sendKind)
                 sendKind = new QLabel();
             sendKind->setText(trUtf8("Rodzaj zapłaty:"));
             sendKind->setAlignment(Qt::AlignRight);
             descPayments->addWidget(sendKind);
 
-            if (restLabel == 0)
+            if (!restLabel)
                 restLabel = new QLabel();
             restLabel->setText(trUtf8("Pozostało do spłaty:"));
             restLabel->setAlignment(Qt::AlignRight);
             descPayments->addWidget(restLabel);
 
-            if (rateLabelInfo == 0)
+            if (!rateLabelInfo)
                 rateLabelInfo = new QLabel();
             rateLabelInfo->setText(sett().numberToString(custPaymData->amount1, 'f', 2));
             dataPayments->addWidget(rateLabelInfo);
 
-            if (sendKindInfo == 0)
+            if (!sendKindInfo)
                 sendKindInfo = new QLabel();
             sendKindInfo->setText(custPaymData->payment1);
             dataPayments->addWidget(sendKindInfo);
 
-            if (restLabelInfo == 0)
+            if (!restLabelInfo)
                 restLabelInfo = new QLabel();
             restLabelInfo->setText(sett().numberToString(custPaymData->amount2, 'f', 2));
             dataPayments->addWidget(restLabelInfo);

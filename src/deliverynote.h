@@ -6,11 +6,10 @@
 #define DELIVERYNOTE_H
 
 #include "warehouse.h"
-#include "warehousedata.h"
 
 // class for creating delivery note document, that belongs to warehouse
 // documents
-class DeliveryNote : public Warehouse
+class DeliveryNote final : public Warehouse
 {
 public:
     DeliveryNote(QWidget *parent, IDataLayer *dl, QString in_form);

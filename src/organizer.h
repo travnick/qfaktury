@@ -9,22 +9,20 @@
 #include <QPointer>
 #include <QWidget>
 
-class QTabWidget;
-class QFile;
-class QTextEdit;
+#include "fwd.hpp"
 
 namespace Ui
 {
 class Organizer;
 }
 
-class Organizer : public QWidget
+class Organizer final : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Organizer(QTextEdit *exercisesField, const QDate &calendarD, QWidget *parent = 0);
-    explicit Organizer(QTabWidget *tabWidgetOrganizer, QWidget *parent = 0);
+    explicit Organizer(QTextEdit *exercisesField, const QDate &calendarD, QWidget *parent = nullptr);
+    explicit Organizer(QTabWidget *tabWidgetOrganizer, QWidget *parent = nullptr);
     ~Organizer();
     void checkTodayTask();
     const QString getNoteFile(const QDate &taskDate);

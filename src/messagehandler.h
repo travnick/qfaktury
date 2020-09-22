@@ -1,13 +1,13 @@
 #ifndef MESSAGEHANDLER_H
 #define MESSAGEHANDLER_H
 
-#include "QAbstractMessageHandler"
+#include <QAbstractMessageHandler>
 
-class MessageHandler : public QAbstractMessageHandler
+class MessageHandler final : public QAbstractMessageHandler
 {
 public:
     MessageHandler()
-        : QAbstractMessageHandler(0)
+        : QAbstractMessageHandler(nullptr)
     {
     }
 
@@ -16,12 +16,12 @@ public:
         return m_description;
     }
 
-    int line() const
+    qint64 line() const
     {
         return m_sourceLocation.line();
     }
 
-    int column() const
+    qint64 column() const
     {
         return m_sourceLocation.column();
     }

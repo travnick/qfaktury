@@ -5,13 +5,14 @@
 #ifndef GOODS_H
 #define GOODS_H
 
-#include "productdata.h"
 #include "ui_goods.h"
 
-class IDataLayer;
+#include <QDialog>
+
+#include "fwd.hpp"
 
 // class for saving good or service data with GUI
-class Goods : public QDialog, public Ui::Goods
+class Goods final : public QDialog, public Ui::Goods
 {
     Q_OBJECT
 

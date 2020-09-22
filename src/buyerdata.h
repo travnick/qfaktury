@@ -15,11 +15,9 @@
 #include <QString>
 
 // class for holding buyers data. One instance -> One buyer
-class BuyerData
+struct BuyerData final
 {
 public:
-    BuyerData();
-    virtual ~BuyerData();
     QString name;
     QString place;
     QString code;

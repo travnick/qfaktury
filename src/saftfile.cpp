@@ -1,16 +1,20 @@
-#include "saftfile.h"
-#include "debug_message.h"
 #include "idatalayer.h"
 #include "runguard.h"
+#include "saftfile.h"
 #include "saftfileoutput.h"
+#include "settings.h"
 #include "ui_saftfile.h"
 #include "xmldatalayer.h"
+
+#include "debug_message.h"
 
 #include <QButtonGroup>
 #include <QComboBox>
 #include <QMessageBox>
 #include <QPointer>
 #include <QTableWidgetItem>
+
+#include <QDebug>
 
 Saftfile::Saftfile(QWidget *parent)
     : QWidget(parent)

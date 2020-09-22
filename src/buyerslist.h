@@ -8,10 +8,12 @@
 
 #include "ui_buyerslist.h"
 
-#include <QtXml/qdom.h>
+#include <QDialog>
+
+#include "fwd.hpp"
 
 // class for choosing buyer with GUI, when a document is created
-class BuyersList : public QDialog, public Ui::BuyersList
+class BuyersList final : public QDialog, public Ui::BuyersList
 {
     Q_OBJECT
 

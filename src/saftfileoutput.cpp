@@ -1,6 +1,7 @@
-#include "saftfileoutput.h"
 #include "messagehandler.h"
 #include "runguard.h"
+#include "saftfileoutput.h"
+#include "settings.h"
 
 #include <QClipboard>
 #include <QGuiApplication>
@@ -9,14 +10,21 @@
 // can be used, when class will work properly (below commented lines in source too)
 //#include <QXmlSchemaValidator>
 
+#include <QDir>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QList>
+#include <QMessageBox>
 #include <QMetaEnum>
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QStringList>
+#include <QTextCodec>
 #include <QVBoxLayout>
+#include <QXmlSchema>
+#include <QXmlStreamWriter>
+
+#include <QDebug>
 
 SaftfileOutput::SaftfileOutput(QVector<InvoiceData> invs, QHash<QString, QString> data)
     : invoices(invs)

@@ -1,21 +1,21 @@
 #ifndef CSVEXPORT_H
 #define CSVEXPORT_H
 
-#include "idatalayer.h"
-
 #include <QWidget>
+
+#include"fwd.hpp"
 
 namespace Ui
 {
 class CsvExport;
 }
 
-class CsvExport : public QWidget
+class CsvExport final : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit CsvExport(IDataLayer *dlCsv, QWidget *parent = 0);
+    explicit CsvExport(IDataLayer *dlCsv, QWidget *parent = nullptr);
     ~CsvExport();
 
     const QString getPathCsv();

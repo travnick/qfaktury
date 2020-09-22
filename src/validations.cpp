@@ -1,13 +1,15 @@
 #include "validations.h"
+
 #include "debug_message.h"
 
 #include <QChar>
-#include <QDebug>
 #include <QLineEdit>
 #include <QList>
 #include <QMap>
 #include <QMessageBox>
 #include <QRegExp>
+
+#include <QDebug>
 
 Validations *Validations::m_instance { nullptr };
 
@@ -39,7 +41,7 @@ bool Validations::validateAccount(QString text)
     if (!masks.exactMatch(text))
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany rachunek bankowy. Wymagany format to "
                    "\"SSXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX\" lub "
@@ -110,7 +112,7 @@ bool Validations::validateEmail(QString text)
     if (!masks.exactMatch(text) || !notTwoDotted)
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany adres email. Dozwolone są duże litery, małe litery, "
                    "cyfry, specjalne znaki !#$%&'*+-/=?^_`{|}~, znak . (pod "
@@ -135,7 +137,7 @@ bool Validations::validateIDCard(QString text)
     if (!masks.exactMatch(text))
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany numer dowodu osobistego. Wymagany format dowodu to "
                    "AAAXXXXXX, gdzie X oznacza cyfrę, a A oznacza dużą literę"));
@@ -157,7 +159,7 @@ bool Validations::validateNIP(QString text)
     if (!masks.exactMatch(text))
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany numer NIP. Wymagany format NIP to XXX-XXX-XX-XX lub "
                    "XXX-XX-XX-XXX, gdzie X oznacza cyfrę"));
@@ -177,7 +179,7 @@ bool Validations::validatePass(QString text)
     if (!masks.exactMatch(text))
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany numer seryjny paszportu. Wymagany format dowodu to "
                    "AAXXXXXXX, gdzie X oznacza cyfrę, a A oznacza dużą literę"));
@@ -197,7 +199,7 @@ bool Validations::validatePESEL(QString text)
     if (!masks.exactMatch(text))
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany PESEL. Wymagany format to "
                    "XXXXXXXXXXX (11 razy), gdzie X oznacza cyfrę"));
@@ -219,7 +221,7 @@ bool Validations::validatePkwiu(QString text)
     if (!masks.exactMatch(text))
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany numer PKWiU. Wymagany format to XX(.XX.XX.X) , "
                    "gdzie X oznacza cyfrę, a część w nawiasie oznacza opcjonalną "
@@ -240,7 +242,7 @@ bool Validations::validateRegon(QString text)
     if (!masks.exactMatch(text))
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany REGON. Wymagany format to "
                    "XXXXXXXXX (9 razy), gdzie X oznacza cyfrę"));
@@ -260,7 +262,7 @@ bool Validations::validateTel(QString text)
     if (!masks.exactMatch(text))
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany numer telefonu. Wymagany format to +XX(X od 5 do "
                    "20) lub 0(X od 5 do 20), gdzie X oznacza cyfrę."));
@@ -294,7 +296,7 @@ bool Validations::validateWebsite(QString text)
     if (!masks.exactMatch(text))
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany adres internetowy. Format pozwala na umieszczenie "
                    "opcjonalnie https://, http:// jak i www. Wymagany jest adres "
@@ -316,7 +318,7 @@ bool Validations::validateZip(QString text)
     if (!masks.exactMatch(text))
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Źle podany kod pocztowy. Wymagany format to "
                    "XX-XXX, gdzie X oznacza cyfrę"));
@@ -354,7 +356,7 @@ bool Validations::checkSumNIP(QString text)
     else
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Weryfikator cyfry kontrolnej NIP wykrył niepoprawny numer NIP. "
                    "Sprawdź kolejność wpisanych liczb."));
@@ -398,7 +400,7 @@ bool Validations::checkSumREGON(QString text)
     else
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Weryfikator cyfry kontrolnej REGON wykrył niepoprawny numer. "
                    "Sprawdź kolejność wpisanych liczb."));
@@ -432,7 +434,7 @@ bool Validations::checkSumPESEL(QString text)
     else
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Weryfikator cyfry kontrolnej PESEL wykrył niepoprawny numer. "
                    "Sprawdź kolejność wpisanych liczb."));
@@ -501,7 +503,7 @@ bool Validations::checkSumAccount(QString text)
         else
         {
             QMessageBox::warning(
-                0,
+                nullptr,
                 "QFaktury",
                 trUtf8("Weryfikator konta bankowego IBAN wykrył niepoprawny numer. "
                        "Sprawdź kolejność wpisanych liczb."));
@@ -556,7 +558,7 @@ bool Validations::checkSumIDCard(QString text)
     else
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Weryfikator polskiego dowodu osobistego wykrył "
                    "niepoprawny numer. Sprawdź kolejność wpisanych "
@@ -601,7 +603,7 @@ bool Validations::checkSumPass(QString text)
     else
     {
         QMessageBox::warning(
-            0,
+            nullptr,
             "QFaktury",
             trUtf8("Weryfikator numeru seryjnego paszportu wykrył "
                    "niepoprawny numer. Sprawdź kolejność wpisanych "
@@ -611,6 +613,60 @@ bool Validations::checkSumPass(QString text)
     }
 }
 
+QVector<int> Validations::validateNumb(
+    int i1,
+    int i2,
+    int i3,
+    int i4,
+    int i5,
+    int i6,
+    int i7,
+    int i8,
+    int i9,
+    int i10,
+    int i11)
+{
+    QVector<int> numbers;
+    numbers << i1 << i2 << i3 << i4 << i5 << i6 << i7 << i8 << i9 << i10 << i11;
+    numbers.removeAll(-1);
+
+    return numbers;
+}
+
+const QHash<QChar, int> &Validations::symbols()
+{
+    static QHash<QChar, int> symb {
+        { 'A', 10 }, //
+        { 'B', 11 }, //
+        { 'C', 12 }, //
+        { 'D', 13 }, //
+        { 'E', 14 }, //
+        { 'F', 15 }, //
+        { 'G', 16 }, //
+        { 'H', 17 }, //
+        { 'I', 18 }, //
+        { 'J', 19 }, //
+        { 'K', 20 }, //
+        { 'L', 21 }, //
+        { 'M', 22 }, //
+        { 'N', 23 }, //
+        { 'O', 24 }, //
+        { 'P', 25 }, //
+        { 'Q', 26 }, //
+        { 'R', 27 }, //
+        { 'S', 28 }, //
+        { 'T', 29 }, //
+        { 'U', 30 }, //
+        { 'V', 31 }, //
+        { 'W', 32 }, //
+        { 'X', 33 }, //
+        { 'Y', 34 }, //
+        { 'Z', 35 }, //
+    };
+
+    return symb;
+}
+
 bool Validations::isEmptyField(QLineEdit *field, QString title)
 {
     StrDebug();
@@ -618,11 +674,11 @@ bool Validations::isEmptyField(QLineEdit *field, QString title)
     if (field->text().isEmpty())
     {
         QMessageBox::warning(
-            0,
-            "QFaktury",
-            trUtf8("Firma nie może zostać zapisana, pownieważ "
-                   "brakuje wymaganych danych w polu - ")
-                + title);
+                    nullptr,
+                    "QFaktury",
+                    trUtf8("Firma nie może zostać zapisana, pownieważ "
+                           "brakuje wymaganych danych w polu - ")
+                    + title);
         return true;
     }
 
@@ -636,11 +692,11 @@ bool Validations::isEmptyField(QString input, QString title)
     if (input.isEmpty())
     {
         QMessageBox::warning(
-            0,
-            "QFaktury",
-            trUtf8("Firma nie może zostać zapisana, pownieważ "
-                   "brakuje wymaganych danych w polu - ")
-                + title);
+                    nullptr,
+                    "QFaktury",
+                    trUtf8("Firma nie może zostać zapisana, pownieważ "
+                           "brakuje wymaganych danych w polu - ")
+                    + title);
         return true;
     }
 

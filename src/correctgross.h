@@ -16,7 +16,7 @@
 
 // class for creating correction invoice with gross, using correction class as
 // parent
-class CorrectGross : public Correction
+class CorrectGross final : public Correction
 {
     Q_OBJECT
 

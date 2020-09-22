@@ -1,12 +1,19 @@
 #include "goodslist.h"
-#include "debug_message.h"
+#include "productdata.h"
 #include "settings.h"
 
+#include "debug_message.h"
+
+#include <QFile>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QList>
+#include <QMessageBox>
+#include <QTextStream>
 #include <QVBoxLayout>
 #include <QtXml/qdom.h>
+
+#include <QDebug>
 
 GoodsList *GoodsList::m_instance = nullptr;
 

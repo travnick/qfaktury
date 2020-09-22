@@ -5,27 +5,21 @@
 #ifndef SEND_H
 #define SEND_H
 
-#include <QWizard>
-
 #include "buyerdata.h"
-#include "buyers.h"
-#include "emailwindow.h"
 #include "invoicedata.h"
 
-class EmailWindow;
-class QLabel;
-class QLineEdit;
-class QGroupBox;
-class QTableWidget;
+#include <QWizard>
+
+#include "fwd.hpp"
 
 // class for creating wizard window, used for sending emails with invoices to
 // buyers
-class Send : public QWizard
+class Send final : public QWizard
 {
     Q_OBJECT
 
 public:
-    Send(QVector<BuyerData>, QVector<InvoiceData>, QWidget *parent = 0);
+    Send(QVector<BuyerData>, QVector<InvoiceData>, QWidget *parent = nullptr);
 
     void accept() override;
 
@@ -41,7 +35,7 @@ class IntroPage : public QWizardPage
     Q_OBJECT
 
 public:
-    IntroPage(QWidget *parent = 0);
+    IntroPage(QWidget *parent = nullptr);
 
 private:
     QLabel *label;
@@ -52,7 +46,7 @@ class ClassInvoicePage : public QWizardPage
     Q_OBJECT
 
 public:
-    ClassInvoicePage(QVector<BuyerData>, QVector<InvoiceData>, QWidget *parent = 0);
+    ClassInvoicePage(QVector<BuyerData>, QVector<InvoiceData>, QWidget *parent = nullptr);
 
 protected:
     bool validatePage() override;
@@ -69,7 +63,7 @@ class EmailPage : public QWizardPage
     Q_OBJECT
 
 public:
-    EmailPage(QWidget *parent = 0);
+    EmailPage(QWidget *parent = nullptr);
     void setHostPort(QString, QString);
 
 protected:
@@ -107,7 +101,7 @@ class ConclusionPage : public QWizardPage
     Q_OBJECT
 
 public:
-    ConclusionPage(QWidget *parent = 0);
+    ConclusionPage(QWidget *parent = nullptr);
 
 protected:
     void initializePage() override;

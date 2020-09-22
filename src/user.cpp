@@ -1,11 +1,13 @@
 #include "user.h"
-#include "debug_message.h"
 #include "settings.h"
 #include "validations.h"
+
+#include "debug_message.h"
 
 #include <QCheckBox>
 #include <QComboBox>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QScrollArea>
 
 User::User(QWidget *parent)
@@ -653,7 +655,7 @@ void User::delcurrSel()
             trUtf8("Usunąć dane kolejnego sprzedawcy/oddziału?"),
             trUtf8("Tak"),
             trUtf8("Nie"),
-            0,
+            nullptr,
             0,
             1)
         == 0)

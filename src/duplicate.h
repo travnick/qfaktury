@@ -15,7 +15,7 @@
 #include "invoice.h"
 
 // class for cretaing duplicate documents from invoices
-class Duplicate : public Invoice
+class Duplicate final : public Invoice
 {
     Q_OBJECT
 

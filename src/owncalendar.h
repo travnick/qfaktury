@@ -7,23 +7,12 @@
 
 #include <QCalendarWidget>
 
-class QSize;
-class QDate;
-class QWidget;
-class QResizeEvent;
-class QMouseEvent;
-class QKeyEvent;
-class QObject;
-class QEvent;
-class QPainter;
-class QRect;
-
-class ownCalendarWidget : public QCalendarWidget
+class ownCalendarWidget final : public QCalendarWidget
 {
     Q_OBJECT
 
 public:
-    ownCalendarWidget(QWidget *parent = 0);
+    ownCalendarWidget(QWidget *parent = nullptr);
     ~ownCalendarWidget();
 
     void ourCall(QDate);

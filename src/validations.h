@@ -5,20 +5,19 @@
 #ifndef VALIDATIONS_H
 #define VALIDATIONS_H
 
-#include <QHash>
 #include <QObject>
-#include <QVector>
 
-class QLineEdit;
+#include "fwd.hpp"
 
 // class for data validation, putted into widgets
-class Validations : public QObject
+class Validations final : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit Validations(QObject *parent = 0);
+    explicit Validations(QObject *parent = nullptr);
     ~Validations();
+
     static Validations *instance();
     bool validateNIP(QString);
     bool validatePESEL(QString);
@@ -43,7 +42,7 @@ public:
 private:
     static Validations *m_instance;
 
-    QVector<int> validateNumb(
+    static QVector<int> validateNumb(
         int i1,
         int i2,
         int i3,
@@ -54,50 +53,9 @@ private:
         int i8 = -1,
         int i9 = -1,
         int i10 = -1,
-        int i11 = -1)
-    {
-        QVector<int> numbers;
-        numbers << i1 << i2 << i3 << i4 << i5 << i6 << i7 << i8 << i9 << i10 << i11;
-        numbers.removeAll(-1);
+        int i11 = -1);
 
-        return numbers;
-    }
-
-    QHash<QChar, int> symbols() const
-    {
-        QHash<QChar, int> symb;
-        symb.insert('A', 10);
-        symb.insert('B', 11);
-        symb.insert('C', 12);
-        symb.insert('D', 13);
-        symb.insert('E', 14);
-        symb.insert('F', 15);
-        symb.insert('G', 16);
-        symb.insert('H', 17);
-        symb.insert('I', 18);
-        symb.insert('J', 19);
-        symb.insert('K', 20);
-        symb.insert('L', 21);
-        symb.insert('M', 22);
-        symb.insert('N', 23);
-        symb.insert('O', 24);
-        symb.insert('P', 25);
-        symb.insert('Q', 26);
-        symb.insert('R', 27);
-        symb.insert('S', 28);
-        symb.insert('T', 29);
-        symb.insert('U', 30);
-        symb.insert('V', 31);
-        symb.insert('W', 32);
-        symb.insert('X', 33);
-        symb.insert('Y', 34);
-        symb.insert('Z', 35);
-        return symb;
-    }
-
-signals:
-
-public slots:
+    static const QHash<QChar, int>& symbols();
 };
 
 #endif // Validations_H

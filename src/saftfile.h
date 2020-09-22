@@ -9,9 +9,7 @@
 
 #include <QWidget>
 
-class IDataLayer;
-class QTableWidget;
-class QButtonGroup;
+#include "fwd.hpp"
 
 namespace Ui
 {
@@ -23,8 +21,8 @@ class Saftfile : public QWidget
     Q_OBJECT
 
 public:
-    explicit Saftfile(QWidget *parent = 0);
-    Saftfile(IDataLayer *dl, QWidget *parent = 0);
+    explicit Saftfile(QWidget *parent = nullptr);
+    Saftfile(IDataLayer *dl, QWidget *parent = nullptr);
     ~Saftfile();
 
 private slots:
