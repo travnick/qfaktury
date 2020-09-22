@@ -1,16 +1,24 @@
-#include "invoice.h"
 #include "buyers.h"
 #include "buyerslist.h"
 #include "changeamount.h"
 #include "const.h"
+#include "convertamount.h"
 #include "custompaymdata.h"
 #include "custompayment.h"
 #include "goodslist.h"
 #include "idatalayer.h"
+#include "invoice.h"
+#include "invoicedata.h"
 #include "mainwindow.h"
+#include "settings.h"
+
+#include "debug_message.h"
 
 #include <QComboBox>
+#include <QDir>
+#include <QFileInfo>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QPrintPreviewDialog>
@@ -19,9 +27,6 @@
 
 #include <memory>
 
-#include "debug_message.h"
-
-short invType;
 Invoice *Invoice::m_instance = nullptr;
 
 /** Constructor
@@ -161,22 +166,22 @@ void Invoice::init()
     goodsEdited = false;
 
     this->setWindowTitle(inv_form);
-    whatTypeFromTitle(s_PROFORMA, true, false, FPro, 2);
-    whatTypeFromTitle(s_WIN_PROFORMA_EDIT, true, true, FPro, 2);
-    whatTypeFromTitle(s_INVOICE, false, false, FVat, 1);
-    whatTypeFromTitle(s_WIN_INVOICE_EDIT, false, true, FVat, 1);
-    whatTypeFromTitle(s_CORRECT_TITLE, false, true, EFVat, 3);
-    whatTypeFromTitle(s_WIN_CORRECT_EDIT, false, true, EFVat, 3);
-    whatTypeFromTitle(s_FBRUTTO, false, false, EFPro, 4);
-    whatTypeFromTitle(s_BR_INVOICE_EDIT, false, true, EFPro, 4);
-    whatTypeFromTitle(s_CORRECT_BRUTTO, false, true, KBR, 5);
-    whatTypeFromTitle(s_BILL, false, false, BILL, 6);
-    whatTypeFromTitle(s_BILL_EDIT, false, true, BILL, 6);
-    whatTypeFromTitle(s_DUPLICATE, false, true, DUP, 7);
-    whatTypeFromTitle(s_WIN_DUPLICATE_LOOK, false, true, DUP, 7);
-    whatTypeFromTitle(s_RR, false, false, RR, 8);
-    whatTypeFromTitle(s_WZ, false, false, WZ, 9);
-    whatTypeFromTitle(s_RW, false, false, RW, 10);
+    whatTypeFromTitle(s_PROFORMA, true, false, InvoiceType::FPro, 2);
+    whatTypeFromTitle(s_WIN_PROFORMA_EDIT, true, true, InvoiceType::FPro, 2);
+    whatTypeFromTitle(s_INVOICE, false, false, InvoiceType::FVat, 1);
+    whatTypeFromTitle(s_WIN_INVOICE_EDIT, false, true, InvoiceType::FVat, 1);
+    whatTypeFromTitle(s_CORRECT_TITLE, false, true, InvoiceType::EFVat, 3);
+    whatTypeFromTitle(s_WIN_CORRECT_EDIT, false, true, InvoiceType::EFVat, 3);
+    whatTypeFromTitle(s_FBRUTTO, false, false, InvoiceType::EFPro, 4);
+    whatTypeFromTitle(s_BR_INVOICE_EDIT, false, true, InvoiceType::EFPro, 4);
+    whatTypeFromTitle(s_CORRECT_BRUTTO, false, true, InvoiceType::KBR, 5);
+    whatTypeFromTitle(s_BILL, false, false, InvoiceType::BILL, 6);
+    whatTypeFromTitle(s_BILL_EDIT, false, true, InvoiceType::BILL, 6);
+    whatTypeFromTitle(s_DUPLICATE, false, true, InvoiceType::DUP, 7);
+    whatTypeFromTitle(s_WIN_DUPLICATE_LOOK, false, true, InvoiceType::DUP, 7);
+    whatTypeFromTitle(s_RR, false, false, InvoiceType::RR, 8);
+    whatTypeFromTitle(s_WZ, false, false, InvoiceType::WZ, 9);
+    whatTypeFromTitle(s_RW, false, false, InvoiceType::RW, 10);
 
     if (sett().value("editSymbol").toBool())
         invNr->setEnabled(false);
@@ -301,7 +306,7 @@ void Invoice::whatTypeFromTitle(
     QString title,
     bool ifForm,
     bool kadded,
-    InvoiceType invTyp,
+    InvoiceType /*invTyp*/,
     int numbType)
 {
     StrDebug();
@@ -310,7 +315,6 @@ void Invoice::whatTypeFromTitle(
     {
         pforma = ifForm;
         kAdded = kadded;
-        invType = invTyp;
         type = numbType;
     }
 

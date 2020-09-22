@@ -5,23 +5,16 @@
 #ifndef INVOICE_H
 #define INVOICE_H
 
-#include <QDomDocument>
-#include <QDomElement>
-
-#include "convertamount.h"
-#include "invoicedata.h"
 #include "ui_invoice.h"
 
-class QPrinter;
-class QNetworkAccessManager;
-class QNetworkReply;
-class CustomPaymData;
-class QLabel;
-class QComboBox;
-class QKeyEvent;
-class IDataLayer;
+#include <QDomElement>
+#include <QFile>
 
-enum InvoiceType
+#include <QDialog>
+
+#include "fwd.hpp"
+
+enum class InvoiceType
 {
     FVat,
     FPro,

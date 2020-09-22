@@ -1,16 +1,22 @@
-﻿#include "csvexport.h"
-#include "debug_message.h"
+﻿#include "buyerdata.h"
+#include "csvexport.h"
 #include "invoicedata.h"
 #include "settings.h"
 #include "ui_csvexport.h"
+#include "warehousedata.h"
 #include "xmldatalayer.h"
 
+#include "debug_message.h"
+
 #include <QFileDialog>
+#include <QMessageBox>
+
+#include <QDebug>
 
 CsvExport::CsvExport(IDataLayer *dlCsv, QWidget *parent)
-    : dl(dlCsv)
-    , QWidget(parent)
+    : QWidget(parent)
     , ui(new Ui::CsvExport)
+    , dl(dlCsv)
 {
     ui->setupUi(this);
 

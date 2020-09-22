@@ -11,13 +11,14 @@
  * https://stackoverflow.com/questions/5006547/qt-best-practice-for-a-single-instance-app-protection
  */
 
-#include <QObject>
 #include <QSharedMemory>
 #include <QSystemSemaphore>
 
 //
-class RunGuard
+class RunGuard final
 {
+    Q_DISABLE_COPY(RunGuard)
+
 public:
     RunGuard(const QString &key);
     ~RunGuard();
@@ -33,8 +34,6 @@ private:
 
     QSharedMemory sharedMem;
     QSystemSemaphore memLock;
-
-    Q_DISABLE_COPY(RunGuard)
 };
 
 #endif // RUNGUARD_H

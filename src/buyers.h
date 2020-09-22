@@ -8,14 +8,13 @@
 
 #include "ui_buyers.h"
 
-#include <QStringList>
+#include <QDialog>
+#include <QString>
 
-class IDataLayer;
-class BuyerData;
-class QJsonValue;
+#include "fwd.hpp"
 
 // class for setting your data as company with GUI
-class Buyers : public QDialog, public Ui::Buyers
+class Buyers final : public QDialog, public Ui::Buyers
 {
     Q_OBJECT
 

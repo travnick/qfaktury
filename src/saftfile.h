@@ -9,9 +9,7 @@
 
 #include <QWidget>
 
-class IDataLayer;
-class QTableWidget;
-class QButtonGroup;
+#include "fwd.hpp"
 
 namespace Ui
 {

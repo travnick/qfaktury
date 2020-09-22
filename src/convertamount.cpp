@@ -6,18 +6,11 @@
  */
 
 #include "convertamount.h"
-#include "debug_message.h"
 #include "settings.h"
 
-ConvertAmount::ConvertAmount()
-{
-    StrDebug();
-}
+#include "debug_message.h"
 
-ConvertAmount::~ConvertAmount()
-{
-    StrDebug();
-}
+#include <QDebug>
 
 QString &ConvertAmount::descAmount(
     QString &countMoney,

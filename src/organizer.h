@@ -9,16 +9,14 @@
 #include <QPointer>
 #include <QWidget>
 
-class QTabWidget;
-class QFile;
-class QTextEdit;
+#include "fwd.hpp"
 
 namespace Ui
 {
 class Organizer;
 }
 
-class Organizer : public QWidget
+class Organizer final : public QWidget
 {
     Q_OBJECT
 

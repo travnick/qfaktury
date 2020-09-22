@@ -1,16 +1,22 @@
+#include "buyerdata.h"
 #include "buyers.h"
-#include "debug_message.h"
 #include "idatalayer.h"
+#include "settings.h"
 #include "validations.h"
 
+#include "debug_message.h"
+
+#include <QDir>
+#include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QMessageBox>
 #include <QMovie>
 
+#include <QDebug>
+
 #include <pwd.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 Buyers::Buyers(QWidget *parent, int mode, IDataLayer *dl)

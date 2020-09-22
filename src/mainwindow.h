@@ -5,25 +5,14 @@
 #ifndef MainWindow_H
 #define MainWindow_H
 
-#include <QDir>
-#include <QMainWindow>
-
 #include "ui_mainwindow.h"
 
-class QKeyEvent;
-class QPrinter;
-class IDataLayer;
-class QPushButton;
-class QTableWidget;
-class QLineEdit;
-class ownCalendarWidget;
-class QWidget;
-class QTimer;
-class QAction;
-class Invoice;
+#include <QMainWindow>
+
+#include "fwd.hpp"
 
 // class for creating main window with menu, toolbar, calendar and table widget
-class MainWindow : public QMainWindow
+class MainWindow final : public QMainWindow
 {
     Q_OBJECT
 

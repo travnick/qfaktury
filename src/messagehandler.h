@@ -1,9 +1,9 @@
 #ifndef MESSAGEHANDLER_H
 #define MESSAGEHANDLER_H
 
-#include "QAbstractMessageHandler"
+#include <QAbstractMessageHandler>
 
-class MessageHandler : public QAbstractMessageHandler
+class MessageHandler final : public QAbstractMessageHandler
 {
 public:
     MessageHandler()

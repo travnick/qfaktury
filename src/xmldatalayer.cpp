@@ -5,13 +5,19 @@
  *      Author: moux
  */
 
-#include "xmldatalayer.h"
+#include "buyerdata.h"
 #include "invoice.h"
+#include "invoicedata.h"
 #include "settings.h"
-
-#include <QDirIterator>
+#include "warehousedata.h"
+#include "xmldatalayer.h"
 
 #include "debug_message.h"
+
+#include <QDirIterator>
+#include <QTextCodec>
+
+#include <QDebug>
 
 XmlDataLayer::XmlDataLayer()
 {
@@ -2609,6 +2615,14 @@ void XmlDataLayer::separateOldDocuments(QString path)
             i++;
         }
     }
+}
+
+void XmlDataLayer::saveInvoiceData()
+{
+}
+
+void XmlDataLayer::readInvoiceData()
+{
 }
 
 bool XmlDataLayer::invoiceUpdateData(InvoiceData &, int, QString)

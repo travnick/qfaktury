@@ -5,11 +5,14 @@
 #ifndef GOODSLIST_H
 #define GOODSLIST_H
 
-#include "productdata.h"
 #include "ui_goodslist.h"
 
-class QSpinBox;
-class QLabel;
+#include <QHash>
+#include <QList>
+#include <QMap>
+#include <QString>
+
+#include "fwd.hpp"
 
 // class for choosing goods/services with GUI, when a document is created
 class GoodsList : public QDialog, public Ui::GoodsList

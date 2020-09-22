@@ -7,8 +7,11 @@
 
 #include "custompayment.h"
 #include "custompaymdata.h"
-#include "debug_message.h"
 #include "settings.h"
+
+#include "debug_message.h"
+
+#include <QMessageBox>
 
 CustomPayment::CustomPayment(QWidget *parent)
     : QDialog(parent)

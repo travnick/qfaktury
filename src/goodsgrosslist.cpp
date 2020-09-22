@@ -6,8 +6,12 @@
  */
 
 #include "goodsgrosslist.h"
-#include "debug_message.h"
+#include "productdata.h"
 #include "settings.h"
+
+#include "debug_message.h"
+
+#include <QMessageBox>
 
 GoodsGrossList::GoodsGrossList(QWidget *parent)
     : GoodsList(parent)

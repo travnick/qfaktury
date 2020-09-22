@@ -5,22 +5,16 @@
 #ifndef SEND_H
 #define SEND_H
 
-#include <QWizard>
-
 #include "buyerdata.h"
-#include "buyers.h"
-#include "emailwindow.h"
 #include "invoicedata.h"
 
-class EmailWindow;
-class QLabel;
-class QLineEdit;
-class QGroupBox;
-class QTableWidget;
+#include <QWizard>
+
+#include "fwd.hpp"
 
 // class for creating wizard window, used for sending emails with invoices to
 // buyers
-class Send : public QWizard
+class Send final : public QWizard
 {
     Q_OBJECT
 

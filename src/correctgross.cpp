@@ -6,9 +6,11 @@
  */
 
 #include "correctgross.h"
-#include "debug_message.h"
 #include "goodsgrosslist.h"
 #include "mainwindow.h"
+#include "settings.h"
+
+#include "debug_message.h"
 
 CorrectGross::CorrectGross(QWidget *parent, IDataLayer *dl, QString in_form, bool edMode)
     : Correction(parent, dl, in_form, edMode)

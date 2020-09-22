@@ -1,6 +1,15 @@
 #include "buyerslist.h"
-#include "debug_message.h"
 #include "settings.h"
+
+#include "debug_message.h"
+
+#include <QDir>
+#include <QDomDocument>
+#include <QFile>
+#include <QFileInfo>
+#include <QMessageBox>
+#include <QTextCodec>
+#include <QTextStream>
 
 BuyersList::BuyersList(QWidget *parent)
     : QDialog(parent)

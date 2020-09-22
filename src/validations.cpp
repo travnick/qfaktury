@@ -1,13 +1,15 @@
 #include "validations.h"
+
 #include "debug_message.h"
 
 #include <QChar>
-#include <QDebug>
 #include <QLineEdit>
 #include <QList>
 #include <QMap>
 #include <QMessageBox>
 #include <QRegExp>
+
+#include <QDebug>
 
 Validations *Validations::m_instance { nullptr };
 
@@ -611,6 +613,60 @@ bool Validations::checkSumPass(QString text)
     }
 }
 
+QVector<int> Validations::validateNumb(
+    int i1,
+    int i2,
+    int i3,
+    int i4,
+    int i5,
+    int i6,
+    int i7,
+    int i8,
+    int i9,
+    int i10,
+    int i11)
+{
+    QVector<int> numbers;
+    numbers << i1 << i2 << i3 << i4 << i5 << i6 << i7 << i8 << i9 << i10 << i11;
+    numbers.removeAll(-1);
+
+    return numbers;
+}
+
+const QHash<QChar, int> &Validations::symbols()
+{
+    static QHash<QChar, int> symb {
+        { 'A', 10 }, //
+        { 'B', 11 }, //
+        { 'C', 12 }, //
+        { 'D', 13 }, //
+        { 'E', 14 }, //
+        { 'F', 15 }, //
+        { 'G', 16 }, //
+        { 'H', 17 }, //
+        { 'I', 18 }, //
+        { 'J', 19 }, //
+        { 'K', 20 }, //
+        { 'L', 21 }, //
+        { 'M', 22 }, //
+        { 'N', 23 }, //
+        { 'O', 24 }, //
+        { 'P', 25 }, //
+        { 'Q', 26 }, //
+        { 'R', 27 }, //
+        { 'S', 28 }, //
+        { 'T', 29 }, //
+        { 'U', 30 }, //
+        { 'V', 31 }, //
+        { 'W', 32 }, //
+        { 'X', 33 }, //
+        { 'Y', 34 }, //
+        { 'Z', 35 }, //
+    };
+
+    return symb;
+}
+
 bool Validations::isEmptyField(QLineEdit *field, QString title)
 {
     StrDebug();
@@ -618,11 +674,11 @@ bool Validations::isEmptyField(QLineEdit *field, QString title)
     if (field->text().isEmpty())
     {
         QMessageBox::warning(
-            nullptr,
-            "QFaktury",
-            trUtf8("Firma nie może zostać zapisana, pownieważ "
-                   "brakuje wymaganych danych w polu - ")
-                + title);
+                    nullptr,
+                    "QFaktury",
+                    trUtf8("Firma nie może zostać zapisana, pownieważ "
+                           "brakuje wymaganych danych w polu - ")
+                    + title);
         return true;
     }
 
@@ -636,11 +692,11 @@ bool Validations::isEmptyField(QString input, QString title)
     if (input.isEmpty())
     {
         QMessageBox::warning(
-            nullptr,
-            "QFaktury",
-            trUtf8("Firma nie może zostać zapisana, pownieważ "
-                   "brakuje wymaganych danych w polu - ")
-                + title);
+                    nullptr,
+                    "QFaktury",
+                    trUtf8("Firma nie może zostać zapisana, pownieważ "
+                           "brakuje wymaganych danych w polu - ")
+                    + title);
         return true;
     }
 

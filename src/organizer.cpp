@@ -1,13 +1,19 @@
 ﻿#include "organizer.h"
-#include "debug_message.h"
 #include "settings.h"
 #include "ui_organizer.h"
 
+#include "debug_message.h"
+
 #include <QCalendarWidget>
+#include <QDir>
 #include <QFileInfo>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QTabWidget>
 #include <QTextEdit>
+#include <QTextStream>
+
+#include <QDebug>
 
 Organizer::Organizer(QTextEdit *exercisesField, const QDate &calendarD, QWidget *parent)
     : QWidget(parent)

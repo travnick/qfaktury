@@ -6,15 +6,10 @@
 #define GOODSISSUEDNOTES_H
 
 #include "warehouse.h"
-#include "warehousedata.h"
-
-class QFormLayout;
-class QLineEdit;
-class QDateTimeEdit;
 
 // class for creating and updating good issue note, that belongs to warehouse
 // documents
-class GoodsIssuedNotes : public Warehouse
+class GoodsIssuedNotes final : public Warehouse
 {
 public:
     GoodsIssuedNotes(QWidget *parent, IDataLayer *dl, QString in_form);

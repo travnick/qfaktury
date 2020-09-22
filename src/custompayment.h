@@ -14,10 +14,12 @@
 
 #include "ui_custompaymentdialog.h"
 
-class CustomPaymData;
+#include <QDialog>
+
+#include "fwd.hpp"
 
 // class for splitting cost sum with GUI, when prepayment method is checked
-class CustomPayment : public QDialog, public Ui::CustomPaymentDialog
+class CustomPayment final : public QDialog, public Ui::CustomPaymentDialog
 {
     Q_OBJECT
 

@@ -1,11 +1,15 @@
-#include "send.h"
 #include "buyers.h"
 #include "const.h"
 #include "convertamount.h"
-#include "debug_message.h"
 #include "idatalayer.h"
 #include "invoice.h"
 #include "invoicedata.h"
+#include "send.h"
+#include "settings.h"
+
+#include "debug_message.h"
+
+#include "emailwindow.h"
 
 #include <QCheckBox>
 #include <QDomDocument>
@@ -17,11 +21,15 @@
 #include <QMessageBox>
 #include <QRadioButton>
 #include <QRegularExpression>
+#include <QSettings>
 #include <QTableWidget>
 #include <QTextEdit>
+#include <QTextStream>
 #include <QVariant>
 #include <QWizard>
 #include <QWizardPage>
+
+#include <QDebug>
 
 Send::Send(QVector<BuyerData> buyersList, QVector<InvoiceData> invList, QWidget *parent)
     : QWizard(parent)

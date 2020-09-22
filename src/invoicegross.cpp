@@ -5,10 +5,12 @@
  *      Author: TPIELECH
  */
 
-#include "invoicegross.h"
-#include "debug_message.h"
 #include "goodsgrosslist.h"
+#include "invoicegross.h"
 #include "mainwindow.h"
+#include "settings.h"
+
+#include "debug_message.h"
 
 InvoiceGross::InvoiceGross(QWidget *parent, IDataLayer *dl, QString in_form)
     : Invoice(parent, dl, in_form)

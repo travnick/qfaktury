@@ -7,6 +7,8 @@
 
 #include "bill.h"
 #include "const.h"
+#include "settings.h"
+
 #include "debug_message.h"
 
 Bill::Bill(QWidget *parent, IDataLayer *dl, QString in_form)

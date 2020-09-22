@@ -14,7 +14,7 @@
 #include "invoice.h"
 
 // class for creating and updating gross invoice
-class InvoiceGross : public Invoice
+class InvoiceGross final : public Invoice
 {
     Q_OBJECT
 

@@ -1,16 +1,16 @@
 #ifndef CSVEXPORT_H
 #define CSVEXPORT_H
 
-#include "idatalayer.h"
-
 #include <QWidget>
+
+#include"fwd.hpp"
 
 namespace Ui
 {
 class CsvExport;
 }
 
-class CsvExport : public QWidget
+class CsvExport final : public QWidget
 {
     Q_OBJECT
 

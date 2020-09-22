@@ -1,12 +1,13 @@
-#include <QDesktopServices>
-#include <QUrl>
-
 #include "goods.h"
 #include "idatalayer.h"
+#include "productdata.h"
 #include "settings.h"
 #include "validations.h"
 
 #include "debug_message.h"
+
+#include <QDesktopServices>
+#include <QUrl>
 
 /** Constructor
  */

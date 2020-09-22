@@ -6,11 +6,6 @@
 #define CORRECTION_H
 
 #include "invoice.h"
-#include "ui_invoice.h"
-
-class QComboBox;
-class InvoiceData;
-class QLabel;
 
 // class for creation correction document with GUI, using invoice class as
 // parent

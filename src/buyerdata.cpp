@@ -6,16 +6,3 @@
  */
 
 #include "buyerdata.h"
-#include "debug_message.h"
-
-#include <QDebug>
-
-BuyerData::BuyerData()
-{
-    StrDebug();
-}
-
-BuyerData::~BuyerData()
-{
-    StrDebug();
-}

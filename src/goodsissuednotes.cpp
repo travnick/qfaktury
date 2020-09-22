@@ -1,17 +1,26 @@
-#include "goodsissuednotes.h"
 #include "changeamount.h"
 #include "const.h"
-#include "debug_message.h"
+#include "goodsissuednotes.h"
 #include "goodslist.h"
+#include "invoicedata.h"
 #include "mainwindow.h"
+#include "settings.h"
+#include "warehousedata.h"
 #include "xmldatalayer.h"
 
+#include "debug_message.h"
+
 #include <QDateTimeEdit>
+#include <QFileInfo>
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QTableWidget>
+#include <QTextStream>
+
+#include <QDebug>
 
 GoodsIssuedNotes::GoodsIssuedNotes(QWidget *parent, IDataLayer *dl, QString in_form)
     : Warehouse(parent, dl, in_form)

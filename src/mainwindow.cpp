@@ -1,21 +1,7 @@
-﻿#include <QDateEdit>
-#include <QDesktopServices>
-#include <QDesktopWidget>
-#include <QFileDialog>
-#include <QInputDialog>
-#include <QKeyEvent>
-#include <QPdfWriter>
-#include <QPointer>
-#include <QPrintPreviewDialog>
-#include <QPrinter>
-#include <QProcess>
-#include <QTimer>
-
-#include <memory>
-
-#include "backup.h"
+﻿#include "backup.h"
 #include "bill.h"
 #include "buyers.h"
+#include "config.h"
 #include "const.h"
 #include "correctgross.h"
 #include "csvexport.h"
@@ -35,6 +21,7 @@
 #include "send.h"
 #include "setting.h"
 #include "user.h"
+#include "warehousedata.h"
 #include "xmldatalayer.h"
 
 #include "debug_message.h"
@@ -43,6 +30,25 @@
 #include "quazip5/JlCompress.h"
 #include "quazip5/quazipdir.h"
 #endif
+
+#include <QDateEdit>
+#include <QDesktopServices>
+#include <QDesktopWidget>
+#include <QFileDialog>
+#include <QInputDialog>
+#include <QKeyEvent>
+#include <QMessageBox>
+#include <QPdfWriter>
+#include <QPointer>
+#include <QPrintPreviewDialog>
+#include <QPrinter>
+#include <QProcess>
+#include <QTextStream>
+#include <QTimer>
+
+#include <QDebug>
+
+#include <memory>
 
 MainWindow *MainWindow::m_instance = nullptr;
 bool MainWindow::shouldHidden = false;

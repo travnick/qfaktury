@@ -15,12 +15,9 @@
 #include <QString>
 
 // class for converting number values to in words
-class ConvertAmount
+class ConvertAmount final
 {
 public:
-    ConvertAmount();
-    ~ConvertAmount();
-
     void convertTest();
     QString convertPL(QString input, QString currency);
     QString &

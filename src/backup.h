@@ -12,7 +12,7 @@ namespace Ui
 class Backup;
 }
 
-class Backup : public QWidget
+class Backup final : public QWidget
 {
     Q_OBJECT
 

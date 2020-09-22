@@ -6,7 +6,12 @@
  */
 
 #include "duplicate.h"
+#include "invoicedata.h"
+#include "settings.h"
+
 #include "debug_message.h"
+
+#include <QMessageBox>
 
 Duplicate::Duplicate(QWidget *parent, IDataLayer *dl, QString in_form, bool ifEdited)
     : Invoice(parent, dl, in_form)

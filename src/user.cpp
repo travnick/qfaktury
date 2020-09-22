@@ -1,11 +1,13 @@
 #include "user.h"
-#include "debug_message.h"
 #include "settings.h"
 #include "validations.h"
+
+#include "debug_message.h"
 
 #include <QCheckBox>
 #include <QComboBox>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QScrollArea>
 
 User::User(QWidget *parent)

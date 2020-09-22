@@ -1,13 +1,18 @@
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QLineEdit>
-
-#include "const.h"
 #include "mainwindow.h"
+#include "settings.h"
 #include "warehouse.h"
+#include "warehousedata.h"
 #include "xmldatalayer.h"
 
 #include "debug_message.h"
+
+#include <QFileInfo>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMessageBox>
+
+#include <QDebug>
 
 /** Constructor
  */

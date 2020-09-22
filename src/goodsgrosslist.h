@@ -15,7 +15,7 @@
 #include "goodslist.h"
 
 // class for calculating gross and net in goods list window
-class GoodsGrossList : public GoodsList
+class GoodsGrossList final : public GoodsList
 {
     Q_OBJECT
 

@@ -11,13 +11,15 @@
 #include "settings.h"
 
 // class for creating QTableWidgetItem, including inherited virtual methods for extra functionality
-class DateWidgetItem : public QTableWidgetItem
+class DateWidgetItem final : public QTableWidgetItem
 {
 public:
     explicit DateWidgetItem(QDate date);
-    ~DateWidgetItem();
+
     void setData(int role, const QVariant &value);
+
     QVariant data(int role) const;
+
     bool operator<(const QTableWidgetItem &other) const;
 
 private:
@@ -28,10 +30,6 @@ DateWidgetItem::DateWidgetItem(QDate date)
     : m_data(date)
 {
     QTableWidgetItem::setData(Qt::DisplayRole, date);
-}
-
-DateWidgetItem::~DateWidgetItem()
-{
 }
 
 void DateWidgetItem::setData(int role, const QVariant &value)
